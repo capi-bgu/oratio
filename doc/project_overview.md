@@ -83,7 +83,7 @@ shared between multiple or all clients.
 
 ## Research
 
-in our research, we will try to use three different methods for predicting the user's emotional state:
+in our research, we will try to use two different methods for predicting the user's emotional state:
 
 * Face Recognition - This is the most researched approach, using face recognition models for the task of recognizing facial expressions. Current methods lack an 
   understanding of emotion and instead focus on recognizing facial features that are commonly associated with emotion. But emotion is rarely as simple as a 
