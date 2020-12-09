@@ -8,7 +8,7 @@ is feeling down, to helping psychologists in tracking the mental health of their
 ## Project Goals
 
 * The first goal of the project is to create a software platform that will ease the creation of personalized machine learning models. The platform will be as 
-  implementation-independent as possible to allow the easy integration of research in this field. The platform will try to provide utilities that are will be 
+  implementation-independent as possible to allow the easy integration of research in this field. The platform will try to provide utilities that will be 
   necessary for any method trying to create personalized models, such as data gathering and labeling.
 
 * The second goal is to develop a model or a collection of models that will be integrated with the platform and hopefully compete with the state of the
