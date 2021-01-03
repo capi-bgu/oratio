@@ -13,4 +13,4 @@ class CameraProcessorStub(DataProcessor):
 
     def process_data(self, data, session):
         for i, pic in enumerate(data):
-            cv2.imwrite(str(session.session_name)+'_'+str(i) + ".jpg", pic)
+            cv2.imwrite(f"{self.output_path}\\s_{session.session_name}_{i}.jpg", pic)
