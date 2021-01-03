@@ -6,4 +6,4 @@ class MouseProcessor(DataProcessor):
         super().__init__(output_path)
 
     def process_data(self, data, session):
-        super().process_data(data, session)
+        pass

@@ -26,7 +26,7 @@ class CameraProcessorTest(unittest.TestCase):
         data = []
         self.files = [f for f in listdir(self.data_path) if isfile(join(self.data_path, f))]
         for img in self.files:
-            self.data.append(cv2.imread(self.data_path + '\\' + img))
+            data.append(cv2.imread(self.data_path + '\\' + img))
 
         return data
 

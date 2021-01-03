@@ -10,8 +10,7 @@ class DataProcessor(ABC):
 
     @abstractmethod
     def process_data(self, data: list, session: Session):
-        os.chdir(self.output_path)
-
+        pass
 
 
 

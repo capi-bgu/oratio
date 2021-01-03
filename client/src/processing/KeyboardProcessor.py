@@ -6,7 +6,6 @@ class KeyboardProcessor(DataProcessor):
         super().__init__(output_path)
 
     def process_data(self, data, session):
-        super().process_data(data, session)
         KB = {}
         features = KeyboardProcessor.__init_features(session)
         for event in data:

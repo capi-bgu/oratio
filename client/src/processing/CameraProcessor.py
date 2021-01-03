@@ -16,7 +16,6 @@ class CameraProcessor(DataProcessor):
         self.detector = dlib.get_frontal_face_detector()
 
     def process_data(self, data, session):
-        super().process_data(data, session)
         for i, frame in enumerate(data):
             frame = cv2.cvtColor(src=frame, code=cv2.COLOR_BGR2GRAY)
             frame = frame/255.0
