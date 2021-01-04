@@ -14,6 +14,7 @@ class CameraProcessorTest(unittest.TestCase):
 
         if not os.path.isdir("../test_output"):
             os.mkdir("../test_output")
+        if not os.path.isdir("../test_output/img"):
             os.mkdir("../test_output/img")
 
         self.out_path = os.path.join(test_dir, 'test_output', 'img')
