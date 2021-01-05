@@ -27,5 +27,6 @@ class MouseCollector(DataCollector):
     def __mouse_event(self, event):
         if not event.Injected:
             self.data.append(event)
+            print(event.__dict__)
             return True
         return False

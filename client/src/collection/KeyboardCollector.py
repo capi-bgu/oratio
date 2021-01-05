@@ -27,6 +27,6 @@ class KeyboardCollector(DataCollector):
     def __keyboard_event(self, event):
         if not event.Injected:
             self.data.append(event)
-            # print(event.__dict__)
+            print(event.Key)
             return True
         return False
