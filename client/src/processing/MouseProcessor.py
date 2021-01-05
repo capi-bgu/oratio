@@ -16,7 +16,8 @@ class MouseProcessor(DataProcessor):
         idle_time = 0
         for i, event in enumerate(data):
             if event.Message == 512:    # Mouse move
-                print("Mouse move")
+                # print("Mouse move")
+                pass
             elif event.Message == 513:  # Left button press
                 features['left_click_count'] += 1
                 # TODO: this double click option counts 3 consecutive clicks as 2 double clicks.
@@ -31,7 +32,6 @@ class MouseProcessor(DataProcessor):
             elif event.Message == 517:  # Right button release
                 features['right_click_duration'] += event.Timestamp - last_right_click_time
             elif event.Message == 522:  # Mouse Scroll
-                print("mouse scroll")
                 if last_mouse_scroll_direction != event.Wheel or last_message != 522:
                     if len(last_scrolling_segment) > 1:
                         # calculating the time it took to do the whole scroll session and divide by number of scrolls
@@ -43,12 +43,14 @@ class MouseProcessor(DataProcessor):
                 last_mouse_scroll_direction = event.Wheel
             if i == 0:  # if it's the first event
                 time_interval = data[i].Timestamp - session.session_start_time
-                if time_interval > 100:
-                    idle_time += time_interval
             else:
+                if i == len(data) - 1:
+                    time_interval = (session.session_start_time + session.session_duration) - data[i].Timestamp
+                    if time_interval > 0.5:
+                        idle_time += time_interval
                 time_interval = data[i].Timestamp - data[i - 1].Timestamp
-                if time_interval > 100:
-                    idle_time += time_interval
+            if time_interval > 0.5:
+                idle_time += time_interval
             last_message = event.Message
         # if we still have a scrolling left, we add it
         if len(last_scrolling_segment) > 1:
@@ -58,15 +60,18 @@ class MouseProcessor(DataProcessor):
 
         if amount_of_scroll_segments > 0:
             features['scroll_speed'] /= amount_of_scroll_segments
-        if idle_time != 0:
+        if len(data) > 0:
             features['idle_time'] = idle_time
+
+        for k, v in zip(features.keys(), features.values()):
+            print(k, v)
 
     def __init_features(self, session):
         features = {
-            # 'right_click_count': 0,
-            # 'left_click_count': 0,
-            # 'scroll_speed': 0,
-            # 'double_click_count': 0,
+            'right_click_count': 0,
+            'left_click_count': 0,
+            'scroll_speed': 0,
+            'double_click_count': 0,
             'cursor_x_distance': 0,
             'cursor_y_distance': 0,
             'average_cursor_x_speed': 0,
@@ -74,8 +79,8 @@ class MouseProcessor(DataProcessor):
             'average_cursor_x_angle': 0,
             'average_cursor_y_angle': 0,
             'cursor_distance_ratio': 0,
-            # 'idle_time': session.session_duration,
-            # 'right_click_duration': 0,
-            # 'left_click_duration': 0,
+            'idle_time': session.session_duration,
+            'right_click_duration': 0,
+            'left_click_duration': 0,
         }
         return features

@@ -28,6 +28,5 @@ class MouseCollector(DataCollector):
         if not event.Injected:
             event.Timestamp = time.time()
             self.data.append(event)
-            print(event.Time ,time.time())
             return True
         return False

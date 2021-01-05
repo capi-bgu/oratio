@@ -6,77 +6,88 @@ class KeyboardProcessor(DataProcessor):
         super().__init__(output_path)
 
     def process_data(self, data, session):
-        KB = {}
+        keys_info = {}
         features = self.__init_features(session)
         previous_time = 0
-        last_active_time = 0
-        total_active_time = 0
         pressed_keys = set()  # the set that will save every key that is pressed
-        for event in data:
+        idle_time = 0
+        for i, event in enumerate(data):
             if event.Message == 256:  # key press
-                if event.Key not in KB.keys():
-                    KB[event.Key] = {'last_press_time': 0,
-                                     'press_count': 0,
-                                     'total_press_time': 0}
-                if KB[event.Key]['last_press_time'] == 0:  # the first event sent when press occur
-                    if len(pressed_keys) == 0:
-                        last_active_time = event.Timestamp
-                    pressed_keys.add(event.Key)
-                    KB[event.Key]['last_press_time'] = event.Timestamp
+                if event.KeyID not in keys_info.keys():
+                    keys_info[event.KeyID] = {'last_press_time': 0,
+                                       'press_count': 0,
+                                       'total_press_time': 0}
+                if keys_info[event.KeyID]['last_press_time'] == 0:  # the first event sent when press occur
+                    keys_info[event.KeyID]['press_count'] += 1
+                    pressed_keys.add(event.KeyID)
+                    keys_info[event.KeyID]['last_press_time'] = event.Timestamp
                     if previous_time == 0:
                         previous_time = event.Timestamp
                     else:
                         features['average_down_to_down'] += event.Timestamp - previous_time
-
-            elif event.Message == 257:  # key release
-                pressed_keys.remove(event.Key)
-                if len(pressed_keys) == 0:  # no more keys are pressed and we add the active time
-                    total_active_time += event.Timestamp - last_active_time
-                KB[event.Key]['total_press_time'] += event.Timestamp - KB[event.Key]['last_press_time']
-                KB[event.Key]['press_count'] += 1
-                KB[event.Key]['last_press_time'] = 0
-
-                if chr(event.Ascii).isupper():
-                    features['uppercase_counter'] += 1
-                if chr(event.Ascii).isspace():
-                    features['space_counter'] += 1
-                if chr(event.Ascii).isalnum():
-                    features['space_counter'] += 1
+                        previous_time = event.Timestamp
 
                 if event.Key == 'Delete' or event.Key == 'Back':
                     features['error_corrections'] += 1
 
-        total_press_count = 0
-        features['mode_key'] = list(KB.keys())[0]
-        mode_key_presses = KB[list(KB.keys())[0]]['press_count']
-        for key in KB:
-            features['average_press_duration'] += KB[key]['total_press_time'] / KB[key]['press_count']
-            total_press_count += KB[key]['press_count']
-            if KB[key]['press_count'] > mode_key_presses:
-                mode_key_presses = KB[key]['press_count']
-                features['mode_key'] = key
+            elif event.Message == 257:  # key release
+                if event.KeyID in pressed_keys:
+                    pressed_keys.remove(event.KeyID)
+                    keys_info[event.KeyID]['total_press_time'] += event.Timestamp - keys_info[event.KeyID]['last_press_time']
+                    keys_info[event.KeyID]['last_press_time'] = 0
 
-        features['typing_speed'] = total_press_count / session.session_duration
-        features['average_press_duration'] /= len(KB)
-        features['average_down_to_down'] /= total_press_count
-        features['unique_events'] = len(KB)
-        features['idle_time'] -= total_active_time
+                    if chr(event.Ascii).isupper():
+                        features['uppercase_counter'] += 1
+                    if chr(event.Ascii).isspace():
+                        features['space_counter'] += 1
+                    if chr(event.Ascii).isalnum():
+                        features['regular_press_count'] += 1
+
+            if i == 0:  # if it's the first event
+                time_interval = data[i].Timestamp - session.session_start_time
+            else:
+                if i == len(data) - 1:
+                    time_interval = (session.session_start_time + session.session_duration) - data[i].Timestamp
+                    if time_interval > 0.75:
+                        idle_time += time_interval
+                time_interval = data[i].Timestamp - data[i - 1].Timestamp  # A B C .
+            if time_interval > 0.75:
+                idle_time += time_interval
+        if len(data) > 0:
+            total_press_count = 0
+            features['mode_key'] = list(keys_info.keys())[0]
+            mode_key_presses = keys_info[list(keys_info.keys())[0]]['press_count']
+            for key in keys_info:
+                features['average_press_duration'] += keys_info[key]['total_press_time'] / keys_info[key]['press_count']
+                total_press_count += keys_info[key]['press_count']
+                if keys_info[key]['press_count'] > mode_key_presses:
+                    mode_key_presses = keys_info[key]['press_count']
+                    features['mode_key'] = key
+
+            features['typing_speed'] = total_press_count / session.session_duration
+            features['average_press_duration'] /= len(keys_info)
+            features['average_down_to_down'] /= total_press_count
+            features['unique_events'] = len(keys_info)
+            features['idle_time'] = idle_time
+
+        for k, v in zip(features.keys(), features.values()):
+            print(k, v)
 
     def __init_features(self, session):
         features = {
-            # 'typing_speed': 0,
-            # 'average_press_duration': 0,
-            # 'average_down_to_down': 0,
-            # 'regular_press_count': 0,
+            'typing_speed': 0,
+            'average_press_duration': 0,
+            'average_down_to_down': 0,
+            'regular_press_count': 0,
             'punctuations_press_count': 0,
-            # 'space_counter': 0,
+            'space_counter': 0,
             'special_press_count': 0,
-            # 'error_corrections': 0,
-            # 'uppercase_counter': 0,
+            'error_corrections': 0,
+            'uppercase_counter': 0,
             'digraph_duration': 0,
             'trigraph_duration': 0,
-            # 'mode_key': 0,
-            # 'idle_time': session.session_duration,
-            # 'unique_events': 0
+            'mode_key': 0,
+            'idle_time': session.session_duration,
+            'unique_events': 0
         }
         return features
