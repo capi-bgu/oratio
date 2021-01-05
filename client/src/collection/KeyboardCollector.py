@@ -26,6 +26,7 @@ class KeyboardCollector(DataCollector):
 
     def __keyboard_event(self, event):
         if not event.Injected:
+            event.Timestamp = time.time()
             self.data.append(event)
             print(event.Key)
             return True
