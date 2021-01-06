@@ -26,6 +26,8 @@ dependencies:
   - mkl-service=2.3.0=py38h196d8e1_0
   - mkl_fft=1.2.0=py38h45dec08_0
   - mkl_random=1.1.1=py38h47e9c7a_0
+  - msgpack-numpy=0.4.7.1=pyh9f0ad1d_0
+  - msgpack-python=1.0.2=py38hbd9d945_0
   - numpy=1.19.2=py38hadc3359_0
   - numpy-base=1.19.2=py38ha3acd2a_0
   - opencv=4.0.1=py38h2a7c758_0

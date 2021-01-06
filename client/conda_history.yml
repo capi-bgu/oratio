@@ -8,4 +8,6 @@ dependencies:
   - pywinhook
   - typer
   - requests
+  - msgpack-python
+  - msgpack-numpy
 prefix: C:\Users\Shoha\.conda\envs\capi-client
