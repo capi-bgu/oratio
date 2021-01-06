@@ -1,3 +1,4 @@
+import json
 from src.processing.DataProcessor import DataProcessor
 
 
@@ -15,8 +16,8 @@ class KeyboardProcessor(DataProcessor):
             if event.Message == 256:  # key press
                 if event.KeyID not in keys_info.keys():
                     keys_info[event.KeyID] = {'last_press_time': 0,
-                                       'press_count': 0,
-                                       'total_press_time': 0}
+                                              'press_count': 0,
+                                              'total_press_time': 0}
                 if keys_info[event.KeyID]['last_press_time'] == 0:  # the first event sent when press occur
                     keys_info[event.KeyID]['press_count'] += 1
                     pressed_keys.add(event.KeyID)
@@ -33,7 +34,8 @@ class KeyboardProcessor(DataProcessor):
             elif event.Message == 257:  # key release
                 if event.KeyID in pressed_keys:
                     pressed_keys.remove(event.KeyID)
-                    keys_info[event.KeyID]['total_press_time'] += event.Timestamp - keys_info[event.KeyID]['last_press_time']
+                    keys_info[event.KeyID]['total_press_time'] += event.Timestamp - keys_info[event.KeyID][
+                        'last_press_time']
                     keys_info[event.KeyID]['last_press_time'] = 0
 
                     if chr(event.Ascii).isupper():
@@ -70,8 +72,8 @@ class KeyboardProcessor(DataProcessor):
             features['unique_events'] = len(keys_info)
             features['idle_time'] = idle_time
 
-        for k, v in zip(features.keys(), features.values()):
-            print(k, v)
+        with open(self.output_path + f"\\kb_features_s_{str(session.session_name)}.json", 'w+') as features_file:
+            json.dump(features, features_file)
 
     def __init_features(self, session):
         features = {

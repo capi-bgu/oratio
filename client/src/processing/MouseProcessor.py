@@ -1,3 +1,4 @@
+import json
 from src.processing.DataProcessor import DataProcessor
 
 
@@ -63,8 +64,8 @@ class MouseProcessor(DataProcessor):
         if len(data) > 0:
             features['idle_time'] = idle_time
 
-        for k, v in zip(features.keys(), features.values()):
-            print(k, v)
+        with open(self.output_path + f"\\mouse_features_s_{str(session.session_name)}.json", 'w+') as features_file:
+            json.dump(features, features_file)
 
     def __init_features(self, session):
         features = {

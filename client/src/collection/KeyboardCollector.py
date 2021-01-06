@@ -1,33 +1,28 @@
-from src.collection.DataCollector import DataCollector
-import pyWinhook as pyHook
-import pythoncom
 import time
+import pythoncom
+import pyWinhook as pyHook
+from src.collection.DataCollector import DataCollector
 
 
 class KeyboardCollector(DataCollector):
-    def __init__(self, session, data_processor):
-        super().__init__(session, data_processor)
+    def __init__(self):
+        super().__init__()
         self.hm = pyHook.HookManager()
 
     def start_collect(self):
-        self.data = []
-        self.hook = True
-        st = time.time()
         self.hm.KeyAll = self.__keyboard_event
-        while time.time() - self.session.session_duration < st and self.hook:
+        while self.collect:
             self.hm.HookKeyboard()
             pythoncom.PumpWaitingMessages()
-        self.send_to_process()
-        self.stop_collect()
 
     def stop_collect(self):
         self.hm.UnhookKeyboard()
-        self.hook = False
+        return super().stop_collect()
 
     def __keyboard_event(self, event):
         if not event.Injected:
             event.Timestamp = time.time()
             self.data.append(event)
-            # print(event.Ascii)
             return True
         return False
+

@@ -148,5 +148,5 @@ dmypy.json
 
 .idea/*
 .vscode/*
-test/test_output/*
+tests/test_output/*
 src/processing/dlib_face_detection.dat

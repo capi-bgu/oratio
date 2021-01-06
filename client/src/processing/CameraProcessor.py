@@ -1,9 +1,9 @@
-from src.processing.DataProcessor import DataProcessor
-import numpy as np
-import dlib
-import cv2
-import pathlib
 import os
+import cv2
+import dlib
+import pathlib
+import numpy as np
+from src.processing.DataProcessor import DataProcessor
 
 
 class CameraProcessor(DataProcessor):

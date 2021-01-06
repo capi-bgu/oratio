@@ -1,12 +1,12 @@
+import os
 import cv2
+import time
+import pathlib
 import unittest
 from os import listdir
-from src.Session import Session
 from os.path import isfile, join
+from tests.SessionStub import SessionStub
 from src.processing.CameraProcessor import CameraProcessor
-import os
-import pathlib
-
 
 class CameraProcessorTest(unittest.TestCase):
     def test(self):
@@ -21,7 +21,9 @@ class CameraProcessorTest(unittest.TestCase):
         self.data_path = os.path.join(test_dir, 'test_data', 'img')
         self.cpt = CameraProcessor(self.out_path)
         data = self.__get_data()
-        self.cpt.process_data(data, Session(0, 5))
+        st = time.time()
+        self.cpt.process_data(data, SessionStub(0, 5, st))
+        print(time.time()-st)
 
     def __get_data(self):
         data = []

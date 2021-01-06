@@ -1,28 +1,24 @@
-from src.collection.DataCollector import DataCollector
-import pyWinhook as pyHook
-import pythoncom
 import time
+import pythoncom
+import pyWinhook as pyHook
+from src.collection.DataCollector import DataCollector
 
 
 class MouseCollector(DataCollector):
-    def __init__(self, session, data_processor):
-        super().__init__(session, data_processor)
+    def __init__(self):
+        super().__init__()
         self.hm = pyHook.HookManager()
 
     def start_collect(self):
-        self.data = []
-        self.hook = True
-        st = time.time()
         self.hm.MouseAll = self.__mouse_event
-        while time.time() - self.session.session_duration < st and self.hook:
+        while self.collect:
             self.hm.HookMouse()
             pythoncom.PumpWaitingMessages()
-        self.send_to_process()
-        self.stop_collect()
+        # self.stop_collect()
 
     def stop_collect(self):
         self.hm.UnhookMouse()
-        self.hook = False
+        return super().stop_collect()
 
     def __mouse_event(self, event):
         if not event.Injected:
