@@ -9,18 +9,23 @@ from src.processing.KeyboardProcessor import KeyboardProcessor
 
 class KeyboardGatherTest(unittest.TestCase):
     def test(self):
+        test_dir = pathlib.Path(__file__).parent.parent.absolute()
+        if not os.path.isdir("../test_output"):
+            os.mkdir("../test_output")
+        if not os.path.isdir("../test_output/kb"):
+            os.mkdir("../test_output/kb")
+        out_path = os.path.join(test_dir, 'test_output', 'kb')
 
-        keyboard_processor = KeyboardProcessor("")
+        keyboard_processor = KeyboardProcessor(out_path)
         keyboard_collector = KeyboardCollector()
         self.st = time.time()
-        session = SessionStub(0, 5, self.st)
+        session = SessionStub(1, 5, self.st)
         keyboard_collector.start()
         time.sleep(session.session_duration)
         data = keyboard_collector.stop_collect()
         # self.save_data(data)
-        features = keyboard_processor.process_data(data, session)
-        for k, v in zip(features.keys(), features.values()):
-            print(k, v)
+        keyboard_processor.process_data(data, session)
+
 
     def save_data(self, data):
         if not os.path.isdir("../test_output"):

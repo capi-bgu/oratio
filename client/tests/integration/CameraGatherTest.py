@@ -15,10 +15,11 @@ class CameraGatherTest(unittest.TestCase):
             os.mkdir("../test_output/img")
         out_path = os.path.join(test_dir, 'test_output', 'img')
 
-        session = SessionStub(1, 5)
+
         camera_processor = CameraProcessor(out_path)
         camera_collector = CameraCollector(2)
         st = time.time()
+        session = SessionStub(1, 5, st)
         camera_collector.start()
         time.sleep(session.session_duration)
         data = camera_collector.stop_collect()
