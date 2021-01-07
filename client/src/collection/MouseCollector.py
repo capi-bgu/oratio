@@ -7,15 +7,16 @@ from src.collection.DataCollector import DataCollector
 class MouseCollector(DataCollector):
     def __init__(self):
         super().__init__()
+        self.hm = pyHook.HookManager()
 
     def start_collect(self):
+        print("start mouse collecting...")
         super().start_collect()
-        self.hm = pyHook.HookManager()
         self.hm.MouseAll = self.__mouse_event
         while self.collect:
             self.hm.HookMouse()
             pythoncom.PumpWaitingMessages()
-        # self.stop_collect()
+        print("end mouse collecting...")
 
     def stop_collect(self):
         self.hm.UnhookMouse()

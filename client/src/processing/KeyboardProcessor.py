@@ -8,6 +8,7 @@ class KeyboardProcessor(DataProcessor):
         super().__init__(output_path)
 
     def process_data(self, data, session):
+        print("start kb processing...")
         keys_info = {}
         features = self.__init_features(session)
         previous_time = 0
@@ -75,6 +76,8 @@ class KeyboardProcessor(DataProcessor):
 
         with open(f"{self.output_path}\\kb_features_s_{str(session.session_name)}.json", 'w+') as features_file:
             json.dump(features, features_file)
+        print("end kb processing...")
+
 
     def __init_features(self, session):
         features = {

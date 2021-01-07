@@ -9,6 +9,7 @@ class MouseProcessor(DataProcessor):
         super().__init__(output_path)
 
     def process_data(self, data, session):
+        print("start mouse processing...")
         features = self.__init_features(session)
         last_left_click_time = 0
         last_right_click_time = 0
@@ -38,7 +39,7 @@ class MouseProcessor(DataProcessor):
                 if last_mouse_scroll_direction != event.Wheel or last_message != 522:
                     if len(last_scrolling_segment) > 1:
                         # calculating the time it took to do the whole scroll session and divide by number of scrolls
-                        features['scroll_speed'] += len(last_scrolling_segment) / (last_scrolling_segment[-1].Timestamp - last_scrolling_segment[0].Timestamp)
+                        features['scroll_speed'] += len(last_scrolling_segment) / (last_scrolling_segment[-1].Timestamp - last_scrolling_segment[0].Timestamp + 0.0001)
                         amount_of_scroll_segments += 1
                     last_scrolling_segment = [event]
                 else:
@@ -58,7 +59,7 @@ class MouseProcessor(DataProcessor):
         # if we still have a scrolling left, we add it
         if len(last_scrolling_segment) > 1:
             features['scroll_speed'] += len(last_scrolling_segment) / (
-                        last_scrolling_segment[-1].Timestamp - last_scrolling_segment[0].Timestamp)
+                        last_scrolling_segment[-1].Timestamp - last_scrolling_segment[0].Timestamp + 0.0001)
             amount_of_scroll_segments += 1
 
         if amount_of_scroll_segments > 0:
@@ -68,6 +69,8 @@ class MouseProcessor(DataProcessor):
 
         with open(f"{self.output_path}\\mouse_features_s_{str(session.session_name)}.json", 'w+') as features_file:
             json.dump(features, features_file)
+
+        print("end mouse processing...")
 
     def __init_features(self, session):
         features = {

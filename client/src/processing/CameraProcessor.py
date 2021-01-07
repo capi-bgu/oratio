@@ -17,6 +17,7 @@ class CameraProcessor(DataProcessor):
         self.detector = dlib.get_frontal_face_detector()
 
     def process_data(self, data, session):
+        print("start camera processing...")
         for i, frame in enumerate(data):
             frame = cv2.cvtColor(src=frame, code=cv2.COLOR_BGR2GRAY)
             frame = frame/255.0
@@ -35,5 +36,7 @@ class CameraProcessor(DataProcessor):
                     y.append(landmarks.part(n).y)
                 cut_frame = frame[min(y):max(y), min(x):max(x)]
                 cv2.imwrite(f"{self.output_path}\\s_{session.session_name}_pn_{i}.jpg", cut_frame)
+        print("end camera processing...")
+
 
 
