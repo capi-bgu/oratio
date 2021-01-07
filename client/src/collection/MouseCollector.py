@@ -2,9 +2,12 @@ import time
 import pythoncom
 import pyWinhook as pyHook
 from src.collection.DataCollector import DataCollector
+from src.collection.KeyboardCollector import KeyboardCollector
 
 
 class MouseCollector(DataCollector):
+    #hm = pyHook.HookManager()
+
     def __init__(self):
         super().__init__()
         self.hm = pyHook.HookManager()
@@ -13,8 +16,8 @@ class MouseCollector(DataCollector):
         print("start mouse collecting...")
         super().start_collect()
         self.hm.MouseAll = self.__mouse_event
+        self.hm.HookMouse()
         while self.collect:
-            self.hm.HookMouse()
             pythoncom.PumpWaitingMessages()
         print("end mouse collecting...")
 

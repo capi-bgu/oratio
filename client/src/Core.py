@@ -30,9 +30,7 @@ class Core:
             self.curr_session = Session(self.sessions_passed, self.session_duration, self.data_gatherers, self.out_path)
             self.curr_session.start_session()
             self.sessions_passed += 1
-            curr_session = self.curr_session
-            self.curr_session = None
-            del curr_session
+            del self.curr_session
             gc.collect()
 
 

@@ -5,16 +5,19 @@ from src.collection.DataCollector import DataCollector
 
 
 class KeyboardCollector(DataCollector):
+    #hm = pyHook.HookManager()
+
     def __init__(self):
         super().__init__()
         self.hm = pyHook.HookManager()
+
 
     def start_collect(self):
         print("start kb collecting...")
         super().start_collect()
         self.hm.KeyAll = self.__keyboard_event
+        self.hm.HookKeyboard()
         while self.collect:
-            self.hm.HookKeyboard()
             pythoncom.PumpWaitingMessages()
         print("end kb collecting...")
 

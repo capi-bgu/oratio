@@ -1,4 +1,5 @@
 import threading
+import time
 from abc import ABC, abstractmethod
 
 
@@ -21,6 +22,7 @@ class DataCollector(ABC, threading.Thread):
     def stop_collect(self):
         self.collect = False
         return self.data
+
 
 
 

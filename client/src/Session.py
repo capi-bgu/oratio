@@ -26,11 +26,19 @@ class Session:
         for collector in self.data_gatherers:
             collector.start()
         time.sleep(self.session_duration)
-        for collector, processors in self.data_gatherers.items():
-            data = collector.stop_collect()
+        all_data = list()
+        for collector in self.data_gatherers:
+            all_data.append(collector.stop_collect())
+        for collector in self.data_gatherers:
+            collector.join()
             del collector
+        for i, processors in enumerate(self.data_gatherers.values()):
             for processor in processors:
-                processor.process_data(data, self)
+                processor.set_arguements(all_data[i], self)
+                processor.start()
+        for processors in self.data_gatherers.values():
+            for processor in processors:
+                processor.join()
                 del processor
         del self.data_gatherers
         gc.collect()
