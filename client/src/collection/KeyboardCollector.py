@@ -5,7 +5,6 @@ from src.collection.DataCollector import DataCollector
 
 
 class KeyboardCollector(DataCollector):
-    #hm = pyHook.HookManager()
 
     def __init__(self):
         super().__init__()

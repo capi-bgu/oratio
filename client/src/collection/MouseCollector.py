@@ -2,11 +2,9 @@ import time
 import pythoncom
 import pyWinhook as pyHook
 from src.collection.DataCollector import DataCollector
-from src.collection.KeyboardCollector import KeyboardCollector
 
 
 class MouseCollector(DataCollector):
-    #hm = pyHook.HookManager()
 
     def __init__(self):
         super().__init__()

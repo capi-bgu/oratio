@@ -1,4 +1,6 @@
 import gc
+import json
+import os
 import time
 
 
@@ -15,6 +17,7 @@ class Session:
         self.session_duration = session_duration
         self.session_start_time = time.time()
         self.data_gatherers = dict()
+        self.out_path = out_path
         for collector_class, processors_class in data_gatherers.items():
             collector = collector_class()
             self.data_gatherers[collector] = list()
@@ -40,5 +43,25 @@ class Session:
             for processor in processors:
                 processor.join()
                 del processor
+
         del self.data_gatherers
         gc.collect()
+
+    def set_args(self, front_window_type, window_switches, label):
+        self.front_window_type = front_window_type
+        self.window_switches = window_switches
+        self.label = label
+
+    def save_session(self):
+        output_path = self.out_path + "\\session"
+        if not os.path.isdir(output_path):
+            os.mkdir(output_path)
+        session_data = {"session": self.session_name,
+                        "front_window_type": self.front_window_type,
+                        "window_switches": self.window_switches,
+                        "label": self.label}
+        with open(f"{output_path}\\session_{str(self.session_name)}.json", 'w+') as session_file:
+            json.dump(session_data, session_file)
+
+
+
