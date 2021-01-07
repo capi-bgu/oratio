@@ -7,9 +7,10 @@ from src.collection.DataCollector import DataCollector
 class MouseCollector(DataCollector):
     def __init__(self):
         super().__init__()
-        self.hm = pyHook.HookManager()
 
     def start_collect(self):
+        super().start_collect()
+        self.hm = pyHook.HookManager()
         self.hm.MouseAll = self.__mouse_event
         while self.collect:
             self.hm.HookMouse()

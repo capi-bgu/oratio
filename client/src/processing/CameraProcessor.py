@@ -8,6 +8,7 @@ from src.processing.DataProcessor import DataProcessor
 
 class CameraProcessor(DataProcessor):
     def __init__(self, output_path):
+        output_path += "\\img"
         super().__init__(output_path)
 
         processing_dir = pathlib.Path(__file__).parent.absolute()

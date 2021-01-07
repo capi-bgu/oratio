@@ -16,10 +16,8 @@ class MouseProcessorTest(unittest.TestCase):
 
         if not os.path.isdir("../test_output"):
             os.mkdir("../test_output")
-        if not os.path.isdir("../test_output/mouse"):
-            os.mkdir("../test_output/mouse")
 
-        self.out_path = os.path.join(test_dir, 'test_output', 'mouse')
+        self.out_path = os.path.join(test_dir, 'test_output')
         self.data_path = os.path.join(test_dir, 'test_data', 'mouse')
         self.mpt = MouseProcessor(self.out_path)
         start_time, data = self.__get_data()

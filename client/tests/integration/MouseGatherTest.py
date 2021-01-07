@@ -12,9 +12,7 @@ class MouseGatherTest(unittest.TestCase):
         test_dir = pathlib.Path(__file__).parent.parent.absolute()
         if not os.path.isdir("../test_output"):
             os.mkdir("../test_output")
-        if not os.path.isdir("../test_output/mouse"):
-            os.mkdir("../test_output/mouse")
-        out_path = os.path.join(test_dir, 'test_output', 'mouse')
+        out_path = os.path.join(test_dir, 'test_output')
 
         mouse_processor = MouseProcessor(out_path)
         mouse_collector = MouseCollector()
@@ -27,10 +25,6 @@ class MouseGatherTest(unittest.TestCase):
         mouse_processor.process_data(data, session)
 
     def save_data(self, data):
-        if not os.path.isdir("../test_output"):
-            os.mkdir("../test_output")
-        if not os.path.isdir("../test_output/mouse"):
-            os.mkdir("../test_output/mouse")
         test_dir = pathlib.Path(__file__).parent.parent.absolute()
         output_path = os.path.join(test_dir, 'test_output', 'mouse')
 

@@ -7,6 +7,8 @@ class DataProcessor(ABC):
 
     def __init__(self, output_path):
         self.output_path = output_path
+        if not os.path.isdir(output_path):
+            os.mkdir(output_path)
 
     @abstractmethod
     def process_data(self, data, session):

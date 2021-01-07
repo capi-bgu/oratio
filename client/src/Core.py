@@ -8,13 +8,20 @@ from src.processing.KeyboardProcessor import KeyboardProcessor
 
 class Core:
     def __init__(self, data_gatherers):
-        self.data_gatherers = data_gatherers
+        """
 
-    def run(self):
-        session = Session(0, 10, data_gatherers)
+        :param data_gatherers: dictionary of collectors classes and the list of all related processors classes
+            in the format: {CollectorClass: [*(ProcessorClass, out_path]}
+        """
+        self.data_gatherers = dict()
+        for collector_class, processors_class in zip(data_gatherers.keys(), data_gatherers.values()):
+            collector = collector_class()
+            self.data_gatherers[collector] = list()
+            for processor_class in processors_class:
+                self.data_gatherers[collector].append(processor_class())
+        print()
 
 
-# {collectorclass1: [*processingclasses1], collectorclass2: [*processingclasses2]}
 
 if __name__ == '__main__':
     data_gatherers = {KeyboardCollector: [KeyboardProcessor],

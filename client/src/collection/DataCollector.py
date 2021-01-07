@@ -14,7 +14,8 @@ class DataCollector(ABC, threading.Thread):
 
     @abstractmethod
     def start_collect(self):
-        pass
+        self.collect = True
+        self.data = list()
 
     @abstractmethod
     def stop_collect(self):

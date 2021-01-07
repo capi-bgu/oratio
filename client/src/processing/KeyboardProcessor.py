@@ -4,6 +4,7 @@ from src.processing.DataProcessor import DataProcessor
 
 class KeyboardProcessor(DataProcessor):
     def __init__(self, output_path):
+        output_path += "\\keyboard"
         super().__init__(output_path)
 
     def process_data(self, data, session):
@@ -72,7 +73,7 @@ class KeyboardProcessor(DataProcessor):
             features['unique_events'] = len(keys_info)
             features['idle_time'] = idle_time
 
-        with open(self.output_path + f"\\kb_features_s_{str(session.session_name)}.json", 'w+') as features_file:
+        with open(f"{self.output_path}\\kb_features_s_{str(session.session_name)}.json", 'w+') as features_file:
             json.dump(features, features_file)
 
     def __init_features(self, session):

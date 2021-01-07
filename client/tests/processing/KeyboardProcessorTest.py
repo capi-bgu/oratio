@@ -16,10 +16,8 @@ class KeyboardProcessorTest(unittest.TestCase):
 
         if not os.path.isdir("../test_output"):
             os.mkdir("../test_output")
-        if not os.path.isdir("../test_output/kb"):
-            os.mkdir("../test_output/kb")
 
-        self.out_path = os.path.join(test_dir, 'test_output', 'kb')
+        self.out_path = os.path.join(test_dir, 'test_output')
         self.data_path = os.path.join(test_dir, 'test_data', 'kb')
         self.kbpt = KeyboardProcessor(self.out_path)
         start_time, data = self.__get_data()
