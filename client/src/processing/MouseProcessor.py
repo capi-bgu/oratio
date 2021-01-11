@@ -11,6 +11,11 @@ class MouseProcessor(DataProcessor):
     def process_data(self, data, session):
         print("start mouse processing...")
         features = self.__init_features(session)
+        num_mouse_move = 0
+        sum_mouse_x_speed = 0
+        sum_mouse_y_speed = 0
+        total_x_distance = 0
+        total_y_distance = 0
         last_left_click_time = 0
         last_right_click_time = 0
         last_scrolling_segment = []
@@ -18,10 +23,16 @@ class MouseProcessor(DataProcessor):
         last_mouse_scroll_direction = 0
         amount_of_scroll_segments = 0
         idle_time = 0
+        last_mouse_event = None
         for i, event in enumerate(data):
             if event.Message == 512:    # Mouse move
-                # print("Mouse move")
-                pass
+                if last_mouse_event is not None:
+                    total_x_distance += abs(event.Position[0] - last_mouse_event.Position[0])
+                    total_y_distance += abs(event.Position[1] - last_mouse_event.Position[1])
+                    sum_mouse_x_speed += total_x_distance / (1 + event.Timestamp - last_mouse_event.Timestamp)
+                    sum_mouse_y_speed += total_y_distance / (1 + event.Timestamp - last_mouse_event.Timestamp)
+                num_mouse_move += 1
+                last_mouse_event = event
             elif event.Message == 513:  # Left button press
                 features['left_click_count'] += 1
                 # TODO: this double click option counts 3 consecutive clicks as 2 double clicks.
@@ -66,6 +77,18 @@ class MouseProcessor(DataProcessor):
             features['scroll_speed'] /= amount_of_scroll_segments
         if len(data) > 0:
             features['idle_time'] = idle_time
+        features['cursor_x_distance'] = total_x_distance
+        features['cursor_y_distance'] = total_y_distance
+        features['average_speed_x'] = total_x_distance / session.session_duration
+        features['average_speed_y'] = total_y_distance / session.session_duration
+        active_time = session.session_duration - features['idle_time']
+        if active_time > 0:
+            features['average_active_speed_x'] = total_x_distance / active_time
+            features['average_active_speed_y'] = total_y_distance / active_time
+        if num_mouse_move > 0:
+            features['average_momentary_speed_x'] = sum_mouse_x_speed / num_mouse_move
+        if num_mouse_move > 0:
+            features['average_momentary_speed_y'] = sum_mouse_y_speed / num_mouse_move
 
         with open(f"{self.output_path}\\mouse_features_s_{str(session.session_name)}.json", 'w+') as features_file:
             json.dump(features, features_file)
@@ -80,8 +103,12 @@ class MouseProcessor(DataProcessor):
             'double_click_count': 0,
             'cursor_x_distance': 0,
             'cursor_y_distance': 0,
-            'average_cursor_x_speed': 0,
-            'average_cursor_y_speed': 0,
+            'average_momentary_speed_x': 0,
+            'average_momentary_speed_y': 0,
+            'average_speed_x': 0,
+            'average_speed_y': 0,
+            'average_active_speed_x': 0,
+            'average_active_speed_y': 0,
             'average_cursor_x_angle': 0,
             'average_cursor_y_angle': 0,
             'cursor_distance_ratio': 0,

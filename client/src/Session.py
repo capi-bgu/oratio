@@ -15,7 +15,6 @@ class Session:
         """
         self.session_name = session_id
         self.session_duration = session_duration
-        self.session_start_time = time.time()
         self.data_gatherers = dict()
         self.out_path = out_path
         for collector_class, processors_class in data_gatherers.items():
@@ -26,6 +25,7 @@ class Session:
 
     def start_session(self):
         print(f"start session {self.session_name}...")
+        self.session_start_time = time.time()
         for collector in self.data_gatherers:
             collector.start()
         time.sleep(self.session_duration)

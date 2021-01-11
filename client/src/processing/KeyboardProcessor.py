@@ -1,4 +1,6 @@
 import json
+import string
+
 from src.processing.DataProcessor import DataProcessor
 
 
@@ -40,12 +42,15 @@ class KeyboardProcessor(DataProcessor):
                         'last_press_time']
                     keys_info[event.KeyID]['last_press_time'] = 0
 
-                    if chr(event.Ascii).isupper():
-                        features['uppercase_counter'] += 1
-                    if chr(event.Ascii).isspace():
-                        features['space_counter'] += 1
                     if chr(event.Ascii).isalnum():
                         features['regular_press_count'] += 1
+                    elif chr(event.Ascii) in string.punctuation:
+                        features['punctuations_press_count'] += 1
+
+                    if chr(event.Ascii).isupper():
+                        features['uppercase_counter'] += 1
+                    elif chr(event.Ascii).isspace():
+                        features['space_counter'] += 1
 
             if i == 0:  # if it's the first event
                 time_interval = data[i].Timestamp - session.session_start_time
@@ -57,7 +62,7 @@ class KeyboardProcessor(DataProcessor):
                 time_interval = data[i].Timestamp - data[i - 1].Timestamp  # A B C .
             if time_interval > 0.75:
                 idle_time += time_interval
-        if len(data) > 0:
+        if len(keys_info) > 0:
             total_press_count = 0
             features['mode_key'] = list(keys_info.keys())[0]
             mode_key_presses = keys_info[list(keys_info.keys())[0]]['press_count']
@@ -73,6 +78,9 @@ class KeyboardProcessor(DataProcessor):
             features['average_down_to_down'] /= total_press_count
             features['unique_events'] = len(keys_info)
             features['idle_time'] = idle_time
+            active_time = session.session_duration - features['idle_time']
+            if active_time != 0:
+                features['active_typing_speed'] = total_press_count / active_time
 
         with open(f"{self.output_path}\\kb_features_s_{str(session.session_name)}.json", 'w+') as features_file:
             json.dump(features, features_file)
@@ -82,12 +90,12 @@ class KeyboardProcessor(DataProcessor):
     def __init_features(self, session):
         features = {
             'typing_speed': 0,
+            'active_typing_speed': 0,
             'average_press_duration': 0,
             'average_down_to_down': 0,
             'regular_press_count': 0,
             'punctuations_press_count': 0,
             'space_counter': 0,
-            'special_press_count': 0,
             'error_corrections': 0,
             'uppercase_counter': 0,
             'digraph_duration': 0,
