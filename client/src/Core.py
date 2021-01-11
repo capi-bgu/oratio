@@ -12,7 +12,8 @@ from src.collection.KeyboardCollector import KeyboardCollector
 from src.processing.KeyboardProcessor import KeyboardProcessor
 
 class Core:
-    def __init__(self, data_gatherers, out_path, num_sessions, session_duration, ask_freq=2, sessions_passed=0):
+    def __init__(self, data_gatherers, out_path, num_sessions, session_duration, vad_labels=True,
+                 categorical_labels=True, ask_freq=2, sessions_passed=0):
         """
 
         :param data_gatherers: dictionary of collectors classes and the list of all related processors classes
@@ -27,14 +28,14 @@ class Core:
         self.curr_session = None
         self.running = True
         self.ask_freq = ask_freq
+        self.vad_labels = vad_labels
+        self.categorical_labels = categorical_labels
 
     def run(self):
         label = -1
         while self.sessions_passed < self.num_sessions and self.running:
             if self.sessions_passed % self.ask_freq == 0:
-                category_label = Categorical_ui().result
-                vad_label = SAM_ui().result
-                label = (category_label, vad_label)
+                label = self.ask_for_label()
             self.curr_session = Session(self.sessions_passed, self.session_duration, self.data_gatherers, self.out_path)
             self.curr_session.start_session()
             self.sessions_passed += 1
@@ -42,6 +43,14 @@ class Core:
             self.curr_session.save_session()
             del self.curr_session
             gc.collect()
+
+    def ask_for_label(self):
+        label = list()
+        if self.categorical_labels:
+            label.append(Categorical_ui().result)
+        if self.vad_labels:
+            label.append(SAM_ui().result)
+        return label
 
 
 if __name__ == '__main__':

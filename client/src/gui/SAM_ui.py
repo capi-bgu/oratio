@@ -43,7 +43,7 @@ class SAM_ui:
         self.valance = self.valance_scale.get()
         self.arousal = self.arousal_scale.get()
         self.dominance = self.dominance_scale.get()
-        self.result = (self.valance, self.arousal, self.dominance)
+        self.result = [self.valance, self.arousal, self.dominance]
         self.master.destroy()
 
 
