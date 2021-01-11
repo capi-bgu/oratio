@@ -1,8 +1,9 @@
 import os
 import gc
 import pathlib
-from src.PopUp import PopUp
 from src.Session import Session
+from src.gui.SAM_ui import SAM_ui
+from src.gui.Categorical_ui import Categorical_ui
 from src.collection.MouseCollector import MouseCollector
 from src.processing.MouseProcessor import MouseProcessor
 from src.collection.CameraCollector import CameraCollector
@@ -31,7 +32,9 @@ class Core:
         label = -1
         while self.sessions_passed < self.num_sessions and self.running:
             if self.sessions_passed % self.ask_freq == 0:
-                label = PopUp().v.get()
+                category_label = Categorical_ui().result
+                vad_label = SAM_ui().result
+                label = (category_label, vad_label)
             self.curr_session = Session(self.sessions_passed, self.session_duration, self.data_gatherers, self.out_path)
             self.curr_session.start_session()
             self.sessions_passed += 1
@@ -53,4 +56,3 @@ if __name__ == '__main__':
                       MouseCollector: [MouseProcessor]}
     core = Core(data_gatherers, out_path, num_sessions=4, session_duration=5)
     core.run()
-
