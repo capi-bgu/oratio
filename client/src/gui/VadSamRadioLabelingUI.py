@@ -6,7 +6,10 @@ class VadSamRadioLabelingUI(LabelingUI):
     def __init__(self):
         super().__init__()
         self.valance = tk.IntVar()
-        feelings = {"sad": 1,
+        self.arousal = tk.IntVar()
+        self.dominance = tk.IntVar()
+        feelings = {"no answer": 0,
+                    "sad": 1,
                     "anger": 2,
                     "fear": 3,
                     "happy": 4,
@@ -20,15 +23,26 @@ class VadSamRadioLabelingUI(LabelingUI):
             tk.Radiobutton(self.root,
                            text=txt,
                            padx=20,
-                           variable=self.result,
+                           variable=self.valance,
+                           value=val).pack(anchor=tk.W)
+        for txt, val in feelings.items():
+            tk.Radiobutton(self.root,
+                           text=txt,
+                           padx=20,
+                           variable=self.arousal,
+                           value=val).pack(anchor=tk.W)
+        for txt, val in feelings.items():
+            tk.Radiobutton(self.root,
+                           text=txt,
+                           padx=20,
+                           variable=self.dominance,
                            value=val).pack(anchor=tk.W)
         tk.Button(self.root, text="OK", command=self.exit).pack(anchor=tk.W)
         tk.mainloop()
 
     def exit(self):
-        if self.result.get() != 0:
-            self.label = self.result.get()
-            super().exit()
+        self.label = (self.valance.get(), self.arousal.get(), self.dominance.get())
+        super().exit()
 
 
 if __name__ == '__main__':
