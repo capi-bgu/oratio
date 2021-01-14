@@ -1,12 +1,10 @@
 from tkinter import *
+from src.gui.LabelingUI import LabelingUI
 
 
-class Categorical_ui:
-    def __init__(self):  # create popup question about user's feeling, active only in Learning Mode.
-        self.root = Tk()
-        self.root.resizable(0, 0)
-        self.root.protocol('WM_DELETE_WINDOW', self.exit)
-        self.root.wm_attributes("-topmost", True)
+class CategoricalLabelingUI(LabelingUI):
+    def __init__(self):
+        super().__init__()
         self.result = IntVar()
         feelings = {"sad": 1,
                     "anger": 2,
@@ -19,7 +17,6 @@ class Categorical_ui:
               justify=LEFT,
               padx=20).pack()
         for txt, val in feelings.items():
-            # different styles to show the options
             Radiobutton(self.root,
                         text=txt,
                         padx=20,
@@ -30,10 +27,10 @@ class Categorical_ui:
 
     def exit(self):  # check to prevent closing before mark an option
         if self.result.get() != 0:
-            self.result = self.result.get()
-            self.root.destroy()
+            self.label = self.result.get()
+            super().exit()
 
 
 if __name__ == '__main__':
-    categorical = Categorical_ui()
-    print(categorical.result)
+    categorical = CategoricalLabelingUI()
+    print(categorical.label)

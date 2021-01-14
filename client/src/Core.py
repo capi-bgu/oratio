@@ -2,8 +2,8 @@ import os
 import gc
 import pathlib
 from src.Session import Session
-from src.gui.SAM_ui import SAM_ui
-from src.gui.Categorical_ui import Categorical_ui
+from src.gui.VadSamLabelongUI import VadSamLabelingUI
+from src.gui.CategoricalLabelingUI import CategoricalLabelingUI
 from src.collection.MouseCollector import MouseCollector
 from src.processing.MouseProcessor import MouseProcessor
 from src.collection.CameraCollector import CameraCollector
@@ -12,8 +12,8 @@ from src.collection.KeyboardCollector import KeyboardCollector
 from src.processing.KeyboardProcessor import KeyboardProcessor
 
 class Core:
-    def __init__(self, data_gatherers, out_path, num_sessions, session_duration, vad_labels=True,
-                 categorical_labels=True, ask_freq=2, sessions_passed=0):
+    def __init__(self, data_gatherers, out_path, num_sessions, session_duration,
+                 labeling_methods, ask_freq=2, sessions_passed=0):
         """
 
         :param data_gatherers: dictionary of collectors classes and the list of all related processors classes
@@ -28,8 +28,7 @@ class Core:
         self.curr_session = None
         self.running = True
         self.ask_freq = ask_freq
-        self.vad_labels = vad_labels
-        self.categorical_labels = categorical_labels
+        self.labeling_methods = labeling_methods
 
     def run(self):
         label = -1
@@ -46,10 +45,8 @@ class Core:
 
     def ask_for_label(self):
         label = list()
-        if self.categorical_labels:
-            label.append(Categorical_ui().result)
-        if self.vad_labels:
-            label.append(SAM_ui().result)
+        for method in self.labeling_methods:
+            label.append(method().label)
         return label
 
 
@@ -63,5 +60,6 @@ if __name__ == '__main__':
     data_gatherers = {KeyboardCollector: [KeyboardProcessor],
                       CameraCollector: [CameraProcessor],
                       MouseCollector: [MouseProcessor]}
-    core = Core(data_gatherers, out_path, num_sessions=4, session_duration=5)
+    label_methods = [CategoricalLabelingUI, VadSamLabelingUI]
+    core = Core(data_gatherers, out_path, num_sessions=4, session_duration=5, labeling_methods=label_methods)
     core.run()
