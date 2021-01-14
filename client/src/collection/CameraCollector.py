@@ -7,20 +7,22 @@ class CameraCollector(DataCollector):
     def __init__(self, fps=2, camera=0):
         super().__init__()
         self.fps = fps
-        self.cap = cv2.VideoCapture(camera)
+        self.camera = camera
+        self.cap = cv2.VideoCapture(self.camera, cv2.CAP_DSHOW)
+        self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+        self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 400)
 
     def start_collect(self):
         print("start camera collecting...")
         super().start_collect()
-        prev = 0
         while self.collect:
-            time_elapsed = time.time() - prev
-            if time_elapsed > 1. / self.fps:
-                prev = time.time()
-                _, frame = self.cap.read()
-                if frame is not None:
-                    self.data.append(frame)
+            _, frame = self.cap.read()
+            if frame is not None:
+                self.data.append(frame)
+            print("Added the picture")
+            time.sleep(1.0 / self.fps)
         print("end camera collecting...")
+
 
     def stop_collect(self):
         self.cap.release()
