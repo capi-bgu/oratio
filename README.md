@@ -1,3 +1,5 @@
+<img src="doc/logo.svg" alt="logo" width="300"/>
+
 # capi
 Cognitive Automatic Psychology Interface
 
