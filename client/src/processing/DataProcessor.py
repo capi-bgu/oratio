@@ -7,11 +7,9 @@ from abc import ABC, abstractmethod
 
 class DataProcessor(ABC, threading.Thread):
 
-    def __init__(self, output_path):
+    def __init__(self):
         super().__init__()
-        self.output_path = output_path
-        if not os.path.isdir(output_path):
-            os.mkdir(output_path)
+        self.features = None
 
     @abstractmethod
     def process_data(self, data, session):

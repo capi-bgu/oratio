@@ -19,7 +19,6 @@ class CameraCollector(DataCollector):
             _, frame = self.cap.read()
             if frame is not None:
                 self.data.append(frame)
-            print("Added the picture")
             time.sleep(1.0 / self.fps)
         print("end camera collecting...")
 

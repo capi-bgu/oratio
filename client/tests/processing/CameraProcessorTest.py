@@ -1,4 +1,6 @@
 import os
+from concurrent.futures._base import as_completed
+
 import cv2
 import time
 import pathlib
@@ -11,24 +13,35 @@ from src.processing.CameraProcessor import CameraProcessor
 class CameraProcessorTest(unittest.TestCase):
     def test(self):
         test_dir = pathlib.Path(__file__).parent.parent.absolute()
-
         if not os.path.isdir("../test_output"):
             os.mkdir("../test_output")
-
-        self.out_path = os.path.join(test_dir, 'test_output')
+        if not os.path.isdir("../test_output/img"):
+            os.mkdir("../test_output/img")
+        self.out_path = os.path.join(test_dir, 'test_output', 'img')
         self.data_path = os.path.join(test_dir, 'test_data', 'img')
-        self.cpt = CameraProcessor(self.out_path)
+        self.cpt = CameraProcessor()
+        session_duration = 5
+
         data = self.__get_data()
+        assert len(data) == session_duration * 2
+
         st = time.time()
-        self.cpt.process_data(data, SessionStub(0, 5, st))
+        session = SessionStub(0, session_duration, st)
+        self.cpt.set_arguements(data, session)
+        self.cpt.start()
+        self.cpt.join()
+        features = self.cpt.features
         print(time.time()-st)
+
+        assert len(features) == len(data)
+        for i, img in enumerate(features):
+            cv2.imwrite(f"{self.out_path}\\processor_test_{i}.jpg", img)
 
     def __get_data(self):
         data = []
         self.files = [f for f in listdir(self.data_path) if isfile(join(self.data_path, f))]
         for img in self.files:
             data.append(cv2.imread(self.data_path + '\\' + img))
-
         return data
 
 

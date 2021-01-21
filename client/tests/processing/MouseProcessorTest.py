@@ -1,3 +1,4 @@
+import json
 import os
 import ast
 import time
@@ -13,17 +14,26 @@ from src.processing.MouseProcessor import MouseProcessor
 class MouseProcessorTest(unittest.TestCase):
     def test(self):
         test_dir = pathlib.Path(__file__).parent.parent.absolute()
-
         if not os.path.isdir("../test_output"):
             os.mkdir("../test_output")
-
-        self.out_path = os.path.join(test_dir, 'test_output')
+        if not os.path.isdir("../test_output/mouse"):
+            os.mkdir("../test_output/mouse")
+        self.out_path = os.path.join(test_dir, 'test_output', 'mouse')
         self.data_path = os.path.join(test_dir, 'test_data', 'mouse')
-        self.mpt = MouseProcessor(self.out_path)
+        self.mpt = MouseProcessor()
         start_time, data = self.__get_data()
+        session_duration = 5
+        session = SessionStub(0, session_duration, start_time)
+        self.mpt.set_arguements(data, session)
+
         st = time.time()
-        self.mpt.process_data(data, SessionStub(0, 5, start_time))
+        self.mpt.start()
+        self.mpt.join()
+        features = self.mpt.features
         print(time.time() - st)
+
+        with open(f"{self.out_path}\\processor_test.json", 'w+') as features_file:
+            json.dump(features, features_file)
 
     def __get_data(self):
         data = []

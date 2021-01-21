@@ -1,3 +1,4 @@
+import json
 import os
 import ast
 import time
@@ -13,17 +14,26 @@ from src.processing.KeyboardProcessor import KeyboardProcessor
 class KeyboardProcessorTest(unittest.TestCase):
     def test(self):
         test_dir = pathlib.Path(__file__).parent.parent.absolute()
-
         if not os.path.isdir("../test_output"):
             os.mkdir("../test_output")
-
-        self.out_path = os.path.join(test_dir, 'test_output')
+        if not os.path.isdir("../test_output/kb"):
+            os.mkdir("../test_output/kb")
+        self.out_path = os.path.join(test_dir, 'test_output', 'kb')
         self.data_path = os.path.join(test_dir, 'test_data', 'kb')
-        self.kbpt = KeyboardProcessor(self.out_path)
+        self.kbpt = KeyboardProcessor()
         start_time, data = self.__get_data()
+        session_duration = 5
+        session = SessionStub(0, session_duration, start_time)
+        self.kbpt.set_arguements(data, session)
+
         st = time.time()
-        self.kbpt.process_data(data, SessionStub(0, 5, start_time))
+        self.kbpt.start()
+        self.kbpt.join()
+        features = self.kbpt.features
         print(time.time() - st)
+
+        with open(f"{self.out_path}\\processor_test.json", 'w+') as features_file:
+            json.dump(features, features_file)
 
     def __get_data(self):
         data = []

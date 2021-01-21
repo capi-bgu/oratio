@@ -5,14 +5,13 @@ from src.processing.DataProcessor import DataProcessor
 
 
 class KeyboardProcessor(DataProcessor):
-    def __init__(self, output_path):
-        output_path += "\\keyboard"
-        super().__init__(output_path)
+    def __init__(self):
+        super().__init__()
 
     def process_data(self, data, session):
         print("start kb processing...")
         keys_info = {}
-        features = self.__init_features(session)
+        self.__init_features(session)
         previous_time = 0
         pressed_keys = set()  # the set that will save every key that is pressed
         idle_time = 0
@@ -29,11 +28,11 @@ class KeyboardProcessor(DataProcessor):
                     if previous_time == 0:
                         previous_time = event.Timestamp
                     else:
-                        features['average_down_to_down'] += event.Timestamp - previous_time
+                        self.features['average_down_to_down'] += event.Timestamp - previous_time
                         previous_time = event.Timestamp
 
                 if event.Key == 'Delete' or event.Key == 'Back':
-                    features['error_corrections'] += 1
+                    self.features['error_corrections'] += 1
 
             elif event.Message == 257:  # key release
                 if event.KeyID in pressed_keys:
@@ -43,14 +42,14 @@ class KeyboardProcessor(DataProcessor):
                     keys_info[event.KeyID]['last_press_time'] = 0
 
                     if chr(event.Ascii).isalnum():
-                        features['regular_press_count'] += 1
+                        self.features['regular_press_count'] += 1
                     elif chr(event.Ascii) in string.punctuation:
-                        features['punctuations_press_count'] += 1
+                        self.features['punctuations_press_count'] += 1
 
                     if chr(event.Ascii).isupper():
-                        features['uppercase_counter'] += 1
+                        self.features['uppercase_counter'] += 1
                     elif chr(event.Ascii).isspace():
-                        features['space_counter'] += 1
+                        self.features['space_counter'] += 1
 
             if i == 0:  # if it's the first event
                 time_interval = data[i].Timestamp - session.session_start_time
@@ -64,31 +63,28 @@ class KeyboardProcessor(DataProcessor):
                 idle_time += time_interval
         if len(keys_info) > 0:
             total_press_count = 0
-            features['mode_key'] = list(keys_info.keys())[0]
+            self.features['mode_key'] = list(keys_info.keys())[0]
             mode_key_presses = keys_info[list(keys_info.keys())[0]]['press_count']
             for key in keys_info:
-                features['average_press_duration'] += keys_info[key]['total_press_time'] / keys_info[key]['press_count']
+                self.features['average_press_duration'] += keys_info[key]['total_press_time'] / keys_info[key]['press_count']
                 total_press_count += keys_info[key]['press_count']
                 if keys_info[key]['press_count'] > mode_key_presses:
                     mode_key_presses = keys_info[key]['press_count']
-                    features['mode_key'] = key
+                    self.features['mode_key'] = key
 
-            features['typing_speed'] = total_press_count / session.session_duration
-            features['average_press_duration'] /= len(keys_info)
-            features['average_down_to_down'] /= total_press_count
-            features['unique_events'] = len(keys_info)
-            features['idle_time'] = idle_time
-            active_time = session.session_duration - features['idle_time']
+            self.features['typing_speed'] = total_press_count / session.session_duration
+            self.features['average_press_duration'] /= len(keys_info)
+            self.features['average_down_to_down'] /= total_press_count
+            self.features['unique_events'] = len(keys_info)
+            self.features['idle_time'] = idle_time
+            active_time = session.session_duration - self.features['idle_time']
             if active_time != 0:
-                features['active_typing_speed'] = total_press_count / active_time
-
-        with open(f"{self.output_path}\\kb_features_s_{str(session.session_name)}.json", 'w+') as features_file:
-            json.dump(features, features_file)
+                self.features['active_typing_speed'] = total_press_count / active_time
         print("end kb processing...")
-
+        return self.features
 
     def __init_features(self, session):
-        features = {
+        self.features = {
             'typing_speed': 0,
             'active_typing_speed': 0,
             'average_press_duration': 0,
@@ -104,4 +100,3 @@ class KeyboardProcessor(DataProcessor):
             'idle_time': session.session_duration,
             'unique_events': 0
         }
-        return features

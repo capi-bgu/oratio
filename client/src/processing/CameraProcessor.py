@@ -7,9 +7,8 @@ from src.processing.DataProcessor import DataProcessor
 
 
 class CameraProcessor(DataProcessor):
-    def __init__(self, output_path):
-        output_path += "\\img"
-        super().__init__(output_path)
+    def __init__(self):
+        super().__init__()
 
         processing_dir = pathlib.Path(__file__).parent.absolute()
         self.predictor_path = os.path.join(processing_dir, 'dlib_face_detection.dat')
@@ -18,6 +17,7 @@ class CameraProcessor(DataProcessor):
 
     def process_data(self, data, session):
         print("start camera processing...")
+        self.features = []
         for i, frame in enumerate(data):
             frame = cv2.cvtColor(src=frame, code=cv2.COLOR_BGR2GRAY)
             frame = frame/255.0
@@ -35,8 +35,10 @@ class CameraProcessor(DataProcessor):
                     x.append(landmarks.part(n).x)
                     y.append(landmarks.part(n).y)
                 cut_frame = frame[min(y):max(y), min(x):max(x)]
-                cv2.imwrite(f"{self.output_path}\\s_{session.session_name}_pn_{i}.jpg", cut_frame)
+                self.features.append(cut_frame)
         print("end camera processing...")
+        return self.features
+
 
 
 
