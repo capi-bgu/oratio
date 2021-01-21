@@ -26,16 +26,28 @@ class CameraProcessor(DataProcessor):
             frame = frame.astype(np.uint8)
 
             faces = self.detector(frame)
-            for face in faces:
-                # Create landmark object
-                landmarks = self.predictor(image=frame, box=face)
+            if len(faces) == 0:
+                continue  # TODO: for future implementation- alert the user when no face detected
+            elif len(faces) > 1:
+                max_slant = 0
+                face = 0
+                for curr_index, curr_face in enumerate(faces):
+                    slant = (curr_face.height()**2 + curr_face.width()**2)**0.5
+                    if slant > max_slant:
+                        face = curr_face
+                        max_slant = slant
+            else:
+                face = faces[0]
 
-                x = []; y = []
-                for n in range(0, 68):
-                    x.append(landmarks.part(n).x)
-                    y.append(landmarks.part(n).y)
-                cut_frame = frame[min(y):max(y), min(x):max(x)]
-                self.features.append(cut_frame)
+            # Create landmark object
+            landmarks = self.predictor(image=frame, box=face)
+
+            x = []; y = []
+            for n in range(0, 68):
+                x.append(landmarks.part(n).x)
+                y.append(landmarks.part(n).y)
+            cut_frame = frame[min(y):max(y), min(x):max(x)]
+            self.features.append(cut_frame)
         print("end camera processing...")
         return self.features
 
