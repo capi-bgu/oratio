@@ -21,7 +21,7 @@ class Session:
             collector = collector_class()
             self.data_gatherers[collector] = list()
             for processor_class in processors_class:
-                self.data_gatherers[collector].append(processor_class(out_path))
+                self.data_gatherers[collector].append(processor_class())
 
     def start_session(self):
         print(f"start session {self.session_name}...")

@@ -1,3 +1,5 @@
+import os
+import pathlib
 import tkinter as tk
 from src.gui.LabelingUI import LabelingUI
 from PIL import ImageTk, Image
@@ -6,6 +8,10 @@ from PIL import ImageTk, Image
 class VadSamRadioLabelingUI(LabelingUI):
     def __init__(self):
         super().__init__()
+
+        curr_dir = pathlib.Path(__file__).parent.absolute()
+        self.resources_path = os.path.join(curr_dir, 'resources')
+
         self.valance = tk.IntVar()
         self.arousal = tk.IntVar()
         self.dominance = tk.IntVar()
@@ -18,6 +24,7 @@ class VadSamRadioLabelingUI(LabelingUI):
         self.__build_block("Dominance", self.dominance, 2)
 
         tk.Button(self.root, text="OK", command=self.exit).grid(row=9, column=4)
+
         tk.mainloop()
 
     def __build_block(self, name, out, block_number):
@@ -33,7 +40,7 @@ class VadSamRadioLabelingUI(LabelingUI):
         self.image_list.append(list())  # this list is for the pictures to stay in the memory
         for i in range(9):
             canvas2 = tk.Canvas(self.root, width=110, height=110)
-            img = Image.open(f"resources/{name}/{name}{i}.png")
+            img = Image.open(f"{self.resources_path}/{name}/{name}{i}.png")
             img = img.resize((90, 90), Image.ANTIALIAS)
             img = ImageTk.PhotoImage(img)
             canvas2.create_image(50, 50, anchor=tk.CENTER, image=img)

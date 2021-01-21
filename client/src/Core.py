@@ -3,6 +3,7 @@ import gc
 import pathlib
 from src.Session import Session
 from src.gui.VadSamLabelongUI import VadSamLabelingUI
+from src.gui.VadSamRadioLabelingUI import VadSamRadioLabelingUI
 from src.gui.CategoricalLabelingUI import CategoricalLabelingUI
 from src.collection.MouseCollector import MouseCollector
 from src.processing.MouseProcessor import MouseProcessor
@@ -60,6 +61,6 @@ if __name__ == '__main__':
     data_gatherers = {KeyboardCollector: [KeyboardProcessor],
                       CameraCollector: [CameraProcessor],
                       MouseCollector: [MouseProcessor]}
-    label_methods = [CategoricalLabelingUI, VadSamLabelingUI]
+    label_methods = [CategoricalLabelingUI, VadSamLabelingUI, VadSamRadioLabelingUI]
     core = Core(data_gatherers, out_path, num_sessions=4, session_duration=5, labeling_methods=label_methods)
     core.run()
