@@ -21,7 +21,7 @@ class MouseCollectorTest(unittest.TestCase):
             os.mkdir("../test_output/mouse")
         test_dir = pathlib.Path(__file__).parent.parent.absolute()
         output_path = os.path.join(test_dir, 'test_output', 'mouse')
-        f = open(f"{output_path}\\_mouse.txt", "w+")
+        f = open(f"{output_path}\\raw_mouse.txt", "w+")
         for i, e in enumerate(data):
             f.write(str(i) + '. ' + str(e.__dict__) + '\n')
         f.close()

@@ -23,7 +23,7 @@ class CameraCollectorTest(unittest.TestCase):
         test_dir = pathlib.Path(__file__).parent.parent.absolute()
         output_path = os.path.join(test_dir, 'test_output', 'img')
         for i, pic in enumerate(data):
-            cv2.imwrite(f"{output_path}\\_{i}.jpg", pic)
+            cv2.imwrite(f"{output_path}\\raw_image_{i}.jpg", pic)
 
 
 if __name__ == '__main__':

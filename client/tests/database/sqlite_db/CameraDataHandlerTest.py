@@ -7,6 +7,7 @@ from tests.processing.stubs.CameraProcessorStub import CameraProcessorStub
 
 
 class CameraDataHandlerTest(unittest.TestCase):
+
     def test(self):
         camera_processor = CameraProcessorStub()
         camera_processor.set_arguements(None, None)
@@ -20,8 +21,9 @@ class CameraDataHandlerTest(unittest.TestCase):
 
         manager = SqliteManager(path=self.out_path)
         manager.create_database()
-        data_handler = CameraDataHandler(path=self.out_path)
-        data_handler.save(("CameraHandlerTest", camera_processor.features))
+
+        self.data_handler = CameraDataHandler(path=self.out_path)
+        self.data_handler.save(("CameraHandlerTest", camera_processor.features))
 
 
 if __name__ == '__main__':

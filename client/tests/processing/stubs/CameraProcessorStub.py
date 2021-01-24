@@ -16,6 +16,6 @@ class CameraProcessorStub(DataProcessor):
         features = []
         files = [f for f in listdir(self.data_path) if isfile(join(self.data_path, f))]
         for img in files:
-            features.append(cv2.imread(self.data_path + '\\' + img))
+            features.append(cv2.imread(self.data_path + '\\' + img, cv2.IMREAD_GRAYSCALE))
         self.features = features
         return self.features

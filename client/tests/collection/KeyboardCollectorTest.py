@@ -21,7 +21,7 @@ class KeyboardCollectorTest(unittest.TestCase):
             os.mkdir("../test_output/kb")
         test_dir = pathlib.Path(__file__).parent.parent.absolute()
         output_path = os.path.join(test_dir, 'test_output', 'kb')
-        f = open(f"{output_path}\\_kb.txt", "w+")
+        f = open(f"{output_path}\\raw_kb.txt", "w+")
         for i, e in enumerate(data):
             f.write(str(i) + '. ' + str(e.__dict__) + '\n')
         f.close()
