@@ -1,10 +1,10 @@
 import os
 import sqlite3
-from abc import ABC, abstractmethod
+from abc import abstractmethod
 from src.database.DataHandelr import DataHandler
 
 
-class SqliteDataHandler(ABC, DataHandler):
+class SqliteDataHandler(DataHandler):
 
     def __init__(self, path=""):
         super().__init__(path)
@@ -31,3 +31,4 @@ class SqliteDataHandler(ABC, DataHandler):
     @abstractmethod
     def create_table(self):
         pass
+
