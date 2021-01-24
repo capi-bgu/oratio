@@ -18,7 +18,7 @@ class MouseDataHandlerStub(SqliteDataHandler):
         self.name = name
 
     def save(self, data):
-        with open(f"{self.out_path}\\{self.name}_kb.json", 'w+') as features_file:
+        with open(f"{self.out_path}\\{self.name}_mouse.json", 'w+') as features_file:
             json.dump(data, features_file)
 
     def create_table(self):

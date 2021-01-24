@@ -7,11 +7,9 @@ from src.database.sqlite_db.SqliteManager import SqliteManager
 class SqliteManagerTest(unittest.TestCase):
     def test(self):
         test_dir = pathlib.Path(__file__).parent.parent.parent.absolute()
-        if not os.path.isdir("../test_output"):
-            os.mkdir("../test_output")
-        if not os.path.isdir("../test_output/img"):
-            os.mkdir("../test_output/img")
-        self.out_path = os.path.join(test_dir, 'test_output', 'img')
+        self.out_path = os.path.join(test_dir, 'test_output')
+        if not os.path.isdir(self.out_path):
+            os.mkdir(self.out_path)
         self.db_path = os.path.join(self.out_path, 'data.db')
 
         assert not os.path.isfile(self.db_path)
