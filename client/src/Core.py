@@ -57,9 +57,10 @@ class Core:
             gc.collect()
 
     def ask_for_label(self):
-        label = list()
+        label = dict()
         for method in self.labeling_methods:
-            label.append(method().label)
+            m = method()
+            label[m.name] = m.label
         return label
 
 

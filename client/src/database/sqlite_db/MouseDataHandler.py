@@ -1,20 +1,42 @@
 import os
 import sqlite3
-from src.database.DataHandelr import DataHandler
+from src.database.sqlite_db.SqliteDataHandler import SqliteDataHandler
 
-class MouseDataHandler(DataHandler):
+class MouseDataHandler(SqliteDataHandler):
 
     def __init__(self, path=""):
         super().__init__(path)
-        self.path = path
-        self.db_path = os.path.join(self.path, 'data.db')
-        self.create_table()
 
     def save(self, data):
-        pass
+        """
 
-    def ask(self, query):
-        pass
+        :param data: tuple- (session name, dictionary of all keyboard features from mouse processor)
+        """
+        session, data = super().save(data)
+
+        insert = "INSERT INTO Mouse VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+        with sqlite3.connect(self.db_path) as connection:
+            c = connection.cursor()
+            c.execute(insert, (session,
+                               data['right_click_count'],
+                               data['left_click_count'],
+                               data['scroll_speed'],
+                               data['double_click_count'],
+                               data['cursor_x_distance'],
+                               data['cursor_y_distance'],
+                               data['average_momentary_speed_x'],
+                               data['average_momentary_speed_y'],
+                               data['average_speed_x'],
+                               data['average_speed_y'],
+                               data['average_active_speed_x'],
+                               data['average_active_speed_y'],
+                               data['average_cursor_x_angle'],
+                               data['average_cursor_y_angle'],
+                               data['cursor_distance_ratio'],
+                               data['idle_time'],
+                               data['right_click_duration'],
+                               data['left_click_duration']))
+            connection.commit()
 
     def create_table(self):
         with sqlite3.connect(self.db_path) as connection:

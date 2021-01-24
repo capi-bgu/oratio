@@ -44,7 +44,7 @@ class Session:
                 processor = processor_handler[0]
                 handler = processor_handler[1]
                 processor.join()
-                handler.save(processor.features)
+                handler.save((self.session_name, processor.features))
                 del processor
                 del handler
         del self.data_gatherers

@@ -1,21 +1,27 @@
 import os
 import sqlite3
-from src.database.DataHandelr import DataHandler
+from src.database.sqlite_db.SqliteDataHandler import SqliteDataHandler
 
 
-class SessionDataHandler(DataHandler):
+class SessionDataHandler(SqliteDataHandler):
 
     def __init__(self, path=""):
         super().__init__(path)
-        self.path = path
-        self.db_path = os.path.join(self.path, 'data.db')
-        self.create_table()
 
     def save(self, data):
-        pass
+        """
 
-    def ask(self, query):
-        pass
+        :param data: Session
+        """
+
+        insert = "INSERT INTO Session VALUES(?,?,?,?)"
+        with sqlite3.connect(self.db_path) as connection:
+            c = connection.cursor()
+            c.execute(insert, (str(data.session_name),
+                               data.front_window_type,
+                               data.window_switches,
+                               str(data.label)))
+            connection.commit()
 
     def create_table(self):
         with sqlite3.connect(self.db_path) as connection:
@@ -26,4 +32,3 @@ class SessionDataHandler(DataHandler):
                         window_switch REAL ,\
                         label BLOB ,\
                         PRIMARY KEY(session));")
-

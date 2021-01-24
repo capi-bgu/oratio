@@ -1,21 +1,38 @@
-import os
 import sqlite3
-from src.database.DataHandelr import DataHandler
+from src.database.sqlite_db.SqliteDataHandler import SqliteDataHandler
 
 
-class KeyboardDataHandler(DataHandler):
+class KeyboardDataHandler(SqliteDataHandler):
 
     def __init__(self, path=""):
         super().__init__(path)
-        self.path = path
-        self.db_path = os.path.join(self.path, 'data.db')
-        self.create_table()
 
     def save(self, data):
-        pass
+        """
 
-    def ask(self, query):
-        pass
+        :param data: tuple- (session name, dictionary of all keyboard features from keyboard processor)
+        """
+        session, data = super().save(data)
+
+        insert = "INSERT INTO Keyboard VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+        with sqlite3.connect(self.db_path) as connection:
+            c = connection.cursor()
+            c.execute(insert, (session,
+                               data['typing_speed'],
+                               data['active_typing_speed'],
+                               data['average_press_duration'],
+                               data['average_down_to_down'],
+                               data['regular_press_count'],
+                               data['punctuations_press_count'],
+                               data['space_counter'],
+                               data['error_corrections'],
+                               data['uppercase_counter'],
+                               data['digraph_duration'],
+                               data['trigraph_duration'],
+                               data['mode_key'],
+                               data['idle_time'],
+                               data['unique_events']))
+            connection.commit()
 
     def create_table(self):
         with sqlite3.connect(self.db_path) as connection:
