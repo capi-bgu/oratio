@@ -1,6 +1,6 @@
 import os
-import pathlib
 import time
+import pathlib
 import unittest
 from tests.SessionStub import SessionStub
 from src.collection.MouseCollector import MouseCollector
@@ -8,7 +8,7 @@ from src.processing.MouseProcessor import MouseProcessor
 from tests.database.sqlite_db.stubs.MouseDataHandlerStub import MouseDataHandlerStub
 
 
-class MouseGatherTest(unittest.TestCase):
+class MouseTest(unittest.TestCase):
     def test(self):
         mouse_processor = MouseProcessor()
         mouse_collector = MouseCollector()

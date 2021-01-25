@@ -56,10 +56,10 @@ class KeyboardProcessor(DataProcessor):
             else:
                 if i == len(data) - 1:
                     time_interval = (session.session_start_time + session.session_duration) - data[i].Timestamp
-                    if time_interval > 0.75:
+                    if time_interval > 0.9:
                         idle_time += time_interval
                 time_interval = data[i].Timestamp - data[i - 1].Timestamp  # A B C .
-            if time_interval > 0.75:
+            if time_interval > 0.9:
                 idle_time += time_interval
         if len(keys_info) > 0:
             total_press_count = 0

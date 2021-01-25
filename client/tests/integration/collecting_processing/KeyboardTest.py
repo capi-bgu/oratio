@@ -6,7 +6,7 @@ from src.processing.KeyboardProcessor import KeyboardProcessor
 from tests.database.sqlite_db.stubs.KeyboardDataHandlerStub import KeyboardDataHandlerStub
 
 
-class KeyboardGatherTest(unittest.TestCase):
+class KeyboardTest(unittest.TestCase):
     def test(self):
         keyboard_processor = KeyboardProcessor()
         keyboard_collector = KeyboardCollector()

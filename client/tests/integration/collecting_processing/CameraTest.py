@@ -6,7 +6,7 @@ from src.processing.CameraProcessor import CameraProcessor
 from tests.database.sqlite_db.stubs.CameraDataHandlerStub import CameraDataHandlerStub
 
 
-class CameraGatherTest(unittest.TestCase):
+class CameraTest(unittest.TestCase):
     def test(self):
         fps = 2
 
