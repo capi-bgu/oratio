@@ -19,3 +19,9 @@ class CameraProcessorStub(DataProcessor):
             features.append(cv2.imread(self.data_path + '\\' + img, cv2.IMREAD_GRAYSCALE))
         self.features = features
         return self.features
+
+
+if __name__ == '__main__':
+    camera_processor_stub = CameraProcessorStub()
+    data = camera_processor_stub.process_data()
+    print(data)

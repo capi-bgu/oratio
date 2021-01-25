@@ -35,3 +35,9 @@ class KeyboardCollectorStub(DataCollector):
                     event.Timestamp = event_dict['Timestamp']
                     data.append(event)
         return start_time, data
+
+
+if __name__ == '__main__':
+    keyboard_collector_stub = KeyboardCollectorStub()
+    st, data = keyboard_collector_stub.stop_collect()
+    print(st, data)

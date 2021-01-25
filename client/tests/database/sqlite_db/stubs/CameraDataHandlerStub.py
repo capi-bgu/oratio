@@ -9,11 +9,13 @@ class CameraDataHandlerStub(SqliteDataHandler):
     def __init__(self, name, path=""):
         super().__init__(path)
         test_dir = pathlib.Path(__file__).parent.parent.parent.parent.absolute()
-        if not os.path.isdir("../test_output"):
-            os.mkdir("../test_output")
-        if not os.path.isdir("../test_output/img"):
-            os.mkdir("../test_output/img")
-        self.out_path = os.path.join(test_dir, 'test_output', 'img')
+        self.out_path = os.path.join(test_dir, 'test_output')
+        if not os.path.isdir(self.out_path):
+            os.mkdir(self.out_path)
+        self.out_path = os.path.join(self.out_path, 'img')
+        if not os.path.isdir(self.out_path):
+            os.mkdir(self.out_path)
+
         self.create_table()
         self.name = name
 

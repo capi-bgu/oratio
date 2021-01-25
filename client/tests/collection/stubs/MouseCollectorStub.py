@@ -36,3 +36,9 @@ class MouseCollectorStub(DataCollector):
                     event.Timestamp = event_dict['Timestamp']
                     data.append(event)
         return start_time, data
+
+
+if __name__ == '__main__':
+    mouse_collector_stub = MouseCollectorStub()
+    st, data = mouse_collector_stub.stop_collect()
+    print(st, data)

@@ -22,3 +22,9 @@ class CameraCollectorStub(DataCollector):
         for img in files:
             data.append(cv2.imread(self.data_path + '\\' + img))
         return data
+
+
+if __name__ == '__main__':
+    camera_collector_stub = CameraCollectorStub()
+    data = camera_collector_stub.stop_collect()
+    print(data)
