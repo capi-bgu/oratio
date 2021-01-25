@@ -24,8 +24,6 @@ class MouseCollector(DataCollector):
         return super().stop_collect()
 
     def __mouse_event(self, event):
-        if not event.Injected:
-            event.Timestamp = time.time()
-            self.data.append(event)
-            return True
-        return False
+        event.Timestamp = time.time()
+        self.data.append(event)
+        return True
