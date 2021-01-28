@@ -15,6 +15,12 @@ class SqliteManager(DatabaseManager):
             pass
         return super().create_database()
 
+    def ask(self, query):
+        with sqlite3.connect(self.db_path) as connection:
+            c = connection.cursor()
+            c.execute(query)
+            return c.fetchall()
+
 
 if __name__ == '__main__':
     sql = SqliteManager()

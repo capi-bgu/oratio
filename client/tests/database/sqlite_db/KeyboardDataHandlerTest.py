@@ -20,8 +20,25 @@ class KeyboardDataHandlerTest(unittest.TestCase):
 
         manager = SqliteManager(path=self.out_path)
         manager.create_database()
-        data_handler = KeyboardDataHandler(path=self.out_path)
-        data_handler.save(("KeyboardHandlerTest", keyboard_processor.features))
+
+        res = manager.ask("SELECT name FROM sqlite_master WHERE type='table' AND name='Keyboard';")
+        self.assertNotIn("Keyboard", res)
+
+        self.data_handler = KeyboardDataHandler(path=self.out_path)
+        res = manager.ask("SELECT name FROM sqlite_master WHERE type='table' AND name='Keyboard';")
+        self.assertIn(("Keyboard",), res)
+
+        res = manager.ask("SELECT * FROM Keyboard WHERE session='KeyboardHandlerTest'")
+        self.assertTrue(len(res) == 0)
+
+        self.data_handler.save(("KeyboardHandlerTest", keyboard_processor.features))
+        res = manager.ask("SELECT * FROM Keyboard WHERE session='KeyboardHandlerTest'")
+        self.assertTrue(len(res) == 1)
+        key = res[0][0]
+        self.assertEqual(key, 'KeyboardHandlerTest')
+        for i, val in enumerate(list(keyboard_processor.features.values())):
+            self.assertEqual(val, res[0][i+1])
+
 
 
 if __name__ == '__main__':

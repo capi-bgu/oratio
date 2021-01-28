@@ -22,12 +22,6 @@ class SqliteDataHandler(DataHandler):
         data = data[1]
         return str(session), data
 
-    def ask(self, query):
-        with sqlite3.connect(self.db_path) as connection:
-            c = connection.cursor()
-            c.execute(query)
-            return c.fetchall()
-
     @abstractmethod
     def create_table(self):
         pass

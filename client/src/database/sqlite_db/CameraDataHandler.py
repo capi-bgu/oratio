@@ -21,7 +21,7 @@ class CameraDataHandler(SqliteDataHandler):
         data = np.array(data)
         data = msgpack.packb(data, default=m.encode)
 
-        insert = "INSERT INTO Images VALUES(?,?)"
+        insert = "INSERT INTO Camera VALUES(?,?)"
         with sqlite3.connect(self.db_path) as connection:
             c = connection.cursor()
             c.execute(insert, (session, data))
@@ -30,7 +30,7 @@ class CameraDataHandler(SqliteDataHandler):
     def create_table(self):
         with sqlite3.connect(self.db_path) as connection:
             c = connection.cursor()
-            c.execute("CREATE TABLE IF NOT EXISTS Images \
+            c.execute("CREATE TABLE IF NOT EXISTS Camera \
                         (session BLOB,\
                         Images BLOB,\
                         PRIMARY KEY(session));")

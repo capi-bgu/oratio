@@ -12,10 +12,10 @@ class SqliteManagerTest(unittest.TestCase):
             os.mkdir(self.out_path)
         self.db_path = os.path.join(self.out_path, 'data.db')
 
-        assert not os.path.isfile(self.db_path)
+        self.assertFalse(os.path.isfile(self.db_path))
         manager = SqliteManager(path=self.out_path)
         manager.create_database()
-        assert os.path.isfile(self.db_path)
+        self.assertTrue(os.path.isfile(self.db_path))
 
 
 if __name__ == '__main__':

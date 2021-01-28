@@ -14,14 +14,17 @@ class KeyboardCollectorTest(unittest.TestCase):
         self.keyboard_controller = KeyboardController()
         self.keyboard_collector = KeyboardCollector()
         self.session_duration = 5
+        self.start_time = time.time()
         self.keyboard_collector.start()
 
-        text = "hello from keyboard collector test"
-        Thread(target=self.simulate_user, args=(text,)).start()
+        text = "hello from the test"
+        user = Thread(target=self.simulate_user, args=(text,))
+        user.start()
 
         time.sleep(self.session_duration)
         data = self.keyboard_collector.stop_collect()
         self.keyboard_collector.join()
+        user.join()
 
         for i, c in enumerate(text):
             i *= 2
@@ -40,17 +43,18 @@ class KeyboardCollectorTest(unittest.TestCase):
             os.mkdir(output_path)
 
         f = open(f"{output_path}\\raw_kb.txt", "w+")
+        f.write(str(self.start_time) + '\n')
         for i, e in enumerate(data):
             f.write(str(i) + '. ' + str(e.__dict__) + '\n')
         f.close()
 
     def simulate_user(self, text):
-        time.sleep(0.5)
+        time.sleep(1.5)
         for c in text:
-            key_press_duration = random.uniform(0.0001, 0.01)
+            key_press_duration = 0.04
             self.simulate_press(c, key_press_duration)
-            down_to_down = random.uniform(0.0001, 0.15)
-            time.sleep(down_to_down)
+            key_down_to_down = 0.08
+            time.sleep(key_down_to_down)
 
     def simulate_press(self, character, key_press_duration):
         key = keyboard.KeyCode(char=character)

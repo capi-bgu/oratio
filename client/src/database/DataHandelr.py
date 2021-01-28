@@ -10,7 +10,3 @@ class DataHandler(ABC):
     @abstractmethod
     def save(self, data):
         pass
-
-    @abstractmethod
-    def ask(self, query):
-        pass
