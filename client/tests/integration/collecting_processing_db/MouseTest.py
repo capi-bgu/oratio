@@ -66,6 +66,7 @@ class MouseTest(unittest.TestCase):
 
         st = time.time()
         data_handler = MouseDataHandler(path=self.out_path)
+        data_handler.create_data_holder()
         data_handler.save((session.session_name, self.mpt.features))
         print(time.time() - st)
         res = manager.ask(f"SELECT * FROM Mouse WHERE session='{session.session_name}'")

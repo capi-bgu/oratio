@@ -1,4 +1,3 @@
-import os
 import sqlite3
 import numpy as np
 import msgpack
@@ -27,7 +26,7 @@ class CameraDataHandler(SqliteDataHandler):
             c.execute(insert, (session, data))
             connection.commit()
 
-    def create_table(self):
+    def create_data_holder(self):
         with sqlite3.connect(self.db_path) as connection:
             c = connection.cursor()
             c.execute("CREATE TABLE IF NOT EXISTS Camera \

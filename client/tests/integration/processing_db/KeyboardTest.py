@@ -36,6 +36,7 @@ class KeyboardTest(unittest.TestCase):
 
         st = time.time()
         data_handler = KeyboardDataHandler(path=self.out_path)
+        data_handler.create_data_holder()
         data_handler.save((session.session_name, self.kbpt.features))
         print(time.time() - st)
         res = manager.ask(f"SELECT * FROM Keyboard WHERE session='{session.session_name}'")

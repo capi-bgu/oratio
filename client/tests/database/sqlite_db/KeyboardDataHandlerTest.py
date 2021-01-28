@@ -25,6 +25,7 @@ class KeyboardDataHandlerTest(unittest.TestCase):
         self.assertNotIn("Keyboard", res)
 
         self.data_handler = KeyboardDataHandler(path=self.out_path)
+        self.data_handler.create_data_holder()
         res = manager.ask("SELECT name FROM sqlite_master WHERE type='table' AND name='Keyboard';")
         self.assertIn(("Keyboard",), res)
 

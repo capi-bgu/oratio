@@ -30,6 +30,7 @@ class CameraDataHandlerTest(unittest.TestCase):
         self.assertNotIn("Camera", res)
 
         self.data_handler = CameraDataHandler(path=self.out_path)
+        self.data_handler.create_data_holder()
         res = manager.ask("SELECT name FROM sqlite_master WHERE type='table' AND name='Camera';")
         self.assertIn(("Camera",), res)
 

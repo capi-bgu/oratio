@@ -1,24 +1,14 @@
-import os
 import gc
-import pathlib
 from src.Session import Session
-from src.gui.VadSamLabelongUI import VadSamLabelingUI
-from src.gui.VadSamRadioLabelingUI import VadSamRadioLabelingUI
-from src.gui.CategoricalLabelingUI import CategoricalLabelingUI
-from src.collection.MouseCollector import MouseCollector
-from src.processing.MouseProcessor import MouseProcessor
-from src.collection.CameraCollector import CameraCollector
-from src.processing.CameraProcessor import CameraProcessor
-from src.collection.KeyboardCollector import KeyboardCollector
-from src.processing.KeyboardProcessor import KeyboardProcessor
 
 class Core:
     def __init__(self, data_gatherers, out_path, num_sessions, session_duration, session_data_handlers,
                  labeling_methods, database_managers, ask_freq=2, sessions_passed=0):
         """
 
-        :param data_gatherers: dictionary of collectors classes and the list of all related processors classes
-            in the format: {CollectorClass: ([*(ProcessorClass, DataHandlerClass)]}. dictionary
+        :param data_gatherers: dictionary for relating collectors to all it's processors,
+            and each processor to all it's handlers.
+            in the format: {CollectorClass: {ProcessorClass: [DataHandlerClass]}}
         :param out_path: path where we want to save the data. str
         :param num_sessions: how many sessions we want to collect. int
         :param session_duration: number of seconds for session. float
@@ -39,8 +29,14 @@ class Core:
         self.ask_freq = ask_freq
         self.labeling_methods = labeling_methods
 
-        self.database_managers = [db_manager().create_database() for db_manager in database_managers]
-        self.session_data_handlers = [session_data_handler() for session_data_handler in session_data_handlers]
+        self.database_managers = [db_manager(self.out_path).create_database() for db_manager in database_managers]
+        self.session_data_handlers = [session_data_handler(self.out_path) for session_data_handler in session_data_handlers]
+        for session_data_handler in self.session_data_handlers:
+            session_data_handler.create_data_holder()
+        for processor_handlers_dict in data_gatherers.values():
+            for handler_classes_list in processor_handlers_dict.values():
+                for handler_class in handler_classes_list:
+                    handler_class(self.out_path).create_data_holder()
 
     def run(self):
         label = -1
@@ -62,18 +58,3 @@ class Core:
             m = method()
             label[m.name] = m.label
         return label
-
-
-if __name__ == '__main__':
-    test_dir = pathlib.Path(__file__).parent.parent.absolute()
-
-    if not os.path.isdir("../test_output"):
-        os.mkdir("../test_output")
-
-    out_path = os.path.join(test_dir, 'test_output')
-    data_gatherers = {KeyboardCollector: [KeyboardProcessor],
-                      CameraCollector: [CameraProcessor],
-                      MouseCollector: [MouseProcessor]}
-    label_methods = [CategoricalLabelingUI, VadSamLabelingUI, VadSamRadioLabelingUI]
-    core = Core(data_gatherers, out_path, num_sessions=4, session_duration=5, labeling_methods=label_methods)
-    core.run()

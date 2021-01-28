@@ -47,6 +47,7 @@ class CameraTest(unittest.TestCase):
 
         st = time.time()
         data_handler = CameraDataHandler(path=self.out_path)
+        data_handler.create_data_holder()
         data_handler.save((session.session_name, self.cpt.features))
         print(time.time() - st)
         res = manager.ask(f"SELECT * FROM Camera WHERE session='{session.session_name}'")

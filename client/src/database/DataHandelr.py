@@ -10,3 +10,7 @@ class DataHandler(ABC):
     @abstractmethod
     def save(self, data):
         pass
+
+    @abstractmethod
+    def create_data_holder(self):
+        pass

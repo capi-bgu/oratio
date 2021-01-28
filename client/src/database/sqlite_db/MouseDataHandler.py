@@ -1,6 +1,6 @@
-import os
 import sqlite3
 from src.database.sqlite_db.SqliteDataHandler import SqliteDataHandler
+
 
 class MouseDataHandler(SqliteDataHandler):
 
@@ -38,7 +38,7 @@ class MouseDataHandler(SqliteDataHandler):
                                data['left_click_duration']))
             connection.commit()
 
-    def create_table(self):
+    def create_data_holder(self):
         with sqlite3.connect(self.db_path) as connection:
             c = connection.cursor()
             c.execute("CREATE TABLE IF NOT EXISTS Mouse \
