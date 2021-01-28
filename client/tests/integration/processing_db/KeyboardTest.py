@@ -11,16 +11,18 @@ from tests.collection.stubs.KeyboardCollectorStub import KeyboardCollectorStub
 
 class KeyboardTest(unittest.TestCase):
     def test(self):
+
+        # collecting
         keyboard_collector = KeyboardCollectorStub()
         keyboard_collector.start()
         keyboard_collector.join()
         start_time, data = keyboard_collector.stop_collect()
 
+        # processing
         self.kbpt = KeyboardProcessor()
         session_duration = 5
-        session = SessionStub(0, session_duration, start_time)
+        session = SessionStub('KeyboardIntegrationTest', session_duration, start_time)
         self.kbpt.set_arguements(data, session)
-
         st = time.time()
         self.kbpt.start()
         self.kbpt.join()
@@ -28,16 +30,20 @@ class KeyboardTest(unittest.TestCase):
 
         test_dir = pathlib.Path(__file__).parent.parent.parent.absolute()
         self.out_path = os.path.join(test_dir, 'test_output')
-        if not os.path.isdir(self.out_path):
-            os.mkdir(self.out_path)
 
         manager = SqliteManager(path=self.out_path)
         manager.create_database()
 
         st = time.time()
         data_handler = KeyboardDataHandler(path=self.out_path)
-        data_handler.save(("KeyboardIntegrationTest", self.kbpt.features))
+        data_handler.save((session.session_name, self.kbpt.features))
         print(time.time() - st)
+        res = manager.ask(f"SELECT * FROM Keyboard WHERE session='{session.session_name}'")
+        self.assertTrue(len(res) == 1)
+        key = res[0][0]
+        self.assertEqual(key, session.session_name)
+        for i, val in enumerate(list(self.kbpt.features.values())):
+            self.assertEqual(val, res[0][i + 1])
 
 
 if __name__ == '__main__':

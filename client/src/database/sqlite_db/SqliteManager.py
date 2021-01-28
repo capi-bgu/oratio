@@ -11,6 +11,8 @@ class SqliteManager(DatabaseManager):
         self.db_path = os.path.join(self.path, 'data.db')
 
     def create_database(self):
+        if not os.path.isdir(self.path):
+            os.mkdir(self.path)
         with sqlite3.connect(self.db_path) as connection:
             pass
         return super().create_database()

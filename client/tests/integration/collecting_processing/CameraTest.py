@@ -16,6 +16,7 @@ class CameraTest(unittest.TestCase):
         st = time.time()
         session = SessionStub(1, 5, st)
 
+        # collecting
         st = time.time()
         camera_collector.start()
         time.sleep(session.session_duration)
@@ -23,13 +24,18 @@ class CameraTest(unittest.TestCase):
         camera_collector.join()
         print(time.time() - st)
 
+        # processing
         st = time.time()
         camera_processor.set_arguements(data, session)
         camera_processor.start()
         camera_processor.join()
         features = camera_processor.features
         print(time.time() - st)
+        self.assertLessEqual(len(features), session.session_duration * camera_collector.fps)
+        for img in features:
+            self.assertTupleEqual(img.shape, (150, 150))
 
+        # database
         data_handler = CameraDataHandlerStub(name="gathered")
         data_handler.save(features)
 

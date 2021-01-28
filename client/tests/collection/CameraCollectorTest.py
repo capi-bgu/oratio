@@ -15,7 +15,7 @@ class CameraCollectorTest(unittest.TestCase):
         data = self.camera_collector.stop_collect()
         self.camera_collector.join()
 
-        assert len(data) == self.session_duration * self.camera_collector.fps
+        self.assertEqual(len(data), self.session_duration * self.camera_collector.fps)
 
         self.process_data(data)
 

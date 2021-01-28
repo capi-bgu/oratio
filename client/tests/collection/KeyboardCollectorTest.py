@@ -1,12 +1,11 @@
 import os
 import time
-import random
 import pathlib
 import unittest
 from pynput import keyboard
 from threading import Thread
-from src.collection.KeyboardCollector import KeyboardCollector
 from pynput.keyboard import Controller as KeyboardController
+from src.collection.KeyboardCollector import KeyboardCollector
 
 
 class KeyboardCollectorTest(unittest.TestCase):

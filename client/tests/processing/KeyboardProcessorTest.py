@@ -27,7 +27,7 @@ class KeyboardProcessorTest(unittest.TestCase):
         self.assertAlmostEqual(features['typing_speed'], 3.8, delta=0.05)
         self.assertAlmostEqual(features['active_typing_speed'], 5.4285, delta=0.05)
         self.assertAlmostEqual(features['average_press_duration'], 0.04, delta=0.05)
-        self.assertAlmostEqual(features['average_down_to_down'], 0.08, delta=0.06)
+        self.assertAlmostEqual(features['average_down_to_down'], 0.08, delta=0.07)
         self.assertEqual(features['regular_press_count'], 16)
         self.assertEqual(features['punctuations_press_count'], 0)
         self.assertEqual(features['space_counter'], 3)

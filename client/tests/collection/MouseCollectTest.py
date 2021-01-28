@@ -3,9 +3,9 @@ import time
 import pathlib
 import unittest
 from threading import Thread
-from src.collection.MouseCollector import MouseCollector
-from pynput.mouse import Controller as MouseController
 from pynput.mouse import Button
+from pynput.mouse import Controller as MouseController
+from src.collection.MouseCollector import MouseCollector
 
 
 class MouseCollectorTest(unittest.TestCase):
