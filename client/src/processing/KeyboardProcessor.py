@@ -1,10 +1,10 @@
-import json
 import string
-
 from src.processing.DataProcessor import DataProcessor
 
 
 class KeyboardProcessor(DataProcessor):
+    MINIMUM_IDLE_TIME = 0.9
+
     def __init__(self):
         super().__init__()
 
@@ -28,7 +28,9 @@ class KeyboardProcessor(DataProcessor):
                     if previous_time == 0:
                         previous_time = event.Timestamp
                     else:
-                        self.features['average_down_to_down'] += event.Timestamp - previous_time
+                        down_to_down = event.Timestamp - previous_time
+                        if down_to_down < self.MINIMUM_IDLE_TIME:
+                            self.features['average_down_to_down'] += down_to_down
                         previous_time = event.Timestamp
 
                 if event.Key == 'Delete' or event.Key == 'Back':
@@ -56,17 +58,18 @@ class KeyboardProcessor(DataProcessor):
             else:
                 if i == len(data) - 1:
                     time_interval = (session.session_start_time + session.session_duration) - data[i].Timestamp
-                    if time_interval > 0.9:
+                    if time_interval > self.MINIMUM_IDLE_TIME:
                         idle_time += time_interval
-                time_interval = data[i].Timestamp - data[i - 1].Timestamp  # A B C .
-            if time_interval > 0.9:
+                time_interval = data[i].Timestamp - data[i - 1].Timestamp
+            if time_interval > self.MINIMUM_IDLE_TIME:
                 idle_time += time_interval
         if len(keys_info) > 0:
             total_press_count = 0
             self.features['mode_key'] = list(keys_info.keys())[0]
             mode_key_presses = keys_info[list(keys_info.keys())[0]]['press_count']
             for key in keys_info:
-                self.features['average_press_duration'] += keys_info[key]['total_press_time'] / keys_info[key]['press_count']
+                self.features['average_press_duration'] += keys_info[key]['total_press_time'] / keys_info[key][
+                    'press_count']
                 total_press_count += keys_info[key]['press_count']
                 if keys_info[key]['press_count'] > mode_key_presses:
                     mode_key_presses = keys_info[key]['press_count']

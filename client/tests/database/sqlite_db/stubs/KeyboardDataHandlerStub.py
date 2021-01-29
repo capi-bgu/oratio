@@ -16,12 +16,11 @@ class KeyboardDataHandlerStub(SqliteDataHandler):
         if not os.path.isdir(self.out_path):
             os.mkdir(self.out_path)
 
-        self.create_table()
         self.name = name
 
     def save(self, data):
         with open(f"{self.out_path}\\{self.name}_kb.json", 'w+') as features_file:
             json.dump(data, features_file)
 
-    def create_table(self):
+    def create_data_holder(self):
         pass

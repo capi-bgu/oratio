@@ -16,12 +16,11 @@ class CameraDataHandlerStub(SqliteDataHandler):
         if not os.path.isdir(self.out_path):
             os.mkdir(self.out_path)
 
-        self.create_table()
         self.name = name
 
     def save(self, data):
         for i, img in enumerate(data):
             cv2.imwrite(f"{self.out_path}\\{self.name}_image_{i}.jpg", img)
 
-    def create_table(self):
+    def create_data_holder(self):
         pass
