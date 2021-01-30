@@ -14,7 +14,7 @@ class MouseDataHandler(SqliteDataHandler):
         """
         session, data = super().save(data)
 
-        insert = "INSERT INTO Mouse VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+        insert = "INSERT INTO Mouse VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
         with sqlite3.connect(self.db_path) as connection:
             c = connection.cursor()
             c.execute(insert, (session,
@@ -30,10 +30,24 @@ class MouseDataHandler(SqliteDataHandler):
                                data['average_speed_y'],
                                data['average_active_speed_x'],
                                data['average_active_speed_y'],
-                               data['average_cursor_x_angle'],
-                               data['average_cursor_y_angle'],
-                               data['cursor_distance_ratio'],
-                               data['idle_time'],
+                               data['average_cursor_angle'],
+                                data['std_cursor_angle'],
+                                data['Turn_0_45'],
+                                data['Turn_45_90'],
+                                data['Turn_90_135'],
+                                data['Turn_135_180'],
+                                data['Direction_S'],
+                                data['Direction_SW'],
+                                data['Direction_W'],
+                                data['Direction_NW'],
+                                data['Direction_N'],
+                                data['Direction_NE'],
+                                data['Direction_E'],
+                                data['Direction_SE'],
+                                data['Dist1'],
+                                data['Dist2'],
+                                data['Dist3'],
+                                data['idle_time'],
                                data['right_click_duration'],
                                data['left_click_duration']))
             connection.commit()
@@ -55,9 +69,23 @@ class MouseDataHandler(SqliteDataHandler):
                         average_speed_y NUMERIC , \
                         average_active_speed_x NUMERIC , \
                         average_active_speed_y NUMERIC , \
-                        average_cursor_x_angle NUMERIC , \
-                        average_cursor_y_angle NUMERIC , \
-                        cursor_distance_ratio NUMERIC , \
+                        average_cursor_angle NUMERIC , \
+                        std_cursor_angle NUMERIC , \
+                        Turn_0_45 NUMERIC , \
+                        Turn_45_90 NUMERIC , \
+                        Turn_90_135 NUMERIC , \
+                        Turn_135_180 NUMERIC , \
+                        Direction_S NUMERIC , \
+                        Direction_SW NUMERIC , \
+                        Direction_W NUMERIC , \
+                        Direction_NW NUMERIC , \
+                        Direction_N NUMERIC , \
+                        Direction_NE NUMERIC , \
+                        Direction_E NUMERIC , \
+                        Direction_SE NUMERIC , \
+                        Dist1 NUMERIC , \
+                        Dist2 NUMERIC , \
+                        Dist3 NUMERIC , \
                         idle_time NUMERIC , \
                         right_click_duration NUMERIC , \
                         left_click_duration NUMERIC , \

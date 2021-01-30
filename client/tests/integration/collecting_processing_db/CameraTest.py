@@ -24,7 +24,6 @@ class CameraTest(unittest.TestCase):
         data = camera_collector.stop_collect()
         camera_collector.join()
         print(time.time() - st)
-        self.assertEqual(len(data), session.session_duration * camera_collector.fps)
 
         # processing
         self.cpt = CameraProcessor()
@@ -33,10 +32,6 @@ class CameraTest(unittest.TestCase):
         self.cpt.start()
         self.cpt.join()
         print(time.time() - st)
-        features = self.cpt.features
-        self.assertLessEqual(len(features), session.session_duration * camera_collector.fps)
-        for img in features:
-            self.assertTupleEqual(img.shape, (150, 150))
 
         # database
         test_dir = pathlib.Path(__file__).parent.parent.parent.absolute()

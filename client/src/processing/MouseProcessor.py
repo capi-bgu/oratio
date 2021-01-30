@@ -27,32 +27,90 @@ class MouseProcessor(DataProcessor):
         num_consecutive_move = 0
         last_angle = None
         turn_angles = np.array([])
-        all_angles = np.array([])
+        last_direction = ""
         last_mouse_event = None
+
+        window_dx = 0
+        window_dy = 0
+        abs_window_dx = 0
+        abs_window_dy = 0
+        double_window_dx = 0
+        double_window_dy = 0
+        abs_double_window_dx = 0
+        abs_double_window_dy = 0
+        triple_window_dx = 0
+        triple_window_dy = 0
+        abs_triple_window_dx = 0
+        abs_triple_window_dy = 0
+        ratio_arr = []
+        double_ratio_arr = []
+        triple_ratio_arr = []
+        WINDOW_SIZE = 20
+
         for i, event in enumerate(data):
             if event.Message == 512:  # Mouse move
                 if last_mouse_event is not None:
                     dx = event.Position[0] - last_mouse_event.Position[0]
                     dy = event.Position[1] - last_mouse_event.Position[1]
+                    window_dx += dx
+                    window_dy += dy
+                    abs_window_dx += abs(dx)
+                    abs_window_dy += abs(dy)
+                    double_window_dx += dx
+                    double_window_dy += dy
+                    abs_double_window_dx += abs(dx)
+                    abs_double_window_dy += abs(dy)
+                    triple_window_dx += dx
+                    triple_window_dy += dy
+                    abs_triple_window_dx += abs(dx)
+                    abs_triple_window_dy += abs(dy)
                     total_x_distance += abs(dx)
                     total_y_distance += abs(dy)
-                    # here we used signed because when we calculate the angle we care about the directions
                     velocity_x = abs(dx) / (0.001 + event.Timestamp - last_mouse_event.Timestamp)
                     velocity_y = abs(dy) / (0.001 + event.Timestamp - last_mouse_event.Timestamp)
                     sum_mouse_x_speed += velocity_x
                     sum_mouse_y_speed += velocity_y
-                    if num_consecutive_move % 15 == 0:  # every number of consecutive mouse movements
-                        angle = math.degrees(math.atan2(dy, dx))
+                    if num_consecutive_move % WINDOW_SIZE == WINDOW_SIZE - 1:  # check if end of window
+                        route = math.sqrt(abs_window_dx**2 + abs_window_dy**2)
+                        fastest_route = math.sqrt(window_dx**2 + window_dy**2)
+                        ratio = route / fastest_route
+                        ratio_arr.append(ratio)
+                        abs_window_dx = 0
+                        abs_window_dy = 0
+                        if num_consecutive_move % (2*WINDOW_SIZE) == 2*WINDOW_SIZE - 1:
+                            route = math.sqrt(abs_double_window_dx ** 2 + abs_double_window_dy ** 2)
+                            fastest_route = math.sqrt(double_window_dx ** 2 + double_window_dy ** 2)
+                            double_ratio = route / fastest_route
+                            double_ratio_arr.append(double_ratio)
+                            double_window_dx = 0
+                            double_window_dy = 0
+                            abs_double_window_dx = 0
+                            abs_double_window_dy = 0
+                        if num_consecutive_move % (3*WINDOW_SIZE) == 3*WINDOW_SIZE - 1:
+                            route = math.sqrt(abs_triple_window_dx ** 2 + abs_triple_window_dy ** 2)
+                            fastest_route = math.sqrt(triple_window_dx ** 2 + triple_window_dy ** 2)
+                            triple_ratio = route / fastest_route
+                            triple_ratio_arr.append(triple_ratio)
+                            triple_window_dx = 0
+                            triple_window_dy = 0
+                            abs_triple_window_dx = 0
+                            abs_triple_window_dy = 0
+                        angle = math.degrees(math.atan2(window_dy, window_dx))
                         angle = (angle + 360) % 360  # to make the angle between 0 and 360
-                        all_angles = np.append(all_angles, angle)
-                        if num_consecutive_move != 0 and last_angle != None:
+                        direction = self.__angle_to_direction(angle)
+                        if direction != last_direction:
+                            self.features[f'Direction_{direction}'] += 1
+                            last_direction = direction
+                        window_dx = 0
+                        window_dy = 0
+                        if num_consecutive_move != 0 and last_angle is not None:
                             # absolute value of their difference, then, if larger than 180, substract 360° and take
                             # the absolute value of the result.
                             difference = abs(angle - last_angle)
                             if difference > 180:
                                 difference -= 360
                                 difference = abs(difference)
-                            if difference > 10:
+                            if difference > 15:
                                 turn_angles = np.append(turn_angles, difference)
                         last_angle = angle
                 num_mouse_move += 1
@@ -117,7 +175,12 @@ class MouseProcessor(DataProcessor):
         if num_mouse_move > 0:
             self.features['average_momentary_speed_x'] = sum_mouse_x_speed / num_mouse_move
             self.features['average_momentary_speed_y'] = sum_mouse_y_speed / num_mouse_move
-            # self.features['average_cursor_angle'] = sum_angle / num_mouse_move
+            if len(ratio_arr) > 0:
+                self.features['Dist1'] = sum(ratio_arr) / len(ratio_arr)
+            if len(double_ratio_arr) > 0:
+                self.features['Dist2'] = sum(double_ratio_arr) / len(double_ratio_arr)
+            if len(triple_ratio_arr) > 0:
+                self.features['Dist3'] = sum(triple_ratio_arr) / len(triple_ratio_arr)
 
             if len(turn_angles) > 0:
                 self.features['average_cursor_angle'] = np.mean(turn_angles)
@@ -126,19 +189,29 @@ class MouseProcessor(DataProcessor):
                 self.features['Turn_45_90'] = ((turn_angles >= 45) & (turn_angles < 90)).sum()
                 self.features['Turn_90_135'] = ((turn_angles >= 90) & (turn_angles < 135)).sum()
                 self.features['Turn_135_180'] = ((turn_angles >= 135) & (turn_angles < 180)).sum()
-            if len(all_angles) > 0:
-                self.features['Direction_S'] = ((turn_angles >= 67.5) & (turn_angles < 112.5)).sum()
-                self.features['Direction_SW'] = ((turn_angles >= 112.5) & (turn_angles < 157.5)).sum()
-                self.features['Direction_W'] = ((turn_angles >= 157.5) & (turn_angles < 202.5)).sum()
-                self.features['Direction_NW'] = ((turn_angles >= 202.5) & (turn_angles < 247.5)).sum()
-                self.features['Direction_N'] = ((turn_angles >= 247.5) & (turn_angles < 292.5)).sum()
-                self.features['Direction_NE'] = ((turn_angles >= 292.5) & (turn_angles < 337.5)).sum()
-                self.features['Direction_E'] = (((turn_angles >= 337.5) & (turn_angles < 360)) |
-                                                ((turn_angles < 22.5) & (turn_angles >= 0))).sum()
-                self.features['Direction_SE'] = ((turn_angles >= 22.5) & (turn_angles < 67.5)).sum()
 
         print("end mouse processing...")
         return self.features
+
+    def __angle_to_direction(self, angle):
+        if (angle >= 67.5) and (angle < 112.5):
+            return "S"
+        if (angle >= 112.5) and (angle < 157.5):
+            return "SW"
+        if (angle >= 157.5) and (angle < 202.5):
+            return "W"
+        if (angle >= 202.5) and (angle < 247.5):
+            return "NW"
+        if (angle >= 247.5) and (angle < 292.5):
+            return "N"
+        if (angle >= 292.5) and (angle < 337.5):
+            return "NE"
+        if (angle >= 337.5) and (angle < 360):
+            return "E"
+        if (angle < 22.5) and (angle >= 0):
+            return "E"
+        if (angle >= 22.5) and (angle < 67.5):
+            return "SE"
 
     def __init_features(self, session):
         self.features = {
@@ -168,7 +241,9 @@ class MouseProcessor(DataProcessor):
             'Direction_NE': 0,
             'Direction_E': 0,
             'Direction_SE': 0,
-            'cursor_distance_ratio': 0,
+            'Dist1': 0,
+            'Dist2': 0,
+            'Dist3': 0,
             'idle_time': session.session_duration,
             'right_click_duration': 0,
             'left_click_duration': 0,

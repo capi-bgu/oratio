@@ -19,9 +19,9 @@ class KeyboardTest(unittest.TestCase):
 
         # collecting
         st = time.time()
-        self.keyboard_collector.start()
         text = "hello from the test"
         user = Thread(target=self.simulate_user, args=(text,))
+        self.keyboard_collector.start()
         user.start()
         time.sleep(session.session_duration)
         data = self.keyboard_collector.stop_collect()
@@ -36,6 +36,7 @@ class KeyboardTest(unittest.TestCase):
         self.keyboard_processor.join()
         features = self.keyboard_processor.features
         print(time.time() - st)
+        print(features)
         self.assertAlmostEqual(features['typing_speed'], 3.8, delta=0.05)
         self.assertAlmostEqual(features['active_typing_speed'], 5.4285, delta=0.05)
         self.assertAlmostEqual(features['average_press_duration'], 0.04, delta=0.05)
@@ -45,8 +46,6 @@ class KeyboardTest(unittest.TestCase):
         self.assertEqual(features['space_counter'], 3)
         self.assertEqual(features['error_corrections'], 0)
         self.assertEqual(features['uppercase_counter'], 0)
-        self.assertAlmostEqual(features['digraph_duration'], 0, delta=0.05)
-        self.assertAlmostEqual(features['trigraph_duration'], 0, delta=0.05)
         self.assertEqual(features['mode_key'], ord('e'.upper()))
         self.assertAlmostEqual(features['idle_time'], 1.5, delta=0.05)
         self.assertEqual(features['unique_events'], 10)
@@ -54,7 +53,6 @@ class KeyboardTest(unittest.TestCase):
         # database
         data_handler = KeyboardDataHandlerStub(name="gathered")
         data_handler.save(features)
-
 
     def simulate_user(self, text):
         time.sleep(1.5)
@@ -70,6 +68,6 @@ class KeyboardTest(unittest.TestCase):
         time.sleep(key_press_duration)
         self.keyboard_controller.release(key)
 
+
 if __name__ == '__main__':
     unittest.main()
-    # hello from the test

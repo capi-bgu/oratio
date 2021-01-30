@@ -18,7 +18,6 @@ class MouseTest(unittest.TestCase):
         session = SessionStub("MouseFullTest", 5, st)
         self.mouse_controller = MouseController()
 
-
         # collecting
         mouse_collector = MouseCollector()
         mouse_collector.start()
@@ -37,25 +36,6 @@ class MouseTest(unittest.TestCase):
         self.mpt.start()
         self.mpt.join()
         print(time.time() - st)
-        features = self.mpt.features
-        self.assertEqual(features['right_click_count'], 1)
-        self.assertEqual(features['left_click_count'], 4)
-        # self.assertAlmostEqual(features['scroll_speed'],  ????, delta=0.05)
-        self.assertEqual(features['double_click_count'], 2)
-        self.assertAlmostEqual(features['cursor_x_distance'], 0, delta=0.05)
-        self.assertAlmostEqual(features['cursor_y_distance'], 0, delta=0.05)
-        self.assertAlmostEqual(features['average_momentary_speed_x'], 0, delta=0.05)
-        self.assertAlmostEqual(features['average_momentary_speed_y'], 0, delta=0.05)
-        self.assertAlmostEqual(features['average_speed_x'], 0, delta=0.05)
-        self.assertAlmostEqual(features['average_speed_y'], 0, delta=0.05)
-        self.assertAlmostEqual(features['average_active_speed_x'], 0, delta=0.05)
-        self.assertAlmostEqual(features['average_active_speed_y'], 0, delta=0.05)
-        self.assertAlmostEqual(features['average_cursor_x_angle'], 0, delta=0.05)
-        self.assertAlmostEqual(features['average_cursor_y_angle'], 0, delta=0.05)
-        self.assertAlmostEqual(features['cursor_distance_ratio'], 0, delta=0.05)
-        self.assertAlmostEqual(features['idle_time'], 3.9, delta=0.05)
-        self.assertAlmostEqual(features['right_click_duration'], 0.05, delta=0.05)
-        self.assertAlmostEqual(features['left_click_duration'], 0.0125, delta=0.06)
 
         # database
         test_dir = pathlib.Path(__file__).parent.parent.parent.absolute()

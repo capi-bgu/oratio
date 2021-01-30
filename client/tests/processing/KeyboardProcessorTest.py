@@ -33,8 +33,6 @@ class KeyboardProcessorTest(unittest.TestCase):
         self.assertEqual(features['space_counter'], 3)
         self.assertEqual(features['error_corrections'], 0)
         self.assertEqual(features['uppercase_counter'], 0)
-        self.assertAlmostEqual(features['digraph_duration'], 0, delta=0.05)
-        self.assertAlmostEqual(features['trigraph_duration'], 0, delta=0.05)
         self.assertEqual(features['mode_key'], ord('e'.upper()))
         self.assertAlmostEqual(features['idle_time'], 1.5, delta=0.05)
         self.assertEqual(features['unique_events'], 10)

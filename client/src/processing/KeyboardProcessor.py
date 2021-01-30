@@ -97,8 +97,6 @@ class KeyboardProcessor(DataProcessor):
             'space_counter': 0,
             'error_corrections': 0,
             'uppercase_counter': 0,
-            'digraph_duration': 0,
-            'trigraph_duration': 0,
             'mode_key': 0,
             'idle_time': session.session_duration,
             'unique_events': 0
