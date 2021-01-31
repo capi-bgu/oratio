@@ -8,6 +8,7 @@ from PIL import ImageTk, Image
 class VadSamRadioLabelingUI(LabelingUI):
     def __init__(self):
         super().__init__()
+        self.name = "VAD"
 
         curr_dir = pathlib.Path(__file__).parent.absolute()
         self.resources_path = os.path.join(curr_dir, 'resources')
@@ -55,7 +56,9 @@ class VadSamRadioLabelingUI(LabelingUI):
                            value=i - 4).grid(row=row, column=i)
 
     def exit(self):
-        self.label = (self.valance.get(), self.arousal.get(), self.dominance.get())
+        self.label = {"Valance": self.valance.get(),
+                      "Arousal": self.arousal.get(),
+                      "Dominance": self.dominance.get()}
         super().exit()
 
 

@@ -47,6 +47,8 @@ class CameraProcessor(DataProcessor):
                 x.append(landmarks.part(n).x)
                 y.append(landmarks.part(n).y)
             cut_frame = frame[min(y):max(y), min(x):max(x)]
+            # TODO: Think if it is the best way to resize?
+            cut_frame = cv2.resize(cut_frame, dsize=(150, 150), interpolation=cv2.INTER_CUBIC)
             self.features.append(cut_frame)
         print("end camera processing...")
         return self.features

@@ -5,6 +5,7 @@ from src.gui.LabelingUI import LabelingUI
 class CategoricalLabelingUI(LabelingUI):
     def __init__(self):
         super().__init__()
+        self.name = "Categorical"
         self.result = IntVar()
         feelings = {"sad": 1,
                     "anger": 2,

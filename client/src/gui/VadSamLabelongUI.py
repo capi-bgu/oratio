@@ -8,6 +8,7 @@ from src.gui.LabelingUI import LabelingUI
 class VadSamLabelingUI(LabelingUI):
     def __init__(self):
         super().__init__()
+        self.name = "VAD"
         self.valance = 0
         self.arousal = 0
         self.dominance = 0
@@ -46,7 +47,9 @@ class VadSamLabelingUI(LabelingUI):
         self.valance = self.valance_scale.get()
         self.arousal = self.arousal_scale.get()
         self.dominance = self.dominance_scale.get()
-        self.label = [self.valance, self.arousal, self.dominance]
+        self.label = {"Valance": self.valance,
+                      "Arousal": self.arousal, 
+                      "Dominance": self.dominance}
         super().exit()
 
 

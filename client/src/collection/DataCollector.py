@@ -1,17 +1,12 @@
-import threading
-import time
 from abc import ABC, abstractmethod
 
 
-class DataCollector(ABC, threading.Thread):
+class DataCollector(ABC):
 
     def __init__(self):
         super().__init__()
         self.collect = True
         self.data = list()
-
-    def run(self):
-        self.start_collect()
 
     @abstractmethod
     def start_collect(self):
