@@ -1,5 +1,7 @@
 import time
 import unittest
+from threading import Thread
+
 from tests.SessionStub import SessionStub
 from src.processing.CameraProcessor import CameraProcessor
 from tests.collection.stubs.CameraCollectorStub import CameraCollectorStub
@@ -9,18 +11,17 @@ from tests.database.sqlite_db.stubs.CameraDataHandlerStub import CameraDataHandl
 class CameraProcessorTest(unittest.TestCase):
     def test(self):
         camera_collector = CameraCollectorStub()
-        camera_collector.start()
-        camera_collector.join()
+        camera_collector.start_collect()
         data = camera_collector.stop_collect()
 
-        self.cpt = CameraProcessor()
+        self.camera_processor = CameraProcessor()
         session_duration = 5
         st = time.time()
         session = SessionStub(0, session_duration, st)
-        self.cpt.set_arguements(data, session)
-        self.cpt.start()
-        self.cpt.join()
-        features = self.cpt.features
+        processor = Thread(target=self.camera_processor.process_data, args=(data, session))
+        processor.start()
+        processor.join()
+        features = self.camera_processor.features
         print(time.time() - st)
 
         self.assertTrue(len(features) == session.session_duration * camera_collector.fps)

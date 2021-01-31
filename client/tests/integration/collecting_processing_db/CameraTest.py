@@ -1,6 +1,8 @@
 import os
 import time
 import pathlib
+from threading import Thread
+
 import msgpack
 import unittest
 import numpy as np
@@ -18,19 +20,23 @@ class CameraTest(unittest.TestCase):
         session = SessionStub("CameraFullTest", 5, st)
 
         # collecting
-        camera_collector = CameraCollector(fps=2)
-        camera_collector.start()
+        fps = 2
+        camera = 0
+        camera_collector = CameraCollector(fps, camera)
+        collector = Thread(target=camera_collector.start_collect)
+        st = time.time()
+        collector.start()
         time.sleep(session.session_duration)
         data = camera_collector.stop_collect()
-        camera_collector.join()
+        collector.join()
         print(time.time() - st)
 
         # processing
-        self.cpt = CameraProcessor()
-        self.cpt.set_arguements(data, session)
+        self.camera_processor = CameraProcessor()
+        processor = Thread(target=self.camera_processor.process_data, args=(data, session))
         st = time.time()
-        self.cpt.start()
-        self.cpt.join()
+        processor.start()
+        processor.join()
         print(time.time() - st)
 
         # database
@@ -43,7 +49,7 @@ class CameraTest(unittest.TestCase):
         st = time.time()
         data_handler = CameraDataHandler(path=self.out_path)
         data_handler.create_data_holder()
-        data_handler.save((session.session_name, self.cpt.features))
+        data_handler.save((session.session_name, self.camera_processor.features))
         print(time.time() - st)
         res = manager.ask(f"SELECT * FROM Camera WHERE session='{session.session_name}'")
         self.assertTrue(len(res) == 1)
@@ -51,7 +57,7 @@ class CameraTest(unittest.TestCase):
         data = res[0][1]
         self.assertEqual(key, session.session_name)
         data = msgpack.unpackb(data, object_hook=m.decode)
-        self.assertTrue(np.array_equal(data, np.array(self.cpt.features)))
+        self.assertTrue(np.array_equal(data, np.array(self.camera_processor.features)))
 
 
 if __name__ == '__main__':

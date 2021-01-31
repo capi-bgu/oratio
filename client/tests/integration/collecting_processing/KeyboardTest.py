@@ -21,19 +21,20 @@ class KeyboardTest(unittest.TestCase):
         st = time.time()
         text = "hello from the test"
         user = Thread(target=self.simulate_user, args=(text,))
-        self.keyboard_collector.start()
+        collector = Thread(target=self.keyboard_collector.start_collect)
+        collector.start()
         user.start()
         time.sleep(session.session_duration)
         data = self.keyboard_collector.stop_collect()
-        self.keyboard_collector.join()
+        collector.join()
         print(time.time() - st)
         user.join()
 
         # processing
         st = time.time()
-        self.keyboard_processor.set_arguements(data, session)
-        self.keyboard_processor.start()
-        self.keyboard_processor.join()
+        processor = Thread(target=self.keyboard_processor.process_data, args=(data, session))
+        processor.start()
+        processor.join()
         features = self.keyboard_processor.features
         print(time.time() - st)
         print(features)

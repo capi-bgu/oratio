@@ -14,29 +14,30 @@ from tests.database.sqlite_db.stubs.MouseDataHandlerStub import MouseDataHandler
 class MouseTest(unittest.TestCase):
     def test(self):
         self.mouse_controller = MouseController()
-        mouse_processor = MouseProcessor()
-        mouse_collector = MouseCollector()
+        self.mouse_processor = MouseProcessor()
+        self.mouse_collector = MouseCollector()
         self.st = time.time()
         session = SessionStub(1, 5, self.st)
 
         # collecting
         st = time.time()
-        mouse_collector.start()
         user = Thread(target=self.simulate_user)
+        collector = Thread(target=self.mouse_collector.start_collect)
+        collector.start()
         user.start()
         time.sleep(session.session_duration)
-        data = mouse_collector.stop_collect()
-        mouse_collector.join()
+        data = self.mouse_collector.stop_collect()
+        collector.join()
         print(time.time() - st)
         user.join()
 
         # processing
         st = time.time()
-        mouse_processor.set_arguements(data, session)
-        mouse_processor.start()
-        mouse_processor.join()
+        processor = Thread(target=self.mouse_processor.process_data, args=(data, session))
+        processor.start()
+        processor.join()
         print(time.time() - st)
-        features = mouse_processor.features
+        features = self.mouse_processor.features
         self.assertEqual(features['right_click_count'], 1)
         self.assertEqual(features['left_click_count'], 4)
         # self.assertAlmostEqual(features['scroll_speed'],  ????, delta=0.1)

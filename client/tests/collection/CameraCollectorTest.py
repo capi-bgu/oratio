@@ -1,4 +1,6 @@
 import os
+from threading import Thread
+
 import cv2
 import time
 import pathlib
@@ -8,12 +10,15 @@ from src.collection.CameraCollector import CameraCollector
 
 class CameraCollectorTest(unittest.TestCase):
     def test(self):
-        self.camera_collector = CameraCollector(2)
+        fps = 2
+        camera = 0
+        self.camera_collector = CameraCollector(fps, camera)
         self.session_duration = 5
-        self.camera_collector.start()
+        collector = Thread(target=self.camera_collector.start_collect)
+        collector.start()
         time.sleep(self.session_duration)
         data = self.camera_collector.stop_collect()
-        self.camera_collector.join()
+        collector.join()
 
         self.assertEqual(len(data), self.session_duration * self.camera_collector.fps)
 

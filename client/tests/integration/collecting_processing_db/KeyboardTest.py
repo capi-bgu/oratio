@@ -20,23 +20,23 @@ class KeyboardTest(unittest.TestCase):
         self.keyboard_collector = KeyboardCollector()
 
         # collecting
-        st = time.time()
-        self.keyboard_collector.start()
         text = "hello from the test"
+        collector = Thread(target=self.keyboard_collector.start_collect)
         user = Thread(target=self.simulate_user, args=(text,))
+        st = time.time()
+        collector.start()
         user.start()
         time.sleep(session.session_duration)
         data = self.keyboard_collector.stop_collect()
-        self.keyboard_collector.join()
+        collector.join()
         print(time.time() - st)
         user.join()
 
         # processing
-        self.kbpt = KeyboardProcessor()
-        self.kbpt.set_arguements(data, session)
-        st = time.time()
-        self.kbpt.start()
-        self.kbpt.join()
+        self.keyboard_processor = KeyboardProcessor()
+        processor = Thread(target=self.keyboard_processor.process_data, args=(data, session))
+        processor.start()
+        processor.join()
         print(time.time() - st)
 
         # database
@@ -49,13 +49,13 @@ class KeyboardTest(unittest.TestCase):
         st = time.time()
         data_handler = KeyboardDataHandler(path=self.out_path)
         data_handler.create_data_holder()
-        data_handler.save((session.session_name, self.kbpt.features))
+        data_handler.save((session.session_name, self.keyboard_processor.features))
         print(time.time() - st)
         res = manager.ask(f"SELECT * FROM Keyboard WHERE session='{session.session_name}'")
         self.assertTrue(len(res) == 1)
         key = res[0][0]
         self.assertEqual(key, session.session_name)
-        for i, val in enumerate(list(self.kbpt.features.values())):
+        for i, val in enumerate(list(self.keyboard_processor.features.values())):
             self.assertEqual(val, res[0][i + 1])
 
     def simulate_user(self, text):

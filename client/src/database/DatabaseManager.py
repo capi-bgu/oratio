@@ -9,7 +9,7 @@ class DatabaseManager(ABC):
 
     @abstractmethod
     def create_database(self):
-        return self
+        pass
 
     @abstractmethod
     def ask(self, query):

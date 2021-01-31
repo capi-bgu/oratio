@@ -1,5 +1,7 @@
 import time
 import unittest
+from threading import Thread
+
 from tests.SessionStub import SessionStub
 from src.processing.MouseProcessor import MouseProcessor
 from tests.collection.stubs.MouseCollectorStub import MouseCollectorStub
@@ -9,19 +11,17 @@ from tests.database.sqlite_db.stubs.MouseDataHandlerStub import MouseDataHandler
 class MouseProcessorTest(unittest.TestCase):
     def test(self):
         mouse_collector = MouseCollectorStub()
-        mouse_collector.start()
-        mouse_collector.join()
+        mouse_collector.start_collect()
         start_time, data = mouse_collector.stop_collect()
 
-        self.mpt = MouseProcessor()
+        self.mouse_processor = MouseProcessor()
         session_duration = 5
         session = SessionStub(0, session_duration, start_time)
-        self.mpt.set_arguements(data, session)
-
+        processor = Thread(target=self.mouse_processor.process_data, args=(data, session))
         st = time.time()
-        self.mpt.start()
-        self.mpt.join()
-        features = self.mpt.features
+        processor.start()
+        processor.join()
+        features = self.mouse_processor.features
         print(time.time() - st)
 
         self.assertEqual(features['right_click_count'], 1)

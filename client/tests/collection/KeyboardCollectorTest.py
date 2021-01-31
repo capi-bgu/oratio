@@ -14,7 +14,8 @@ class KeyboardCollectorTest(unittest.TestCase):
         self.keyboard_collector = KeyboardCollector()
         self.session_duration = 5
         self.start_time = time.time()
-        self.keyboard_collector.start()
+        collector = Thread(target=self.keyboard_collector.start_collect)
+        collector.start()
 
         text = "hello from the test"
         user = Thread(target=self.simulate_user, args=(text,))
@@ -22,7 +23,7 @@ class KeyboardCollectorTest(unittest.TestCase):
 
         time.sleep(self.session_duration)
         data = self.keyboard_collector.stop_collect()
-        self.keyboard_collector.join()
+        collector.join()
         user.join()
 
         for i, c in enumerate(text):

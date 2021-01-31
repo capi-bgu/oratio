@@ -19,22 +19,23 @@ class MouseTest(unittest.TestCase):
         self.mouse_controller = MouseController()
 
         # collecting
-        mouse_collector = MouseCollector()
-        mouse_collector.start()
+        self.mouse_collector = MouseCollector()
+        collector = Thread(target=self.mouse_collector.start_collect)
         user = Thread(target=self.simulate_user)
+        st = time.time()
+        collector.start()
         user.start()
         time.sleep(session.session_duration)
-        data = mouse_collector.stop_collect()
-        mouse_collector.join()
+        data = self.mouse_collector.stop_collect()
+        collector.join()
         print(time.time() - st)
         user.join()
 
         # processing
-        self.mpt = MouseProcessor()
-        self.mpt.set_arguements(data, session)
-        st = time.time()
-        self.mpt.start()
-        self.mpt.join()
+        self.mouse_processor = MouseProcessor()
+        processor = Thread(target=self.mouse_processor.process_data, args=(data, session))
+        processor.start()
+        processor.join()
         print(time.time() - st)
 
         # database
@@ -47,13 +48,13 @@ class MouseTest(unittest.TestCase):
         st = time.time()
         data_handler = MouseDataHandler(path=self.out_path)
         data_handler.create_data_holder()
-        data_handler.save((session.session_name, self.mpt.features))
+        data_handler.save((session.session_name, self.mouse_processor.features))
         print(time.time() - st)
         res = manager.ask(f"SELECT * FROM Mouse WHERE session='{session.session_name}'")
         self.assertTrue(len(res) == 1)
         key = res[0][0]
         self.assertEqual(key, session.session_name)
-        for i, val in enumerate(list(self.mpt.features.values())):
+        for i, val in enumerate(list(self.mouse_processor.features.values())):
             self.assertEqual(val, res[0][i + 1])
 
     def simulate_user(self):

@@ -10,7 +10,6 @@ class KeyboardCollector(DataCollector):
         super().__init__()
         self.hm = pyHook.HookManager()
 
-
     def start_collect(self):
         print("start kb collecting...")
         super().start_collect()

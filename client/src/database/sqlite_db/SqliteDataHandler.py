@@ -5,7 +5,7 @@ from src.database.DataHandelr import DataHandler
 
 class SqliteDataHandler(DataHandler):
 
-    def __init__(self, path=""):
+    def __init__(self, path):
         super().__init__(path)
         self.path = path
         self.db_path = os.path.join(self.path, 'data.db')

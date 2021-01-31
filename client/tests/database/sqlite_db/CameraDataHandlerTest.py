@@ -1,5 +1,7 @@
 import os
 import pathlib
+from threading import Thread
+
 import msgpack
 import unittest
 import numpy as np
@@ -13,9 +15,9 @@ class CameraDataHandlerTest(unittest.TestCase):
 
     def test(self):
         camera_processor = CameraProcessorStub()
-        camera_processor.set_arguements(None, None)
-        camera_processor.start()
-        camera_processor.join()
+        processor = Thread(target=camera_processor.process_data, args=(None, None))
+        processor.start()
+        processor.join()
 
         test_dir = pathlib.Path(__file__).parent.parent.parent.absolute()
         self.out_path = os.path.join(test_dir, 'test_output')

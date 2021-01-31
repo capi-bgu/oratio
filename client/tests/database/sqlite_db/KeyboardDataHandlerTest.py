@@ -1,6 +1,8 @@
 import os
 import pathlib
 import unittest
+from threading import Thread
+
 from src.database.sqlite_db.SqliteManager import SqliteManager
 from src.database.sqlite_db.KeyboardDataHandler import KeyboardDataHandler
 from tests.processing.stubs.KeyboardProcessorStub import KeyboardProcessorStub
@@ -9,9 +11,9 @@ from tests.processing.stubs.KeyboardProcessorStub import KeyboardProcessorStub
 class KeyboardDataHandlerTest(unittest.TestCase):
     def test(self):
         keyboard_processor = KeyboardProcessorStub()
-        keyboard_processor.set_arguements(None, None)
-        keyboard_processor.start()
-        keyboard_processor.join()
+        processor = Thread(target=keyboard_processor.process_data, args=(None, None))
+        processor.start()
+        processor.join()
 
         test_dir = pathlib.Path(__file__).parent.parent.parent.absolute()
         self.out_path = os.path.join(test_dir, 'test_output')

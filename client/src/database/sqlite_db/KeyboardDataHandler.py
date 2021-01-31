@@ -4,7 +4,7 @@ from src.database.sqlite_db.SqliteDataHandler import SqliteDataHandler
 
 class KeyboardDataHandler(SqliteDataHandler):
 
-    def __init__(self, path=""):
+    def __init__(self, path):
         super().__init__(path)
 
     def save(self, data):

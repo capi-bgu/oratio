@@ -1,6 +1,8 @@
 import os
 import time
 import pathlib
+from threading import Thread
+
 import msgpack
 import unittest
 import numpy as np
@@ -16,18 +18,17 @@ class CameraTest(unittest.TestCase):
     def test(self):
         # collecting
         camera_collector = CameraCollectorStub()
-        camera_collector.start()
-        camera_collector.join()
+        camera_collector.start_collect()
         data = camera_collector.stop_collect()
 
         # processing
-        self.cpt = CameraProcessor()
+        self.camera_processor = CameraProcessor()
         session_duration = 5
         st = time.time()
         session = SessionStub("CameraProcessingDBTest", session_duration, st)
-        self.cpt.set_arguements(data, session)
-        self.cpt.start()
-        self.cpt.join()
+        processor = Thread(target=self.camera_processor.process_data, args=(data, session))
+        processor.start()
+        processor.join()
         print(time.time() - st)
 
         # database
@@ -40,7 +41,7 @@ class CameraTest(unittest.TestCase):
         st = time.time()
         data_handler = CameraDataHandler(path=self.out_path)
         data_handler.create_data_holder()
-        data_handler.save((session.session_name, self.cpt.features))
+        data_handler.save((session.session_name, self.camera_processor.features))
         print(time.time() - st)
         res = manager.ask(f"SELECT * FROM Camera WHERE session='{session.session_name}'")
         self.assertTrue(len(res) == 1)
@@ -48,7 +49,7 @@ class CameraTest(unittest.TestCase):
         data = res[0][1]
         self.assertEqual(key, session.session_name)
         data = msgpack.unpackb(data, object_hook=m.decode)
-        self.assertTrue(np.array_equal(data, np.array(self.cpt.features)))
+        self.assertTrue(np.array_equal(data, np.array(self.camera_processor.features)))
 
 
 if __name__ == '__main__':

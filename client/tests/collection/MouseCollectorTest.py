@@ -14,12 +14,13 @@ class MouseCollectorTest(unittest.TestCase):
         self.mouse_collector = MouseCollector()
         self.session_duration = 5
         self.start_time = time.time()
-        self.mouse_collector.start()
+        collector = Thread(target=self.mouse_collector.start_collect)
+        collector.start()
         user = Thread(target=self.simulate_user)
         user.start()
         time.sleep(self.session_duration)
         data = self.mouse_collector.stop_collect()
-        self.mouse_collector.join()
+        collector.join()
         user.join()
 
         self.assertEqual(data[0].MessageName, "mouse right down")

@@ -1,5 +1,7 @@
 import time
 import unittest
+from threading import Thread
+
 from tests.SessionStub import SessionStub
 from src.processing.KeyboardProcessor import KeyboardProcessor
 from tests.collection.stubs.KeyboardCollectorStub import KeyboardCollectorStub
@@ -9,19 +11,17 @@ from tests.database.sqlite_db.stubs.KeyboardDataHandlerStub import KeyboardDataH
 class KeyboardProcessorTest(unittest.TestCase):
     def test(self):
         keyboard_collector = KeyboardCollectorStub()
-        keyboard_collector.start()
-        keyboard_collector.join()
+        keyboard_collector.start_collect()
         start_time, data = keyboard_collector.stop_collect()
 
-        self.kbpt = KeyboardProcessor()
+        self.keyboard_processor = KeyboardProcessor()
         session_duration = 5
         session = SessionStub(0, session_duration, start_time)
-        self.kbpt.set_arguements(data, session)
-
+        processor = Thread(target=self.keyboard_processor.process_data, args=(data, session))
         st = time.time()
-        self.kbpt.start()
-        self.kbpt.join()
-        features = self.kbpt.features
+        processor.start()
+        processor.join()
+        features = self.keyboard_processor.features
         print(time.time() - st)
 
         self.assertAlmostEqual(features['typing_speed'], 3.8, delta=0.1)

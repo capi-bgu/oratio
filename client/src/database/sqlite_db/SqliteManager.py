@@ -7,7 +7,6 @@ class SqliteManager(DatabaseManager):
 
     def __init__(self, path=""):
         super().__init__(path)
-        self.path = path
         self.db_path = os.path.join(self.path, 'data.db')
 
     def create_database(self):
@@ -15,7 +14,6 @@ class SqliteManager(DatabaseManager):
             os.mkdir(self.path)
         with sqlite3.connect(self.db_path) as connection:
             pass
-        return super().create_database()
 
     def ask(self, query):
         with sqlite3.connect(self.db_path) as connection:

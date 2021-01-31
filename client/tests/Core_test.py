@@ -22,12 +22,12 @@ class CoreTest(unittest.TestCase):
         test_dir = pathlib.Path(__file__).parent.absolute()
         out_path = os.path.join(test_dir, 'test_output')
 
-        data_gatherers = {KeyboardCollector: {KeyboardProcessor: [KeyboardDataHandler]},
-                          CameraCollector: {CameraProcessor: [CameraDataHandler]},
-                          MouseCollector: {MouseProcessor: [MouseDataHandler]}}
+        data_gatherers = {KeyboardCollector(): {KeyboardProcessor(): [KeyboardDataHandler(out_path)]},
+                          CameraCollector(fps=2, camera=0): {CameraProcessor(): [CameraDataHandler(out_path)]},
+                          MouseCollector(): {MouseProcessor(): [MouseDataHandler(out_path)]}}
         label_methods = [CategoricalLabelingUI, VadSamRadioLabelingUI]
-        session_data_handlers = [SessionDataHandler]
-        database_managers = [SqliteManager]
+        session_data_handlers = [SessionDataHandler(out_path)]
+        database_managers = [SqliteManager(out_path)]
         core = Core(data_gatherers, out_path, num_sessions=4, session_duration=5,
                     session_data_handlers=session_data_handlers, labeling_methods=label_methods,
                     database_managers=database_managers)

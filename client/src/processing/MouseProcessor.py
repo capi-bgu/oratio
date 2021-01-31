@@ -185,10 +185,10 @@ class MouseProcessor(DataProcessor):
             if len(turn_angles) > 0:
                 self.features['average_cursor_angle'] = np.mean(turn_angles)
                 self.features['std_cursor_angle'] = np.std(turn_angles)
-                self.features['Turn_0_45'] = ((turn_angles >= 0) & (turn_angles < 45)).sum()
-                self.features['Turn_45_90'] = ((turn_angles >= 45) & (turn_angles < 90)).sum()
-                self.features['Turn_90_135'] = ((turn_angles >= 90) & (turn_angles < 135)).sum()
-                self.features['Turn_135_180'] = ((turn_angles >= 135) & (turn_angles < 180)).sum()
+                self.features['Turn_0_45'] = int(((turn_angles >= 0) & (turn_angles < 45)).sum())
+                self.features['Turn_45_90'] = int(((turn_angles >= 45) & (turn_angles < 90)).sum())
+                self.features['Turn_90_135'] = int(((turn_angles >= 90) & (turn_angles < 135)).sum())
+                self.features['Turn_135_180'] = int(((turn_angles >= 135) & (turn_angles < 180)).sum())
 
         print("end mouse processing...")
         return self.features

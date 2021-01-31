@@ -1,6 +1,8 @@
 import os
 import pathlib
 import unittest
+from threading import Thread
+
 from src.database.sqlite_db.SqliteManager import SqliteManager
 from src.database.sqlite_db.MouseDataHandler import MouseDataHandler
 from tests.processing.stubs.MouseProcessorStub import MouseProcessorStub
@@ -9,9 +11,9 @@ from tests.processing.stubs.MouseProcessorStub import MouseProcessorStub
 class MouseDataHandlerTest(unittest.TestCase):
     def test(self):
         mouse_processor = MouseProcessorStub()
-        mouse_processor.set_arguements(None, None)
-        mouse_processor.start()
-        mouse_processor.join()
+        processor = Thread(target=mouse_processor.process_data, args=(None, None))
+        processor.start()
+        processor.join()
 
         test_dir = pathlib.Path(__file__).parent.parent.parent.absolute()
         self.out_path = os.path.join(test_dir, 'test_output')
