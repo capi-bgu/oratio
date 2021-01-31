@@ -1,6 +1,7 @@
 import gc
 from src.Session import Session
 
+
 class Core:
     def __init__(self, data_gatherers, out_path, num_sessions, session_duration, session_data_handlers,
                  labeling_methods, database_managers, ask_freq=2, sessions_passed=0):
@@ -46,7 +47,7 @@ class Core:
                 label = self.ask_for_label()
             curr_session = Session(self.sessions_passed, self.session_duration, self.data_gatherers, self.out_path)
             curr_session.start_session()
-            curr_session.set_args(-1, -1, label)
+            curr_session.set_label(label)
             for session_data_handler in self.session_data_handlers:
                 session_data_handler.save(curr_session)
             self.sessions_passed += 1

@@ -24,7 +24,6 @@ class CameraDataHandlerTest(unittest.TestCase):
         if not os.path.isdir(self.out_path):
             os.mkdir(self.out_path)
 
-
         manager = SqliteManager(path=self.out_path)
         manager.create_database()
 
@@ -37,11 +36,11 @@ class CameraDataHandlerTest(unittest.TestCase):
         self.assertIn(("Camera",), res)
 
         res = manager.ask(f"SELECT * FROM Camera WHERE session='CameraHandlerTest'")
-        self.assertTrue(len(res) == 0)
+        self.assertEqual(len(res), 0)
 
         self.data_handler.save(('CameraHandlerTest', camera_processor.features))
         res = manager.ask(f"SELECT * FROM Camera WHERE session='CameraHandlerTest'")
-        self.assertTrue(len(res) == 1)
+        self.assertEqual(len(res), 1)
         key = res[0][0]
         data = res[0][1]
         self.assertEqual(key, 'CameraHandlerTest')

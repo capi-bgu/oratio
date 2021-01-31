@@ -7,7 +7,7 @@ class SqliteManager(DatabaseManager):
 
     def __init__(self, path=""):
         super().__init__(path)
-        self.db_path = os.path.join(self.path, 'data.db')
+        self.db_path = os.path.join(self.path, 'capi_client.db')
 
     def create_database(self):
         if not os.path.isdir(self.path):
@@ -22,6 +22,3 @@ class SqliteManager(DatabaseManager):
             return c.fetchall()
 
 
-if __name__ == '__main__':
-    sql = SqliteManager()
-    sql.create_database()

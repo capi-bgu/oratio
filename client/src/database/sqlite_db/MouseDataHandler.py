@@ -12,7 +12,7 @@ class MouseDataHandler(SqliteDataHandler):
 
         :param data: tuple- (session name, dictionary of all keyboard features from mouse processor)
         """
-        session, data = super().save(data)
+        session, data = data
 
         insert = "INSERT INTO Mouse VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
         with sqlite3.connect(self.db_path) as connection:

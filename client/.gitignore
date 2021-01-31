@@ -150,3 +150,4 @@ dmypy.json
 .vscode/*
 tests/test_output/*
 src/processing/dlib_face_detection.dat
+src/processing/task_keywords.json
