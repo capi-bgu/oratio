@@ -2,9 +2,8 @@ import os
 import pathlib
 import unittest
 from threading import Thread
-
-from src.database.sqlite_db.SessionMetaDataHandler import SessionMetaDataHandler
 from src.database.sqlite_db.SqliteManager import SqliteManager
+from src.database.sqlite_db.SessionMetaDataHandler import SessionMetaDataHandler
 from tests.processing.stubs.SessionMetaProcessorStub import SessionMetaProcessorStub
 
 

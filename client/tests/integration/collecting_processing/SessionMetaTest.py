@@ -1,10 +1,9 @@
 import time
 import unittest
 from threading import Thread
-
+from tests.SessionStub import SessionStub
 from src.collection.SessionMetaCollector import SessionMetaCollector
 from src.processing.SessionMetaProcessor import SessionMetaProcessor
-from tests.SessionStub import SessionStub
 from tests.database.sqlite_db.stubs.SessionMetaDataHandlerStub import SessionMetaDataHandlerStub
 
 
@@ -15,7 +14,7 @@ class SessionMetaTest(unittest.TestCase):
         self.session_processor = SessionMetaProcessor()
 
         start_time = time.time()
-        session = SessionStub(1, session_duration=5, session_start_time=start_time)
+        session = SessionStub("SessionMetaCollectingProcessingTest", session_duration=5, session_start_time=start_time)
 
         # collecting
         start_time = time.time()

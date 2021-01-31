@@ -1,7 +1,6 @@
 import time
 import unittest
 from threading import Thread
-
 from tests.SessionStub import SessionStub
 from src.processing.CameraProcessor import CameraProcessor
 from tests.collection.stubs.CameraCollectorStub import CameraCollectorStub
@@ -17,7 +16,7 @@ class CameraProcessorTest(unittest.TestCase):
         self.camera_processor = CameraProcessor()
         session_duration = 5
         st = time.time()
-        session = SessionStub(0, session_duration, st)
+        session = SessionStub("CameraProcessingTest", session_duration, st)
         processor = Thread(target=self.camera_processor.process_data, args=(data, session))
         processor.start()
         processor.join()

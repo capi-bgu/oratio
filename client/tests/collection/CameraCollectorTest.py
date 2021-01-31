@@ -1,10 +1,9 @@
 import os
-from threading import Thread
-
 import cv2
 import time
 import pathlib
 import unittest
+from threading import Thread
 from src.collection.CameraCollector import CameraCollector
 
 

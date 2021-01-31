@@ -1,5 +1,5 @@
-import pathlib
 import json
+import pathlib
 import numpy as np
 from itertools import groupby
 from src.processing.DataProcessor import DataProcessor

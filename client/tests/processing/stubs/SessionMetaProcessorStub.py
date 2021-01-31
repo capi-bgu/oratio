@@ -1,12 +1,10 @@
-import json
 import os
+import json
 import pathlib
-
 from src.processing.DataProcessor import DataProcessor
 
 
 class SessionMetaProcessorStub(DataProcessor):
-
     def __init__(self):
         super().__init__()
         test_dir = pathlib.Path(__file__).parent.parent.parent.absolute()

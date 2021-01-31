@@ -15,7 +15,7 @@ class KeyboardTest(unittest.TestCase):
         self.keyboard_collector = KeyboardCollector()
         self.keyboard_processor = KeyboardProcessor()
         self.st = time.time()
-        session = SessionStub(1, 5, self.st)
+        session = SessionStub("KeyboardCollectingProcessingTest", 5, self.st)
 
         # collecting
         st = time.time()

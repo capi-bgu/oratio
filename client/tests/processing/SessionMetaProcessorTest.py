@@ -1,11 +1,8 @@
-import os
-import pathlib
 import time
 import unittest
 from threading import Thread
-
-from src.processing.SessionMetaProcessor import SessionMetaProcessor
 from tests.SessionStub import SessionStub
+from src.processing.SessionMetaProcessor import SessionMetaProcessor
 from tests.collection.stubs.SessionMetaCollectorStub import SessionMetaCollectorStub
 from tests.database.sqlite_db.stubs.SessionMetaDataHandlerStub import SessionMetaDataHandlerStub
 
@@ -20,7 +17,7 @@ class SessionMetaProcessorTest(unittest.TestCase):
         self.session_processor = SessionMetaProcessor()
         session_duration = 5
         start_time = time.time()
-        session = SessionStub(0, session_duration, start_time)
+        session = SessionStub("SessionMetaProcessingTest", session_duration, start_time)
         processor = Thread(target=self.session_processor.process_data, args=(data, session))
         processor.start()
         processor.join()

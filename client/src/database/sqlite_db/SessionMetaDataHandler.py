@@ -1,7 +1,4 @@
 import sqlite3
-import numpy as np
-import msgpack
-import msgpack_numpy as m
 from src.database.sqlite_db.SqliteDataHandler import SqliteDataHandler
 
 

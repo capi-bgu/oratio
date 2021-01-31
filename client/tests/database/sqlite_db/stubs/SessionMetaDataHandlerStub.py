@@ -1,5 +1,5 @@
-import json
 import os
+import json
 import pathlib
 from src.database.sqlite_db.SqliteDataHandler import SqliteDataHandler
 

@@ -1,6 +1,6 @@
 import os
-import pathlib
 import cv2
+import pathlib
 from src.database.sqlite_db.SqliteDataHandler import SqliteDataHandler
 
 

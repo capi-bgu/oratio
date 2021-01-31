@@ -1,7 +1,6 @@
 import time
 import unittest
 from threading import Thread
-
 from tests.SessionStub import SessionStub
 from src.processing.MouseProcessor import MouseProcessor
 from tests.collection.stubs.MouseCollectorStub import MouseCollectorStub
@@ -16,7 +15,7 @@ class MouseProcessorTest(unittest.TestCase):
 
         self.mouse_processor = MouseProcessor()
         session_duration = 5
-        session = SessionStub(0, session_duration, start_time)
+        session = SessionStub("MouseProcessingTest", session_duration, start_time)
         processor = Thread(target=self.mouse_processor.process_data, args=(data, session))
         st = time.time()
         processor.start()

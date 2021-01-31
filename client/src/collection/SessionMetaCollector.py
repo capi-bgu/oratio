@@ -1,7 +1,7 @@
 import time
+import psutil
 import win32gui
 import win32process
-import psutil
 from src.collection.DataCollector import DataCollector
 
 

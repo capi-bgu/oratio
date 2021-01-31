@@ -2,7 +2,6 @@ import os
 import pathlib
 import unittest
 from threading import Thread
-
 from src.database.sqlite_db.SqliteManager import SqliteManager
 from src.database.sqlite_db.KeyboardDataHandler import KeyboardDataHandler
 from tests.processing.stubs.KeyboardProcessorStub import KeyboardProcessorStub

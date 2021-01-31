@@ -1,7 +1,6 @@
 import time
 import unittest
 from threading import Thread
-
 from tests.SessionStub import SessionStub
 from src.processing.KeyboardProcessor import KeyboardProcessor
 from tests.collection.stubs.KeyboardCollectorStub import KeyboardCollectorStub
@@ -16,7 +15,7 @@ class KeyboardProcessorTest(unittest.TestCase):
 
         self.keyboard_processor = KeyboardProcessor()
         session_duration = 5
-        session = SessionStub(0, session_duration, start_time)
+        session = SessionStub("KeyboardProcessingTest", session_duration, start_time)
         processor = Thread(target=self.keyboard_processor.process_data, args=(data, session))
         st = time.time()
         processor.start()

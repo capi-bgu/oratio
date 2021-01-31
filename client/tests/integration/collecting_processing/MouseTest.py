@@ -17,7 +17,7 @@ class MouseTest(unittest.TestCase):
         self.mouse_processor = MouseProcessor()
         self.mouse_collector = MouseCollector()
         self.st = time.time()
-        session = SessionStub(1, 5, self.st)
+        session = SessionStub("MouseCollectingProcessingTest", 5, self.st)
 
         # collecting
         st = time.time()

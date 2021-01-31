@@ -1,10 +1,10 @@
-import ast
 import os
+import ast
 import pathlib
 from os import listdir
+import pyWinhook as pyHook
 from os.path import isfile, join
 from src.collection.DataCollector import DataCollector
-import pyWinhook as pyHook
 
 
 class MouseCollectorStub(DataCollector):

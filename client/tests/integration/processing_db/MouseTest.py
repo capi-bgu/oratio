@@ -3,7 +3,6 @@ import time
 import pathlib
 import unittest
 from threading import Thread
-
 from tests.SessionStub import SessionStub
 from src.processing.MouseProcessor import MouseProcessor
 from src.database.sqlite_db.SqliteManager import SqliteManager

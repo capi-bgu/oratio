@@ -1,11 +1,10 @@
 import os
-import pathlib
-from threading import Thread
-
 import msgpack
+import pathlib
 import unittest
 import numpy as np
 import msgpack_numpy as m
+from threading import Thread
 from src.database.sqlite_db.SqliteManager import SqliteManager
 from src.database.sqlite_db.CameraDataHandler import CameraDataHandler
 from tests.processing.stubs.CameraProcessorStub import CameraProcessorStub

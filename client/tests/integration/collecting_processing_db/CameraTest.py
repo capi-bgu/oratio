@@ -1,12 +1,11 @@
 import os
 import time
-import pathlib
-from threading import Thread
-
 import msgpack
+import pathlib
 import unittest
 import numpy as np
 import msgpack_numpy as m
+from threading import Thread
 from tests.SessionStub import SessionStub
 from src.collection.CameraCollector import CameraCollector
 from src.processing.CameraProcessor import CameraProcessor

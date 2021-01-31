@@ -1,10 +1,9 @@
-import json
 import os
+import json
+import time
 import pathlib
 import unittest
-import time
 from threading import Thread
-
 from src.collection.SessionMetaCollector import SessionMetaCollector
 
 

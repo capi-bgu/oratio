@@ -3,11 +3,10 @@ import pathlib
 import time
 import unittest
 from threading import Thread
-
-from src.database.sqlite_db.SessionMetaDataHandler import SessionMetaDataHandler
+from tests.SessionStub import SessionStub
 from src.database.sqlite_db.SqliteManager import SqliteManager
 from src.processing.SessionMetaProcessor import SessionMetaProcessor
-from tests.SessionStub import SessionStub
+from src.database.sqlite_db.SessionMetaDataHandler import SessionMetaDataHandler
 from tests.collection.stubs.SessionMetaCollectorStub import SessionMetaCollectorStub
 
 

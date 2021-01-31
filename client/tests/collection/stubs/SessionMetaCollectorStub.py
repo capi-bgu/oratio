@@ -1,5 +1,5 @@
-import json
 import os
+import json
 import pathlib
 from src.collection.DataCollector import DataCollector
 
