@@ -12,7 +12,7 @@ class KeyboardDataHandler(SqliteDataHandler):
 
         :param data: tuple- (session name, dictionary of all keyboard features from keyboard processor)
         """
-        session, data = super().save(data)
+        session, data = data
 
         insert = "INSERT INTO Keyboard VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)"
         with sqlite3.connect(self.db_path) as connection:

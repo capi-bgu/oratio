@@ -41,7 +41,7 @@ class KeyboardTest(unittest.TestCase):
         data_handler.save(("MouseIntegrationTest", self.mouse_processor.features))
         print(time.time() - st)
         res = manager.ask(f"SELECT * FROM Mouse WHERE session='{session.session_name}'")
-        self.assertTrue(len(res) == 1)
+        self.assertEqual(len(res), 1)
         key = res[0][0]
         self.assertEqual(key, session.session_name)
         for i, val in enumerate(list(self.mouse_processor.features.values())):

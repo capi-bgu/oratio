@@ -45,9 +45,7 @@ class Session:
                 for handler in handlers_list:
                     handler.save((self.session_name, processor.features))
 
-    def set_args(self, front_window_type, window_switches, label):
-        self.front_window_type = front_window_type
-        self.window_switches = window_switches
+    def set_label(self, label):
         self.label = label
 
 

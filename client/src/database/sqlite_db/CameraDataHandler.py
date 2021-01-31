@@ -15,7 +15,7 @@ class CameraDataHandler(SqliteDataHandler):
 
         :param data: tuple- (session name, list of images- list of np.arrays)
         """
-        session, data = super().save(data)
+        session, data = data
 
         data = np.array(data)
         data = msgpack.packb(data, default=m.encode)

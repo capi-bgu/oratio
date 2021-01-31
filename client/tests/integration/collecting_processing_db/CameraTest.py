@@ -52,7 +52,7 @@ class CameraTest(unittest.TestCase):
         data_handler.save((session.session_name, self.camera_processor.features))
         print(time.time() - st)
         res = manager.ask(f"SELECT * FROM Camera WHERE session='{session.session_name}'")
-        self.assertTrue(len(res) == 1)
+        self.assertEqual(len(res), 1)
         key = res[0][0]
         data = res[0][1]
         self.assertEqual(key, session.session_name)
