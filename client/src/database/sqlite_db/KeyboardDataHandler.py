@@ -10,7 +10,7 @@ class KeyboardDataHandler(SqliteDataHandler):
     def save(self, data):
         """
 
-        :param data: tuple- (session name, dictionary of all keyboard features from keyboard processor)
+        :param data: tuple- (session id, dictionary of all keyboard features from keyboard processor)
         """
         session, data = data
 

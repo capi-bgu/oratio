@@ -26,7 +26,7 @@ class KeyboardTest(unittest.TestCase):
         st = time.time()
         collector.start()
         user.start()
-        time.sleep(session.session_duration)
+        time.sleep(session.duration)
         data = self.keyboard_collector.stop_collect()
         collector.join()
         print(time.time() - st)
@@ -49,12 +49,12 @@ class KeyboardTest(unittest.TestCase):
         st = time.time()
         data_handler = KeyboardDataHandler(path=self.out_path)
         data_handler.create_data_holder()
-        data_handler.save((session.session_name, self.keyboard_processor.features))
+        data_handler.save((session.id, self.keyboard_processor.features))
         print(time.time() - st)
-        res = manager.ask(f"SELECT * FROM Keyboard WHERE session='{session.session_name}'")
+        res = manager.ask(f"SELECT * FROM Keyboard WHERE session='{session.id}'")
         self.assertEqual(len(res), 1)
         key = res[0][0]
-        self.assertEqual(key, session.session_name)
+        self.assertEqual(key, session.id)
         for i, val in enumerate(list(self.keyboard_processor.features.values())):
             self.assertEqual(val, res[0][i + 1])
 

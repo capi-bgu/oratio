@@ -13,7 +13,7 @@ class CameraDataHandler(SqliteDataHandler):
     def save(self, data):
         """
 
-        :param data: tuple- (session name, list of images- list of np.arrays)
+        :param data: tuple- (session id, list of images- list of np.arrays)
         """
         session, data = data
 

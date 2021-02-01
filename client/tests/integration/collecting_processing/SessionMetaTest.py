@@ -14,13 +14,13 @@ class SessionMetaTest(unittest.TestCase):
         self.session_processor = SessionMetaProcessor()
 
         start_time = time.time()
-        session = SessionStub("SessionMetaCollectingProcessingTest", session_duration=5, session_start_time=start_time)
+        session = SessionStub("SessionMetaCollectingProcessingTest", duration=5, start_time=start_time)
 
         # collecting
         start_time = time.time()
         collector = Thread(target=self.session_collector.start_collect)
         collector.start()
-        time.sleep(session.session_duration)
+        time.sleep(session.duration)
         data = self.session_collector.stop_collect()
         collector.join()
         print(f"collection runtime: {time.time() - start_time}")

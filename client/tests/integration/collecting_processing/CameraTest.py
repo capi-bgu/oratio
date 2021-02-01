@@ -21,7 +21,7 @@ class CameraTest(unittest.TestCase):
         st = time.time()
         collector = Thread(target=self.camera_collector.start_collect)
         collector.start()
-        time.sleep(session.session_duration)
+        time.sleep(session.duration)
         data = self.camera_collector.stop_collect()
         collector.join()
         print(time.time() - st)
@@ -33,7 +33,7 @@ class CameraTest(unittest.TestCase):
         processor.join()
         features = self.camera_processor.features
         print(time.time() - st)
-        self.assertLessEqual(len(features), session.session_duration * self.camera_collector.fps)
+        self.assertLessEqual(len(features), session.duration * self.camera_collector.fps)
         for img in features:
             self.assertTupleEqual(img.shape, (150, 150))
 

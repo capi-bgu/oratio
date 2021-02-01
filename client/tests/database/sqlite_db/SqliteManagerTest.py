@@ -10,7 +10,7 @@ class SqliteManagerTest(unittest.TestCase):
         self.out_path = os.path.join(test_dir, 'test_output')
         if not os.path.isdir(self.out_path):
             os.mkdir(self.out_path)
-        self.db_path = os.path.join(self.out_path, 'data.db')
+        self.db_path = os.path.join(self.out_path, 'capi_client.db')
 
         self.assertFalse(os.path.isfile(self.db_path))
         manager = SqliteManager(path=self.out_path)

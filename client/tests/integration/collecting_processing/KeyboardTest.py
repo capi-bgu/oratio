@@ -24,7 +24,7 @@ class KeyboardTest(unittest.TestCase):
         collector = Thread(target=self.keyboard_collector.start_collect)
         collector.start()
         user.start()
-        time.sleep(session.session_duration)
+        time.sleep(session.duration)
         data = self.keyboard_collector.stop_collect()
         collector.join()
         print(time.time() - st)
@@ -37,7 +37,6 @@ class KeyboardTest(unittest.TestCase):
         processor.join()
         features = self.keyboard_processor.features
         print(time.time() - st)
-        print(features)
         self.assertAlmostEqual(features['typing_speed'], 3.8, delta=0.1)
         self.assertAlmostEqual(features['active_typing_speed'], 5.4285, delta=0.1)
         self.assertAlmostEqual(features['average_press_duration'], 0.04, delta=0.1)

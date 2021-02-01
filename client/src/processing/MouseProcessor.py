@@ -139,10 +139,10 @@ class MouseProcessor(DataProcessor):
                     last_scrolling_segment.append(event)
                 last_mouse_scroll_direction = event.Wheel
             if i == 0:  # if it's the first event
-                time_interval = data[i].Timestamp - session.session_start_time
+                time_interval = data[i].Timestamp - session.start_time
             else:
                 if i == len(data) - 1:
-                    time_interval = (session.session_start_time + session.session_duration) - data[i].Timestamp
+                    time_interval = (session.start_time + session.duration) - data[i].Timestamp
                     if time_interval > self.MINIMUM_IDLE_TIME:
                         idle_time += time_interval
                 time_interval = data[i].Timestamp - data[i - 1].Timestamp
@@ -166,9 +166,9 @@ class MouseProcessor(DataProcessor):
             self.features['idle_time'] = idle_time
         self.features['cursor_x_distance'] = total_x_distance
         self.features['cursor_y_distance'] = total_y_distance
-        self.features['average_speed_x'] = total_x_distance / session.session_duration
-        self.features['average_speed_y'] = total_y_distance / session.session_duration
-        active_time = session.session_duration - self.features['idle_time']
+        self.features['average_speed_x'] = total_x_distance / session.duration
+        self.features['average_speed_y'] = total_y_distance / session.duration
+        active_time = session.duration - self.features['idle_time']
         if active_time > 0:
             self.features['average_active_speed_x'] = total_x_distance / active_time
             self.features['average_active_speed_y'] = total_y_distance / active_time
@@ -244,7 +244,7 @@ class MouseProcessor(DataProcessor):
             'Dist1': 0,
             'Dist2': 0,
             'Dist3': 0,
-            'idle_time': session.session_duration,
+            'idle_time': session.duration,
             'right_click_duration': 0,
             'left_click_duration': 0,
         }

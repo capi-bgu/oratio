@@ -17,7 +17,7 @@ class SessionMetaTest(unittest.TestCase):
         self.session_processor = SessionMetaProcessor()
 
         start_time = time.time()
-        session = SessionStub("SessionMetaIntegrationDBTest", session_duration=5, session_start_time=start_time)
+        session = SessionStub("SessionMetaIntegrationDBTest", duration=5, start_time=start_time)
 
         # collecting
         self.session_collector.start_collect()
@@ -41,12 +41,12 @@ class SessionMetaTest(unittest.TestCase):
         start_time = time.time()
         data_handler = SessionMetaDataHandler(path=self.out_path)
         data_handler.create_data_holder()
-        data_handler.save((session.session_name, self.session_processor.features))
+        data_handler.save((session.id, self.session_processor.features))
         print(f"database save time: {time.time() - start_time}")
-        res = manager.ask(f"SELECT * FROM SessionMeta WHERE session='{session.session_name}'")
+        res = manager.ask(f"SELECT * FROM SessionMeta WHERE session='{session.id}'")
         self.assertEqual(len(res), 1)
         key = res[0][0]
-        self.assertEqual(key, session.session_name)
+        self.assertEqual(key, session.id)
         for i, val in enumerate(list(self.session_processor.features.values())):
             self.assertEqual(val, res[0][i + 1])
 

@@ -10,7 +10,7 @@ class MouseDataHandler(SqliteDataHandler):
     def save(self, data):
         """
 
-        :param data: tuple- (session name, dictionary of all keyboard features from mouse processor)
+        :param data: tuple- (session id, dictionary of all keyboard features from mouse processor)
         """
         session, data = data
 

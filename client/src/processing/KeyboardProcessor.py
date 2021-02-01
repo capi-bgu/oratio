@@ -54,10 +54,10 @@ class KeyboardProcessor(DataProcessor):
                         self.features['space_counter'] += 1
 
             if i == 0:  # if it's the first event
-                time_interval = data[i].Timestamp - session.session_start_time
+                time_interval = data[i].Timestamp - session.start_time
             else:
                 if i == len(data) - 1:
-                    time_interval = (session.session_start_time + session.session_duration) - data[i].Timestamp
+                    time_interval = (session.start_time + session.duration) - data[i].Timestamp
                     if time_interval > self.MINIMUM_IDLE_TIME:
                         idle_time += time_interval
                 time_interval = data[i].Timestamp - data[i - 1].Timestamp
@@ -75,12 +75,12 @@ class KeyboardProcessor(DataProcessor):
                     mode_key_presses = keys_info[key]['press_count']
                     self.features['mode_key'] = key
 
-            self.features['typing_speed'] = total_press_count / session.session_duration
+            self.features['typing_speed'] = total_press_count / session.duration
             self.features['average_press_duration'] /= len(keys_info)
             self.features['average_down_to_down'] /= total_press_count
             self.features['unique_events'] = len(keys_info)
             self.features['idle_time'] = idle_time
-            active_time = session.session_duration - self.features['idle_time']
+            active_time = session.duration - self.features['idle_time']
             if active_time != 0:
                 self.features['active_typing_speed'] = total_press_count / active_time
         print("end kb processing...")
@@ -98,6 +98,6 @@ class KeyboardProcessor(DataProcessor):
             'error_corrections': 0,
             'uppercase_counter': 0,
             'mode_key': 0,
-            'idle_time': session.session_duration,
+            'idle_time': session.duration,
             'unique_events': 0
         }

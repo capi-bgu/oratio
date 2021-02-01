@@ -16,8 +16,8 @@ class SessionDataHandler(SqliteDataHandler):
         insert = "INSERT INTO Session VALUES(?,?,?)"
         with sqlite3.connect(self.db_path) as connection:
             c = connection.cursor()
-            c.execute(insert, (str(data.session_name),
-                               data.session_start_time,
+            c.execute(insert, (str(data.id),
+                               data.start_time,
                                str(data.label)))
             connection.commit()
 

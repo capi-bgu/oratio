@@ -40,13 +40,13 @@ class CameraTest(unittest.TestCase):
         st = time.time()
         data_handler = CameraDataHandler(path=self.out_path)
         data_handler.create_data_holder()
-        data_handler.save((session.session_name, self.camera_processor.features))
+        data_handler.save((session.id, self.camera_processor.features))
         print(time.time() - st)
-        res = manager.ask(f"SELECT * FROM Camera WHERE session='{session.session_name}'")
+        res = manager.ask(f"SELECT * FROM Camera WHERE session='{session.id}'")
         self.assertEqual(len(res), 1)
         key = res[0][0]
         data = res[0][1]
-        self.assertEqual(key, session.session_name)
+        self.assertEqual(key, session.id)
         data = msgpack.unpackb(data, object_hook=m.decode)
         self.assertTrue(np.array_equal(data, np.array(self.camera_processor.features)))
 

@@ -25,7 +25,7 @@ class MouseTest(unittest.TestCase):
         collector = Thread(target=self.mouse_collector.start_collect)
         collector.start()
         user.start()
-        time.sleep(session.session_duration)
+        time.sleep(session.duration)
         data = self.mouse_collector.stop_collect()
         collector.join()
         print(time.time() - st)
