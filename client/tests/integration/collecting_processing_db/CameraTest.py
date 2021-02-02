@@ -1,10 +1,9 @@
 import os
 import time
-import msgpack
+import pickle
 import pathlib
 import unittest
 import numpy as np
-import msgpack_numpy as m
 from threading import Thread
 from tests.SessionStub import SessionStub
 from src.collection.CameraCollector import CameraCollector
@@ -54,9 +53,11 @@ class CameraTest(unittest.TestCase):
         self.assertEqual(len(res), 1)
         key = res[0][0]
         data = res[0][1]
+        data = pickle.loads(data)
         self.assertEqual(key, session.id)
-        data = msgpack.unpackb(data, object_hook=m.decode)
-        self.assertTrue(np.array_equal(data, np.array(self.camera_processor.features)))
+        self.assertEqual(len(data), len(self.camera_processor.features))
+        for ret, expected in zip(data, self.camera_processor.features):
+            self.assertTrue(np.array_equal(ret, expected))
 
 
 if __name__ == '__main__':

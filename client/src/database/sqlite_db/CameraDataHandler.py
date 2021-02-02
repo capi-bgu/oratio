@@ -1,7 +1,5 @@
+import pickle
 import sqlite3
-import msgpack
-import numpy as np
-import msgpack_numpy as m
 from src.database.sqlite_db.SqliteDataHandler import SqliteDataHandler
 
 
@@ -16,9 +14,7 @@ class CameraDataHandler(SqliteDataHandler):
         :param data: tuple- (session id, list of images- list of np.arrays)
         """
         session, data = data
-
-        data = np.array(data)
-        data = msgpack.packb(data, default=m.encode)
+        data = pickle.dumps(data)
 
         insert = "INSERT INTO Camera VALUES(?,?)"
         with sqlite3.connect(self.db_path) as connection:
