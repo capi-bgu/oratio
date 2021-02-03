@@ -26,7 +26,7 @@ class MouseRawTest(unittest.TestCase):
         st = time.time()
         collector.start()
         user.start()
-        time.sleep(session.session_duration)
+        time.sleep(session.duration)
         data = self.mouse_collector.stop_collect()
         collector.join()
         print(time.time() - st)
@@ -49,14 +49,14 @@ class MouseRawTest(unittest.TestCase):
         st = time.time()
         data_handler = RawDataHandler(name="MouseRawData", path=self.out_path)
         data_handler.create_data_holder()
-        data_handler.save((session.session_name, self.mouse_processor.features))
+        data_handler.save((session.id, self.mouse_processor.features))
         print(time.time() - st)
-        res = manager.ask(f"SELECT * FROM MouseRawData WHERE session='{session.session_name}'")
+        res = manager.ask(f"SELECT * FROM MouseRawData WHERE session='{session.id}'")
         self.assertEqual(len(res), 1)
         key = res[0][0]
         data = res[0][1]
         data = pickle.loads(data)
-        self.assertEqual(key, session.session_name)
+        self.assertEqual(key, session.id)
         self.assertEqual(len(data), len(self.mouse_processor.features))
         for ret, expected in zip(data, self.mouse_processor.features):
             self.assertEqual(ret.__dict__, expected.__dict__)

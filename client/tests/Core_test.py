@@ -13,10 +13,15 @@ from src.processing.IdentityProcessor import IdentityProcessor
 from src.gui.VadSamRadioLabelingUI import VadSamRadioLabelingUI
 from src.gui.CategoricalLabelingUI import CategoricalLabelingUI
 from src.database.sqlite_db.RawDataHandler import RawDataHandler
+from src.labeling.ConstantLabelManager import ConstantLabelManager
 from src.database.sqlite_db.MouseDataHandler import MouseDataHandler
 from src.database.sqlite_db.CameraDataHandler import CameraDataHandler
 from src.database.sqlite_db.SessionDataHandler import SessionDataHandler
 from src.database.sqlite_db.KeyboardDataHandler import KeyboardDataHandler
+
+# from src.collection.SessionMetaCollector import SessionMetaCollector
+# from src.processing.SessionMetaProcessor import SessionMetaProcessor
+# from src.database.sqlite_db.SessionMetaDataHandler import SessionMetaDataHandler
 
 
 class CoreTest(unittest.TestCase):
@@ -28,13 +33,21 @@ class CoreTest(unittest.TestCase):
                           KeyboardCollector(): {KeyboardProcessor(): [KeyboardDataHandler(out_path)],
                                                 IdentityProcessor(): [RawDataHandler("KeyboardRawData", out_path)]},
                           MouseCollector(): {MouseProcessor(): [MouseDataHandler(out_path)],
-                                             IdentityProcessor(): [RawDataHandler("MouseRawData", out_path)]}}
-        label_methods = [CategoricalLabelingUI, VadSamRadioLabelingUI]
+                                             IdentityProcessor(): [RawDataHandler("MouseRawData", out_path)]},
+                          # SessionMetaCollector(): {SessionMetaProcessor(): [SessionMetaDataHandler(out_path)],
+                          #                         IdentityProcessor(): [RawDataHandler("MetaRawData", out_path)]}
+                          }
+        label_methods = [
+            CategoricalLabelingUI,
+            #VadSamRadioLabelingUI
+        ]
+
+        constant_labeler = ConstantLabelManager(label_methods, ask_freq=5)
         session_data_handlers = [SessionDataHandler(out_path)]
         database_managers = [SqliteManager(out_path)]
-        core = Core(data_gatherers, out_path, num_sessions=20, session_duration=1,
-                    session_data_handlers=session_data_handlers, labeling_methods=label_methods,
-                    database_managers=database_managers, ask_freq=10)
+        core = Core(data_gatherers, out_path, num_sessions=15, session_duration=1,
+                    session_data_handlers=session_data_handlers,
+                    database_managers=database_managers, label_manager=constant_labeler)
         core.run()
 
 

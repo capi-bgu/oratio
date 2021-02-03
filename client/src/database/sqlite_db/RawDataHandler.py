@@ -28,6 +28,6 @@ class RawDataHandler(SqliteDataHandler):
             c = connection.cursor()
             c.execute(f"CREATE TABLE IF NOT EXISTS {self.name} \
                         (session BLOB ,\
-                        events BLOB, \
+                        data BLOB, \
                         PRIMARY KEY(session));")
 
