@@ -18,7 +18,7 @@ class CameraDataHandlerTest(unittest.TestCase):
             os.mkdir(self.out_path)
 
         manager = SqliteManager(path=self.out_path)
-        manager.create_database()
+        manager.create_data_holder()
 
         res = manager.ask(f"SELECT name FROM sqlite_master WHERE type='table' AND name='{name}';")
         self.assertNotIn((name,), res)

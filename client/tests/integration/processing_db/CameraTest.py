@@ -34,7 +34,7 @@ class CameraTest(unittest.TestCase):
         self.out_path = os.path.join(test_dir, 'test_output')
 
         manager = SqliteManager(path=self.out_path)
-        manager.create_database()
+        manager.create_data_holder()
 
         st = time.time()
         data_handler = CameraDataHandler(path=self.out_path)

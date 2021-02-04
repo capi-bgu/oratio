@@ -14,8 +14,10 @@ class SqliteManagerTest(unittest.TestCase):
 
         self.assertFalse(os.path.isfile(self.db_path))
         manager = SqliteManager(path=self.out_path)
-        manager.create_database()
+        manager.create_data_holder()
         self.assertTrue(os.path.isfile(self.db_path))
+        res = manager.ask("SELECT name FROM sqlite_master WHERE type='table' AND name='Session';")
+        self.assertIn(("Session",), res)
 
 
 if __name__ == '__main__':

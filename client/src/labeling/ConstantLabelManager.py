@@ -6,8 +6,8 @@ class ConstantLabelManager(AbsLabelManager):
         super().__init__(labeling_methods)
         self.ask_freq = ask_freq
 
-    def get_label(self, session):
-        if session.id % self.ask_freq == 0:
+    def get_label(self, session, now=False):
+        if session.id % self.ask_freq == 0 or now:
             self.label = self.__ask_for_label()
         return self.label
 

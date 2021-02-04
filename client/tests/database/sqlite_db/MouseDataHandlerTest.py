@@ -20,7 +20,7 @@ class MouseDataHandlerTest(unittest.TestCase):
             os.mkdir(self.out_path)
 
         manager = SqliteManager(path=self.out_path)
-        manager.create_database()
+        manager.create_data_holder()
         
         res = manager.ask("SELECT name FROM sqlite_master WHERE type='table' AND name='Mouse';")
         self.assertNotIn(("Mouse",), res)

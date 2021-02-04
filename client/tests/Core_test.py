@@ -17,9 +17,7 @@ from src.database.sqlite_db.RawDataHandler import RawDataHandler
 from src.labeling.ConstantLabelManager import ConstantLabelManager
 from src.database.sqlite_db.MouseDataHandler import MouseDataHandler
 from src.database.sqlite_db.CameraDataHandler import CameraDataHandler
-from src.database.sqlite_db.SessionDataHandler import SessionDataHandler
 from src.database.sqlite_db.KeyboardDataHandler import KeyboardDataHandler
-
 
 # from src.collection.SessionMetaCollector import SessionMetaCollector
 # from src.processing.SessionMetaProcessor import SessionMetaProcessor
@@ -31,10 +29,10 @@ class CoreTest(unittest.TestCase):
         test_dir = pathlib.Path(__file__).parent.absolute()
         out_path = os.path.join(test_dir, 'test_output')
 
-        # logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s: %(message)s',
-        #                     datefmt='%m/%d/%Y %I:%M:%S %p')
+        logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s: %(message)s',
+                            datefmt='%m/%d/%Y %I:%M:%S %p')
 
-        logging.basicConfig(level=logging.DEBUG, format='%(message)s')
+        # logging.basicConfig(level=logging.DEBUG, format='%(message)s')
 
         data_gatherers = {
             CameraCollector(fps=1, camera=0): {CameraProcessor(): [CameraDataHandler(out_path)]},
@@ -50,11 +48,9 @@ class CoreTest(unittest.TestCase):
             # VadSamRadioLabelingUI
         ]
 
-        constant_labeler = ConstantLabelManager(label_methods, ask_freq=2)
-        session_data_handlers = [SessionDataHandler(out_path)]
+        constant_labeler = ConstantLabelManager(label_methods, ask_freq=5)
         database_managers = [SqliteManager(out_path)]
-        core = Core(data_gatherers, out_path, num_sessions=5, session_duration=10,
-                    session_data_handlers=session_data_handlers,
+        core = Core(data_gatherers, out_path, num_sessions=10, session_duration=1,
                     database_managers=database_managers, label_manager=constant_labeler)
         core.run()
 

@@ -6,5 +6,5 @@ class AbsLabelManager(ABC):
         self.labeling_methods = labeling_methods
 
     @abstractmethod
-    def get_label(self, session):
+    def get_label(self, session, now=False):
         pass
