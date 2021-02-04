@@ -1,5 +1,6 @@
 import cv2
 import time
+import logging
 from src.collection.DataCollector import DataCollector
 
 
@@ -13,14 +14,14 @@ class CameraCollector(DataCollector):
         self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 400)
 
     def start_collect(self):
-        print("start camera collecting...")
+        logging.info("start camera collecting...")
         super().start_collect()
         while self.collect:
             _, frame = self.cap.read()
             if frame is not None:
                 self.data.append(frame)
             time.sleep(1.0 / self.fps)
-        print("end camera collecting...")
+        logging.info("end camera collecting...")
 
     def stop_collect(self):
         # self.cap.release()

@@ -1,4 +1,5 @@
 import time
+import logging
 import pythoncom
 import pyWinhook as pyHook
 from src.collection.DataCollector import DataCollector
@@ -11,13 +12,14 @@ class KeyboardCollector(DataCollector):
         self.hm = pyHook.HookManager()
 
     def start_collect(self):
-        print("start kb collecting...")
+        logging.info("start kb collecting...")
         super().start_collect()
         self.hm.KeyAll = self.__keyboard_event
         self.hm.HookKeyboard()
         while self.collect:
             pythoncom.PumpWaitingMessages()
-        print("end kb collecting...")
+            time.sleep(0.001)
+        logging.info("end kb collecting...")
 
     def stop_collect(self):
         self.hm.UnhookKeyboard()

@@ -1,6 +1,6 @@
 import os
-import pathlib
 import time
+import pathlib
 import unittest
 from threading import Thread
 from tests.SessionStub import SessionStub

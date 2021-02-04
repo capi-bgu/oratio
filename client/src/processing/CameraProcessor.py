@@ -1,6 +1,7 @@
 import os
 import cv2
 import dlib
+import logging
 import pathlib
 import numpy as np
 from src.processing.DataProcessor import DataProcessor
@@ -16,7 +17,7 @@ class CameraProcessor(DataProcessor):
         self.detector = dlib.get_frontal_face_detector()
 
     def process_data(self, data, session):
-        print("start camera processing...")
+        logging.info("start camera processing...")
         self.features = []
         for i, frame in enumerate(data):
             frame = cv2.cvtColor(src=frame, code=cv2.COLOR_BGR2GRAY)
@@ -50,7 +51,7 @@ class CameraProcessor(DataProcessor):
             # TODO: Think if it is the best way to resize?
             cut_frame = cv2.resize(cut_frame, dsize=(150, 150), interpolation=cv2.INTER_CUBIC)
             self.features.append(cut_frame)
-        print("end camera processing...")
+        logging.info("end camera processing...")
         return self.features
 
 

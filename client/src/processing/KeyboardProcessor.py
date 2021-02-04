@@ -1,4 +1,5 @@
 import string
+import logging
 from src.processing.DataProcessor import DataProcessor
 
 
@@ -9,7 +10,7 @@ class KeyboardProcessor(DataProcessor):
         super().__init__()
 
     def process_data(self, data, session):
-        print("start kb processing...")
+        logging.info("start kb processing...")
         keys_info = {}
         self.__init_features(session)
         previous_time = 0
@@ -83,7 +84,7 @@ class KeyboardProcessor(DataProcessor):
             active_time = session.duration - self.features['idle_time']
             if active_time != 0:
                 self.features['active_typing_speed'] = total_press_count / active_time
-        print("end kb processing...")
+        logging.info("end kb processing...")
         return self.features
 
     def __init_features(self, session):

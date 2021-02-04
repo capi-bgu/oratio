@@ -1,4 +1,5 @@
 import math
+import logging
 import numpy as np
 from src.processing.DataProcessor import DataProcessor
 
@@ -10,7 +11,7 @@ class MouseProcessor(DataProcessor):
         super().__init__()
 
     def process_data(self, data, session):
-        print("start mouse processing...")
+        logging.info("start mouse processing...")
         self.__init_features(session)
         num_mouse_move = 0
         sum_mouse_x_speed = 0
@@ -190,7 +191,7 @@ class MouseProcessor(DataProcessor):
                 self.features['Turn_90_135'] = int(((turn_angles >= 90) & (turn_angles < 135)).sum())
                 self.features['Turn_135_180'] = int(((turn_angles >= 135) & (turn_angles < 180)).sum())
 
-        print("end mouse processing...")
+        logging.info("end mouse processing...")
         return self.features
 
     def __angle_to_direction(self, angle):

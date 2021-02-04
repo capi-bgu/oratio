@@ -3,7 +3,6 @@ import time
 import pickle
 import pathlib
 import unittest
-import numpy as np
 from pynput import keyboard
 from threading import Thread
 from tests.SessionStub import SessionStub

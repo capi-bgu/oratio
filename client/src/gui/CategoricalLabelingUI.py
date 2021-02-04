@@ -1,3 +1,4 @@
+import logging
 from tkinter import *
 from src.gui.LabelingUI import LabelingUI
 
@@ -34,4 +35,4 @@ class CategoricalLabelingUI(LabelingUI):
 
 if __name__ == '__main__':
     categorical = CategoricalLabelingUI()
-    print(categorical.label)
+    logging.info(categorical.label)

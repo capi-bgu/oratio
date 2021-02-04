@@ -1,4 +1,5 @@
 import os
+import logging
 import pathlib
 import unittest
 from src.Core import Core
@@ -19,6 +20,7 @@ from src.database.sqlite_db.CameraDataHandler import CameraDataHandler
 from src.database.sqlite_db.SessionDataHandler import SessionDataHandler
 from src.database.sqlite_db.KeyboardDataHandler import KeyboardDataHandler
 
+
 # from src.collection.SessionMetaCollector import SessionMetaCollector
 # from src.processing.SessionMetaProcessor import SessionMetaProcessor
 # from src.database.sqlite_db.SessionMetaDataHandler import SessionMetaDataHandler
@@ -29,23 +31,29 @@ class CoreTest(unittest.TestCase):
         test_dir = pathlib.Path(__file__).parent.absolute()
         out_path = os.path.join(test_dir, 'test_output')
 
-        data_gatherers = {CameraCollector(fps=5, camera=0): {CameraProcessor(): [CameraDataHandler(out_path)]},
-                          KeyboardCollector(): {KeyboardProcessor(): [KeyboardDataHandler(out_path)],
-                                                IdentityProcessor(): [RawDataHandler("KeyboardRawData", out_path)]},
-                          MouseCollector(): {MouseProcessor(): [MouseDataHandler(out_path)],
-                                             IdentityProcessor(): [RawDataHandler("MouseRawData", out_path)]},
-                          # SessionMetaCollector(): {SessionMetaProcessor(): [SessionMetaDataHandler(out_path)],
-                          #                         IdentityProcessor(): [RawDataHandler("MetaRawData", out_path)]}
-                          }
+        # logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s: %(message)s',
+        #                     datefmt='%m/%d/%Y %I:%M:%S %p')
+
+        logging.basicConfig(level=logging.DEBUG, format='%(message)s')
+
+        data_gatherers = {
+            CameraCollector(fps=1, camera=0): {CameraProcessor(): [CameraDataHandler(out_path)]},
+            KeyboardCollector(): {KeyboardProcessor(): [KeyboardDataHandler(out_path)],
+                                  IdentityProcessor(): [RawDataHandler("KeyboardRawData", out_path)]},
+            MouseCollector(): {MouseProcessor(): [MouseDataHandler(out_path)],
+                               IdentityProcessor(): [RawDataHandler("MouseRawData", out_path)]},
+            # SessionMetaCollector(): {SessionMetaProcessor(): [SessionMetaDataHandler(out_path)],
+            #                         IdentityProcessor(): [RawDataHandler("MetaRawData", out_path)]}
+        }
         label_methods = [
             CategoricalLabelingUI,
-            #VadSamRadioLabelingUI
+            # VadSamRadioLabelingUI
         ]
 
-        constant_labeler = ConstantLabelManager(label_methods, ask_freq=5)
+        constant_labeler = ConstantLabelManager(label_methods, ask_freq=2)
         session_data_handlers = [SessionDataHandler(out_path)]
         database_managers = [SqliteManager(out_path)]
-        core = Core(data_gatherers, out_path, num_sessions=15, session_duration=1,
+        core = Core(data_gatherers, out_path, num_sessions=5, session_duration=10,
                     session_data_handlers=session_data_handlers,
                     database_managers=database_managers, label_manager=constant_labeler)
         core.run()

@@ -1,5 +1,6 @@
 import time
 import psutil
+import logging
 import win32gui
 import win32process
 from src.collection.DataCollector import DataCollector
@@ -12,7 +13,7 @@ class SessionMetaCollector(DataCollector):
         self.record_window = record_window
 
     def start_collect(self):
-        print("starting to collect session metadata...")
+        logging.info("starting to collect session metadata...")
         super().start_collect()
         while self.collect:
             window_handle = win32gui.GetForegroundWindow()

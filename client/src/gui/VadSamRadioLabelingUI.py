@@ -1,4 +1,5 @@
 import os
+import logging
 import pathlib
 import tkinter as tk
 from src.gui.LabelingUI import LabelingUI
@@ -64,4 +65,4 @@ class VadSamRadioLabelingUI(LabelingUI):
 
 if __name__ == '__main__':
     categorical = VadSamRadioLabelingUI()
-    print(categorical.label)
+    logging.info(categorical.label)

@@ -1,4 +1,5 @@
 import os
+import logging
 import pathlib
 import tkinter as tk
 from PIL import ImageTk, Image
@@ -55,5 +56,5 @@ class VadSamLabelingUI(LabelingUI):
 
 if __name__ == '__main__':
     vad = VadSamLabelingUI()
-    print(vad.label)
+    logging.info(vad.label)
 

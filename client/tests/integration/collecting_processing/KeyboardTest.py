@@ -37,17 +37,17 @@ class KeyboardTest(unittest.TestCase):
         processor.join()
         features = self.keyboard_processor.features
         print(time.time() - st)
-        self.assertAlmostEqual(features['typing_speed'], 3.8, delta=0.1)
-        self.assertAlmostEqual(features['active_typing_speed'], 5.4285, delta=0.1)
-        self.assertAlmostEqual(features['average_press_duration'], 0.04, delta=0.1)
-        self.assertAlmostEqual(features['average_down_to_down'], 0.08, delta=0.1)
+        self.assertAlmostEqual(features['typing_speed'], 3.8, delta=0.5)
+        self.assertAlmostEqual(features['active_typing_speed'], 5.4285, delta=0.5)
+        self.assertAlmostEqual(features['average_press_duration'], 0.04, delta=0.5)
+        self.assertAlmostEqual(features['average_down_to_down'], 0.08, delta=0.5)
         self.assertEqual(features['regular_press_count'], 16)
         self.assertEqual(features['punctuations_press_count'], 0)
         self.assertEqual(features['space_counter'], 3)
         self.assertEqual(features['error_corrections'], 0)
         self.assertEqual(features['uppercase_counter'], 0)
         self.assertEqual(features['mode_key'], ord('e'.upper()))
-        self.assertAlmostEqual(features['idle_time'], 1.5, delta=0.1)
+        self.assertAlmostEqual(features['idle_time'], 1.5, delta=0.5)
         self.assertEqual(features['unique_events'], 10)
 
         # database
