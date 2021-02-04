@@ -1,7 +1,7 @@
-from src.labeling.AbsLabelManager import AbsLabelManager
+from src.labeling.LabelManager import LabelManager
 
 
-class ConstantLabelManager(AbsLabelManager):
+class ConstantLabelManager(LabelManager):
     def __init__(self, labeling_methods, ask_freq):
         super().__init__(labeling_methods)
         self.ask_freq = ask_freq
