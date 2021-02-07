@@ -1,5 +1,6 @@
 import os
 import time
+import logging
 import pathlib
 import unittest
 from threading import Thread
@@ -12,6 +13,8 @@ from tests.collection.stubs.KeyboardCollectorStub import KeyboardCollectorStub
 
 class KeyboardTest(unittest.TestCase):
     def test(self):
+        logging.basicConfig(level=logging.DEBUG, format='%(message)s')
+
         # collecting
         keyboard_collector = KeyboardCollectorStub()
         keyboard_collector.start_collect()
@@ -25,7 +28,7 @@ class KeyboardTest(unittest.TestCase):
         st = time.time()
         processor.start()
         processor.join()
-        print(time.time() - st)
+        logging.debug(time.time() - st)
 
         test_dir = pathlib.Path(__file__).parent.parent.parent.absolute()
         self.out_path = os.path.join(test_dir, 'test_output')
@@ -37,7 +40,7 @@ class KeyboardTest(unittest.TestCase):
         data_handler = KeyboardDataHandler(path=self.out_path)
         data_handler.create_data_holder()
         data_handler.save((session.id, self.keyboard_processor.features))
-        print(time.time() - st)
+        logging.debug(time.time() - st)
         res = manager.ask(f"SELECT * FROM Keyboard WHERE session='{session.id}'")
         self.assertEqual(len(res), 1)
         key = res[0][0]

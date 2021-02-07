@@ -1,4 +1,5 @@
 import time
+import logging
 import unittest
 from threading import Thread
 from tests.SessionStub import SessionStub
@@ -12,6 +13,8 @@ class SessionMetaTest(unittest.TestCase):
     def test(self):
         self.session_collector = SessionMetaCollector(record_window=1)
         self.session_processor = SessionMetaProcessor()
+        logging.basicConfig(level=logging.DEBUG, format='%(message)s')
+
 
         start_time = time.time()
         session = SessionStub("SessionMetaCollectingProcessingTest", duration=5, start_time=start_time)
@@ -23,7 +26,7 @@ class SessionMetaTest(unittest.TestCase):
         time.sleep(session.duration)
         data = self.session_collector.stop_collect()
         collector.join()
-        print(f"collection runtime: {time.time() - start_time}")
+        logging.debug(time.time() - start_time)
 
         # processing
         start_time = time.time()
@@ -31,7 +34,7 @@ class SessionMetaTest(unittest.TestCase):
         processor.start()
         processor.join()
         features = self.session_processor.features
-        print(f"processing time: {time.time() - start_time}")
+        logging.debug(time.time() - start_time)
 
         data_handler = SessionMetaDataHandlerStub(name="gathered")
         data_handler.save(features)

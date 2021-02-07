@@ -1,4 +1,5 @@
 import time
+import logging
 import unittest
 from pynput import keyboard
 from threading import Thread
@@ -14,6 +15,8 @@ class KeyboardTest(unittest.TestCase):
         self.keyboard_controller = KeyboardController()
         self.keyboard_collector = KeyboardCollector()
         self.keyboard_processor = KeyboardProcessor()
+        logging.basicConfig(level=logging.DEBUG, format='%(message)s')
+
         self.st = time.time()
         session = SessionStub("KeyboardCollectingProcessingTest", 5, self.st)
 
@@ -27,7 +30,7 @@ class KeyboardTest(unittest.TestCase):
         time.sleep(session.duration)
         data = self.keyboard_collector.stop_collect()
         collector.join()
-        print(time.time() - st)
+        logging.debug(time.time() - st)
         user.join()
 
         # processing
@@ -36,7 +39,7 @@ class KeyboardTest(unittest.TestCase):
         processor.start()
         processor.join()
         features = self.keyboard_processor.features
-        print(time.time() - st)
+        logging.debug(time.time() - st)
         self.assertAlmostEqual(features['typing_speed'], 3.8, delta=0.5)
         self.assertAlmostEqual(features['active_typing_speed'], 5.4285, delta=0.5)
         self.assertAlmostEqual(features['average_press_duration'], 0.04, delta=0.5)

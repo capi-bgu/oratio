@@ -1,6 +1,7 @@
 import os
 import time
 import pickle
+import logging
 import pathlib
 import unittest
 from threading import Thread
@@ -15,6 +16,8 @@ from src.database.sqlite_db.RawDataHandler import RawDataHandler
 
 class MouseRawTest(unittest.TestCase):
     def test(self):
+        logging.basicConfig(level=logging.DEBUG, format='%(message)s')
+
         st = time.time()
         session = SessionStub("MouseFullTest", 5, st)
         self.mouse_controller = MouseController()
@@ -29,7 +32,7 @@ class MouseRawTest(unittest.TestCase):
         time.sleep(session.duration)
         data = self.mouse_collector.stop_collect()
         collector.join()
-        print(time.time() - st)
+        logging.debug(time.time() - st)
         user.join()
 
         # processing
@@ -37,7 +40,7 @@ class MouseRawTest(unittest.TestCase):
         processor = Thread(target=self.mouse_processor.process_data, args=(data, session))
         processor.start()
         processor.join()
-        print(time.time() - st)
+        logging.debug(time.time() - st)
 
         # database
         test_dir = pathlib.Path(__file__).parent.parent.parent.absolute()
@@ -50,7 +53,7 @@ class MouseRawTest(unittest.TestCase):
         data_handler = RawDataHandler(name="MouseRawData", path=self.out_path)
         data_handler.create_data_holder()
         data_handler.save((session.id, self.mouse_processor.features))
-        print(time.time() - st)
+        logging.debug(time.time() - st)
         res = manager.ask(f"SELECT * FROM MouseRawData WHERE session='{session.id}'")
         self.assertEqual(len(res), 1)
         key = res[0][0]

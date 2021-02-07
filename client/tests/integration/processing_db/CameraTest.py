@@ -1,6 +1,7 @@
 import os
 import time
 import pickle
+import logging
 import pathlib
 import unittest
 import numpy as np
@@ -14,6 +15,8 @@ from tests.collection.stubs.CameraCollectorStub import CameraCollectorStub
 
 class CameraTest(unittest.TestCase):
     def test(self):
+        logging.basicConfig(level=logging.DEBUG, format='%(message)s')
+
         # collecting
         camera_collector = CameraCollectorStub()
         camera_collector.start_collect()
@@ -27,7 +30,7 @@ class CameraTest(unittest.TestCase):
         processor = Thread(target=self.camera_processor.process_data, args=(data, session))
         processor.start()
         processor.join()
-        print(time.time() - st)
+        logging.debug(time.time() - st)
 
         # database
         test_dir = pathlib.Path(__file__).parent.parent.parent.absolute()
@@ -40,7 +43,7 @@ class CameraTest(unittest.TestCase):
         data_handler = CameraDataHandler(path=self.out_path)
         data_handler.create_data_holder()
         data_handler.save((session.id, self.camera_processor.features))
-        print(time.time() - st)
+        logging.debug(time.time() - st)
         res = manager.ask(f"SELECT * FROM Camera WHERE session='{session.id}'")
         self.assertEqual(len(res), 1)
         key = res[0][0]

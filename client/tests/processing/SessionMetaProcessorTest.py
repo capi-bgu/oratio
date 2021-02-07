@@ -1,4 +1,5 @@
 import time
+import logging
 import unittest
 from threading import Thread
 from tests.SessionStub import SessionStub
@@ -10,6 +11,8 @@ from tests.database.sqlite_db.stubs.SessionMetaDataHandlerStub import SessionMet
 class SessionMetaProcessorTest(unittest.TestCase):
 
     def test(self):
+        logging.basicConfig(level=logging.DEBUG, format='%(message)s')
+
         session_collector = SessionMetaCollectorStub()
         session_collector.start_collect()
         data = session_collector.stop_collect()

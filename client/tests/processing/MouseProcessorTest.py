@@ -1,4 +1,5 @@
 import time
+import logging
 import unittest
 from threading import Thread
 from tests.SessionStub import SessionStub
@@ -9,6 +10,8 @@ from tests.database.sqlite_db.stubs.MouseDataHandlerStub import MouseDataHandler
 
 class MouseProcessorTest(unittest.TestCase):
     def test(self):
+        logging.basicConfig(level=logging.DEBUG, format='%(message)s')
+
         mouse_collector = MouseCollectorStub()
         mouse_collector.start_collect()
         start_time, data = mouse_collector.stop_collect()

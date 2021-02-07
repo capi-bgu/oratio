@@ -1,6 +1,7 @@
 import os
 import time
 import pickle
+import logging
 import pathlib
 import unittest
 from pynput import keyboard
@@ -15,6 +16,8 @@ from src.database.sqlite_db.RawDataHandler import RawDataHandler
 
 class KeyboardRawTest(unittest.TestCase):
     def test(self):
+        logging.basicConfig(level=logging.DEBUG, format='%(message)s')
+
         st = time.time()
         session = SessionStub("KeyboardFullRawTest", 5, st)
         self.keyboard_controller = KeyboardController()
@@ -30,7 +33,7 @@ class KeyboardRawTest(unittest.TestCase):
         time.sleep(session.duration)
         data = self.keyboard_collector.stop_collect()
         collector.join()
-        print(time.time() - st)
+        logging.debug(time.time() - st)
         user.join()
 
         # processing
@@ -38,7 +41,7 @@ class KeyboardRawTest(unittest.TestCase):
         processor = Thread(target=self.keyboard_processor.process_data, args=(data, session))
         processor.start()
         processor.join()
-        print(time.time() - st)
+        logging.debug(time.time() - st)
 
         # database
         test_dir = pathlib.Path(__file__).parent.parent.parent.absolute()
@@ -51,7 +54,7 @@ class KeyboardRawTest(unittest.TestCase):
         data_handler = RawDataHandler(name="KeyboardRawData", path=self.out_path)
         data_handler.create_data_holder()
         data_handler.save((session.id, self.keyboard_processor.features))
-        print(time.time() - st)
+        logging.debug(time.time() - st)
         res = manager.ask(f"SELECT * FROM KeyboardRawData WHERE session='{session.id}'")
         self.assertEqual(len(res), 1)
         key = res[0][0]

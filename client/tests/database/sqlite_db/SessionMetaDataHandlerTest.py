@@ -19,7 +19,7 @@ class SessionMetaDataHandlerTest(unittest.TestCase):
         self.out_path = os.path.join(test_dir, 'test_output')
 
         manager = SqliteManager(path=self.out_path)
-        manager.create_database()
+        manager.create_data_holder()
 
         res = manager.ask("SELECT name FROM sqlite_master WHERE type='table' AND name='SessionMeta';")
         self.assertNotIn(("SessionMeta",), res)

@@ -2,6 +2,7 @@ import os
 import cv2
 import time
 import pathlib
+import logging
 import unittest
 from threading import Thread
 from src.collection.CameraCollector import CameraCollector
@@ -9,6 +10,7 @@ from src.collection.CameraCollector import CameraCollector
 
 class CameraCollectorTest(unittest.TestCase):
     def test(self):
+        logging.basicConfig(level=logging.DEBUG, format='%(message)s')
         fps = 2
         camera = 0
         self.camera_collector = CameraCollector(fps, camera)

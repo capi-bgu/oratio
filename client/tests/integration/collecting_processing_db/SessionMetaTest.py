@@ -1,5 +1,6 @@
 import os
 import time
+import logging
 import pathlib
 import unittest
 from threading import Thread
@@ -13,6 +14,8 @@ from src.database.sqlite_db.SessionMetaDataHandler import SessionMetaDataHandler
 class SessionMetaTest(unittest.TestCase):
 
     def test(self):
+        logging.basicConfig(level=logging.DEBUG, format='%(message)s')
+
         self.session_collector = SessionMetaCollector(record_window=1)
         self.session_processor = SessionMetaProcessor()
 
@@ -26,7 +29,7 @@ class SessionMetaTest(unittest.TestCase):
         time.sleep(session.duration)
         data = self.session_collector.stop_collect()
         collector.join()
-        print(f"collection runtime: {time.time() - start_time}")
+        logging.debug(time.time() - start_time)
 
         # processing
         start_time = time.time()
@@ -34,7 +37,7 @@ class SessionMetaTest(unittest.TestCase):
         processor.start()
         processor.join()
         features = self.session_processor.features
-        print(f"processing time: {time.time() - start_time}")
+        logging.debug(time.time() - start_time)
 
         # database
         test_dir = pathlib.Path(__file__).parent.parent.parent.absolute()
@@ -47,7 +50,7 @@ class SessionMetaTest(unittest.TestCase):
         data_handler = SessionMetaDataHandler(path=self.out_path)
         data_handler.create_data_holder()
         data_handler.save((session.id, self.session_processor.features))
-        print(f"database save time: {time.time() - start_time}")
+        logging.debug(time.time() - start_time)
         res = manager.ask(f"SELECT * FROM SessionMeta WHERE session='{session.id}'")
         self.assertEqual(len(res), 1)
         key = res[0][0]

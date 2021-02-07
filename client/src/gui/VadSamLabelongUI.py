@@ -14,8 +14,8 @@ class VadSamLabelingUI(LabelingUI):
         self.arousal = 0
         self.dominance = 0
 
-        curr_dir = pathlib.Path(__file__).parent.absolute()
-        self.resources_path = os.path.join(curr_dir, 'resources')
+        src_dir = pathlib.Path(__file__).parent.parent.absolute()
+        self.resources_path = os.path.join(src_dir, 'resources')
 
         tk.Label(self.root, text="Valance:", font=(None, 11), justify=tk.CENTER).pack()
         self.valance_sam = Image.open(rf"{self.resources_path}\SAM-V-9.png")
@@ -56,5 +56,5 @@ class VadSamLabelingUI(LabelingUI):
 
 if __name__ == '__main__':
     vad = VadSamLabelingUI()
-    logging.info(vad.label)
+    print(vad.label)
 

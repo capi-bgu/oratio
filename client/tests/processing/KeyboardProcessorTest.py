@@ -1,4 +1,5 @@
 import time
+import logging
 import unittest
 from threading import Thread
 from tests.SessionStub import SessionStub
@@ -9,6 +10,8 @@ from tests.database.sqlite_db.stubs.KeyboardDataHandlerStub import KeyboardDataH
 
 class KeyboardProcessorTest(unittest.TestCase):
     def test(self):
+        logging.basicConfig(level=logging.DEBUG, format='%(message)s')
+
         keyboard_collector = KeyboardCollectorStub()
         keyboard_collector.start_collect()
         start_time, data = keyboard_collector.stop_collect()

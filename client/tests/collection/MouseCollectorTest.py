@@ -1,6 +1,7 @@
 import os
 import time
 import pathlib
+import logging
 import unittest
 from threading import Thread
 from pynput.mouse import Button
@@ -10,6 +11,7 @@ from src.collection.MouseCollector import MouseCollector
 
 class MouseCollectorTest(unittest.TestCase):
     def test(self):
+        logging.basicConfig(level=logging.DEBUG, format='%(message)s')
         self.mouse_controller = MouseController()
         self.mouse_collector = MouseCollector()
         self.session_duration = 5

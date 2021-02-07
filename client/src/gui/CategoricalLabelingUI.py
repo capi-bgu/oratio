@@ -35,4 +35,4 @@ class CategoricalLabelingUI(LabelingUI):
 
 if __name__ == '__main__':
     categorical = CategoricalLabelingUI()
-    logging.info(categorical.label)
+    print(categorical.label)

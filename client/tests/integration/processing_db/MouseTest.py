@@ -1,5 +1,6 @@
 import os
 import time
+import logging
 import pathlib
 import unittest
 from threading import Thread
@@ -12,6 +13,8 @@ from tests.collection.stubs.MouseCollectorStub import MouseCollectorStub
 
 class KeyboardTest(unittest.TestCase):
     def test(self):
+        logging.basicConfig(level=logging.DEBUG, format='%(message)s')
+
         # collecting
         mouse_collector = MouseCollectorStub()
         mouse_collector.start_collect()
@@ -25,7 +28,7 @@ class KeyboardTest(unittest.TestCase):
         st = time.time()
         processor.start()
         processor.join()
-        print(time.time() - st)
+        logging.debug(time.time() - st)
 
         # database
         test_dir = pathlib.Path(__file__).parent.parent.parent.absolute()
@@ -38,7 +41,7 @@ class KeyboardTest(unittest.TestCase):
         data_handler = MouseDataHandler(path=self.out_path)
         data_handler.create_data_holder()
         data_handler.save(("MouseIntegrationTest", self.mouse_processor.features))
-        print(time.time() - st)
+        logging.debug(time.time() - st)
         res = manager.ask(f"SELECT * FROM Mouse WHERE session='{session.id}'")
         self.assertEqual(len(res), 1)
         key = res[0][0]

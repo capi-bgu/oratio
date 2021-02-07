@@ -1,4 +1,5 @@
 import time
+import logging
 import unittest
 from threading import Thread
 from tests.SessionStub import SessionStub
@@ -9,6 +10,8 @@ from tests.database.sqlite_db.stubs.CameraDataHandlerStub import CameraDataHandl
 
 class CameraProcessorTest(unittest.TestCase):
     def test(self):
+        logging.basicConfig(level=logging.DEBUG, format='%(message)s')
+
         camera_collector = CameraCollectorStub()
         camera_collector.start_collect()
         data = camera_collector.stop_collect()

@@ -11,8 +11,8 @@ class CameraProcessor(DataProcessor):
     def __init__(self):
         super().__init__()
 
-        processing_dir = pathlib.Path(__file__).parent.absolute()
-        self.predictor_path = os.path.join(processing_dir, 'dlib_face_detection.dat')
+        src_dir = pathlib.Path(__file__).parent.parent.absolute()
+        self.predictor_path = os.path.join(src_dir, 'resources', 'face_detection.dat')
         self.predictor = dlib.shape_predictor(self.predictor_path)
         self.detector = dlib.get_frontal_face_detector()
 

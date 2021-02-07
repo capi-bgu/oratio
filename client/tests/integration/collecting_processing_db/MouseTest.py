@@ -1,5 +1,6 @@
 import os
 import time
+import logging
 import pathlib
 import unittest
 from threading import Thread
@@ -14,6 +15,8 @@ from src.database.sqlite_db.MouseDataHandler import MouseDataHandler
 
 class MouseTest(unittest.TestCase):
     def test(self):
+        logging.basicConfig(level=logging.DEBUG, format='%(message)s')
+
         st = time.time()
         session = SessionStub("MouseFullTest", 5, st)
         self.mouse_controller = MouseController()
@@ -28,7 +31,7 @@ class MouseTest(unittest.TestCase):
         time.sleep(session.duration)
         data = self.mouse_collector.stop_collect()
         collector.join()
-        print(time.time() - st)
+        logging.debug(time.time() - st)
         user.join()
 
         # processing
@@ -36,7 +39,7 @@ class MouseTest(unittest.TestCase):
         processor = Thread(target=self.mouse_processor.process_data, args=(data, session))
         processor.start()
         processor.join()
-        print(time.time() - st)
+        logging.debug(time.time() - st)
 
         # database
         test_dir = pathlib.Path(__file__).parent.parent.parent.absolute()
@@ -49,7 +52,7 @@ class MouseTest(unittest.TestCase):
         data_handler = MouseDataHandler(path=self.out_path)
         data_handler.create_data_holder()
         data_handler.save((session.id, self.mouse_processor.features))
-        print(time.time() - st)
+        logging.debug(time.time() - st)
         res = manager.ask(f"SELECT * FROM Mouse WHERE session='{session.id}'")
         self.assertEqual(len(res), 1)
         key = res[0][0]
@@ -74,6 +77,7 @@ class MouseTest(unittest.TestCase):
         self.mouse_controller.scroll(0, 5)
         time.sleep(0.3)
         self.mouse_controller.scroll(0, -5)
+
 
 if __name__ == '__main__':
     unittest.main()

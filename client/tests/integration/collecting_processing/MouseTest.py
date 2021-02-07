@@ -1,5 +1,6 @@
 import os
 import time
+import logging
 import pathlib
 import unittest
 from threading import Thread
@@ -16,6 +17,8 @@ class MouseTest(unittest.TestCase):
         self.mouse_controller = MouseController()
         self.mouse_processor = MouseProcessor()
         self.mouse_collector = MouseCollector()
+        logging.basicConfig(level=logging.DEBUG, format='%(message)s')
+
         self.st = time.time()
         session = SessionStub("MouseCollectingProcessingTest", 5, self.st)
 
@@ -28,7 +31,7 @@ class MouseTest(unittest.TestCase):
         time.sleep(session.duration)
         data = self.mouse_collector.stop_collect()
         collector.join()
-        print(time.time() - st)
+        logging.debug(time.time() - st)
         user.join()
 
         # processing
@@ -36,7 +39,7 @@ class MouseTest(unittest.TestCase):
         processor = Thread(target=self.mouse_processor.process_data, args=(data, session))
         processor.start()
         processor.join()
-        print(time.time() - st)
+        logging.debug(time.time() - st)
         features = self.mouse_processor.features
         self.assertEqual(features['right_click_count'], 1)
         self.assertEqual(features['left_click_count'], 4)

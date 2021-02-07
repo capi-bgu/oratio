@@ -11,8 +11,8 @@ class VadSamRadioLabelingUI(LabelingUI):
         super().__init__()
         self.name = "VAD"
 
-        curr_dir = pathlib.Path(__file__).parent.absolute()
-        self.resources_path = os.path.join(curr_dir, 'resources')
+        src_dir = pathlib.Path(__file__).parent.parent.absolute()
+        self.resources_path = os.path.join(src_dir, 'resources')
 
         self.valance = tk.IntVar()
         self.arousal = tk.IntVar()
@@ -65,4 +65,4 @@ class VadSamRadioLabelingUI(LabelingUI):
 
 if __name__ == '__main__':
     categorical = VadSamRadioLabelingUI()
-    logging.info(categorical.label)
+    print(categorical.label)

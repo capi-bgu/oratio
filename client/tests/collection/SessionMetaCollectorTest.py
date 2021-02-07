@@ -2,6 +2,7 @@ import os
 import json
 import time
 import pathlib
+import logging
 import unittest
 from threading import Thread
 from src.collection.SessionMetaCollector import SessionMetaCollector
@@ -25,6 +26,7 @@ def process_data(data):
 class SessionMetaCollectorTest(unittest.TestCase):
 
     def test(self):
+        logging.basicConfig(level=logging.DEBUG, format='%(message)s')
         self.session_meta_collector = SessionMetaCollector(record_window=1)
         collector = Thread(target=self.session_meta_collector.start_collect)
         collector.start()

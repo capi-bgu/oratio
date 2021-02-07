@@ -1,4 +1,5 @@
 import time
+import logging
 import unittest
 from threading import Thread
 from tests.SessionStub import SessionStub
@@ -13,6 +14,7 @@ class CameraTest(unittest.TestCase):
         camera = 0
         self.camera_processor = CameraProcessor()
         self.camera_collector = CameraCollector(fps, camera)
+        logging.basicConfig(level=logging.DEBUG, format='%(message)s')
 
         st = time.time()
         session = SessionStub("CameraCollectingProcessingTest", 5, st)
@@ -24,7 +26,7 @@ class CameraTest(unittest.TestCase):
         time.sleep(session.duration)
         data = self.camera_collector.stop_collect()
         collector.join()
-        print(time.time() - st)
+        logging.debug(time.time() - st)
 
         # processing
         st = time.time()
@@ -32,7 +34,7 @@ class CameraTest(unittest.TestCase):
         processor.start()
         processor.join()
         features = self.camera_processor.features
-        print(time.time() - st)
+        logging.debug(time.time() - st)
         self.assertLessEqual(len(features), session.duration * self.camera_collector.fps)
         for img in features:
             self.assertTupleEqual(img.shape, (150, 150))

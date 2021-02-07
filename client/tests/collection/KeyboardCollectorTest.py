@@ -1,6 +1,7 @@
 import os
 import time
 import pathlib
+import logging
 import unittest
 from pynput import keyboard
 from threading import Thread
@@ -10,6 +11,7 @@ from src.collection.KeyboardCollector import KeyboardCollector
 
 class KeyboardCollectorTest(unittest.TestCase):
     def test(self):
+        logging.basicConfig(level=logging.DEBUG, format='%(message)s')
         self.keyboard_controller = KeyboardController()
         self.keyboard_collector = KeyboardCollector()
         self.session_duration = 5
