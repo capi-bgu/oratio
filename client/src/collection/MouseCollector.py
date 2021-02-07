@@ -18,7 +18,7 @@ class MouseCollector(DataCollector):
         self.hm.HookMouse()
         while self.collect:
             pythoncom.PumpWaitingMessages()
-            time.sleep(0.001)
+            time.sleep(0.01)
         logging.info("end mouse collecting...")
 
     def stop_collect(self):

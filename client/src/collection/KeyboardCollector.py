@@ -18,7 +18,7 @@ class KeyboardCollector(DataCollector):
         self.hm.HookKeyboard()
         while self.collect:
             pythoncom.PumpWaitingMessages()
-            time.sleep(0.001)
+            time.sleep(0.01)
         logging.info("end kb collecting...")
 
     def stop_collect(self):
