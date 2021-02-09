@@ -13,15 +13,14 @@ from src.processing.KeyboardProcessor import KeyboardProcessor
 from src.processing.IdentityProcessor import IdentityProcessor
 from src.database.sqlite_db.RawDataHandler import RawDataHandler
 from src.labeling.ConstantLabelManager import ConstantLabelManager
+from src.collection.SessionMetaCollector import SessionMetaCollector
+from src.processing.SessionMetaProcessor import SessionMetaProcessor
 from src.database.sqlite_db.MouseDataHandler import MouseDataHandler
 from src.database.sqlite_db.CameraDataHandler import CameraDataHandler
 from src.database.sqlite_db.KeyboardDataHandler import KeyboardDataHandler
+from src.database.sqlite_db.SessionMetaDataHandler import SessionMetaDataHandler
 from src.labeling.labeling_method.tk_labeling.CategoricalLabelingUI import CategoricalLabelingUI
 from src.labeling.labeling_method.tk_labeling.VadSamRadioLabelingUI import VadSamRadioLabelingUI
-
-# from src.collection.SessionMetaCollector import SessionMetaCollector
-# from src.processing.SessionMetaProcessor import SessionMetaProcessor
-# from src.database.sqlite_db.SessionMetaDataHandler import SessionMetaDataHandler
 
 
 class CoreTest(unittest.TestCase):
@@ -38,8 +37,8 @@ class CoreTest(unittest.TestCase):
                                   IdentityProcessor(): [RawDataHandler("KeyboardRawData", out_path)]},
             MouseCollector(): {MouseProcessor(): [MouseDataHandler(out_path)],
                                IdentityProcessor(): [RawDataHandler("MouseRawData", out_path)]},
-            # SessionMetaCollector(): {SessionMetaProcessor(): [SessionMetaDataHandler(out_path)],
-            #                         IdentityProcessor(): [RawDataHandler("MetaRawData", out_path)]}
+            SessionMetaCollector(): {SessionMetaProcessor(): [SessionMetaDataHandler(out_path)],
+                                     IdentityProcessor(): [RawDataHandler("MetaRawData", out_path)]}
         }
         label_methods = [
             CategoricalLabelingUI(),
