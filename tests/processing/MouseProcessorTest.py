@@ -24,7 +24,7 @@ class MouseProcessorTest(unittest.TestCase):
         processor.start()
         processor.join()
         features = self.mouse_processor.features
-        print(time.time() - st)
+        logging.debug(time.time() - st)
 
         self.assertEqual(features['right_click_count'], 1)
         self.assertEqual(features['left_click_count'], 4)

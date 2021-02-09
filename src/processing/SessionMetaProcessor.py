@@ -1,3 +1,4 @@
+import os
 import json
 import pathlib
 import numpy as np
@@ -8,8 +9,9 @@ from src.processing.DataProcessor import DataProcessor
 class SessionMetaProcessor(DataProcessor):
     def __init__(self):
         super().__init__()
-        processing_dir = pathlib.Path(__file__).parent.absolute()
-        with open(f"{processing_dir}/task_keywords.json") as keywords_file:
+        src_dir = pathlib.Path(__file__).parent.parent.absolute()
+        keywords_file_path = os.path.join(src_dir, 'resources', "task_keywords.json")
+        with open(keywords_file_path) as keywords_file:
             self.task_keywords = json.load(keywords_file)
 
     def process_data(self, data, session):

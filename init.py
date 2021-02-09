@@ -1,5 +1,5 @@
-import requests
 import typer
+import requests
 
 app = typer.Typer()
 

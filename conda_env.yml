@@ -1,59 +1,93 @@
-name: capi-client
+name: oratio
 channels:
   - conda-forge
   - defaults
 dependencies:
-  - blas=1.0=mkl
-  - brotlipy=0.7.0=py38hab1e662_1001
+  - alabaster=0.7.12=py_0
+  - astroid=2.4.2=py38h32f6830_1
+  - babel=2.9.0=pyhd3deb0d_0
+  - brotlipy=0.7.0=py38h294d835_1001
   - ca-certificates=2020.12.5=h5b45459_0
-  - certifi=2020.12.5=py38haa244fe_0
+  - certifi=2020.12.5=py38haa244fe_1
   - cffi=1.14.4=py38hd8c33c5_1
-  - chardet=4.0.0=py38haa244fe_0
+  - chardet=4.0.0=py38haa244fe_1
   - click=7.1.2=pyh9f0ad1d_0
   - colorama=0.4.4=pyh9f0ad1d_0
-  - cryptography=3.3.1=py38hd8c33c5_0
+  - cryptography=3.3.1=py38hd8c33c5_1
   - dlib=19.21.1=py38h082dfc2_0
-  - hdf5=1.10.4=h7ebc959_0
-  - icc_rt=2019.0.0=h0cc432a_1
+  - docutils=0.16=py38haa244fe_3
+  - freeglut=3.2.1=h0e60522_2
+  - freetype=2.10.4=h546665d_1
+  - icu=67.1=h33f27b4_0
   - idna=2.10=pyh9f0ad1d_0
-  - intel-openmp=2020.2=254
+  - imagesize=1.2.0=py_0
+  - intel-openmp=2020.3=h57928b3_311
+  - isort=5.7.0=pyhd8ed1ab_0
+  - jasper=2.0.14=h77af90b_2
+  - jinja2=2.11.3=pyh44b312d_0
   - jpeg=9d=h8ffe710_0
-  - libopencv=4.0.1=hbb9e17c_0
-  - libpng=1.6.37=h2a8f88b_0
-  - libtiff=4.1.0=h56a325e_1
-  - lz4-c=1.9.2=hf4a77e7_3
-  - mkl=2020.2=256
-  - mkl-service=2.3.0=py38h196d8e1_0
-  - mkl_fft=1.2.0=py38h45dec08_0
-  - mkl_random=1.1.1=py38h47e9c7a_0
-  - msgpack-numpy=0.4.7.1=pyh9f0ad1d_0
-  - msgpack-python=1.0.2=py38hbd9d945_0
-  - numpy=1.19.2=py38hadc3359_0
-  - numpy-base=1.19.2=py38ha3acd2a_0
-  - opencv=4.0.1=py38h2a7c758_0
+  - lazy-object-proxy=1.4.3=py38h1e8a9f7_2
+  - lcms2=2.12=h2a16943_0
+  - libblas=3.9.0=8_mkl
+  - libcblas=3.9.0=8_mkl
+  - libclang=10.0.1=default_hf44288c_1
+  - liblapack=3.9.0=8_mkl
+  - liblapacke=3.9.0=8_mkl
+  - libopencv=4.5.1=py38hf7032e7_0
+  - libpng=1.6.37=h1d00b33_2
+  - libtiff=4.2.0=hc10be44_0
+  - libwebp-base=1.2.0=h8ffe710_0
+  - lz4-c=1.9.3=h8ffe710_0
+  - markupsafe=1.1.1=py38h294d835_3
+  - mccabe=0.6.1=py_1
+  - mkl=2020.4=hb70f87d_311
+  - numpy=1.20.0=py38h0cc643e_0
+  - olefile=0.46=pyh9f0ad1d_1
+  - opencv=4.5.1=py38haa244fe_0
   - openssl=1.1.1i=h8ffe710_0
+  - packaging=20.9=pyh44b312d_0
+  - pillow=8.1.0=py38h9273828_2
   - pip=20.3.3=py38haa95532_0
-  - py-opencv=4.0.1=py38he44ac1e_0
+  - psutil=5.8.0=py38h294d835_1
+  - py-opencv=4.5.1=py38hc5df569_0
   - pycparser=2.20=pyh9f0ad1d_2
+  - pygments=2.7.4=pyhd8ed1ab_0
+  - pylint=2.6.0=py38h32f6830_1
+  - pynput=1.7.1=py38h32f6830_1
   - pyopenssl=20.0.1=pyhd8ed1ab_0
-  - pysocks=1.7.1=py38h9bdc248_2
+  - pyparsing=2.4.7=pyh9f0ad1d_0
+  - pysocks=1.7.1=py38haa244fe_3
   - python=3.8.5=h5fd99cc_1
+  - python-xlib=0.28=pyh9f0ad1d_0
   - python_abi=3.8=1_cp38
-  - pywin32=227=py38he774522_1
+  - pytz=2021.1=pyhd8ed1ab_0
+  - pywin32=300=py38h294d835_0
   - pywinhook=1.6.2=py38h1e8a9f7_2
+  - qt=5.12.9=hb2cf2c5_0
   - requests=2.25.1=pyhd3deb0d_0
-  - setuptools=51.0.0=py38haa95532_2
-  - shellingham=1.3.2=py_0
-  - six=1.15.0=py38haa95532_0
+  - setuptools=52.0.0=py38haa95532_0
+  - setuptools-lint=0.6.0=pyh9f0ad1d_0
+  - shellingham=1.4.0=pyh44b312d_0
+  - six=1.15.0=pyh9f0ad1d_0
+  - snowballstemmer=2.1.0=pyhd8ed1ab_0
+  - sphinx=3.4.3=pyhd8ed1ab_0
+  - sphinxcontrib-applehelp=1.0.2=py_0
+  - sphinxcontrib-devhelp=1.0.2=py_0
+  - sphinxcontrib-htmlhelp=1.0.3=py_0
+  - sphinxcontrib-jsmath=1.0.1=py_0
+  - sphinxcontrib-qthelp=1.0.3=py_0
+  - sphinxcontrib-serializinghtml=1.1.4=py_0
   - sqlite=3.33.0=h2a8f88b_0
-  - typer=0.3.1=py_0
-  - urllib3=1.26.2=pyhd8ed1ab_0
+  - tk=8.6.10=h8ffe710_1
+  - toml=0.10.2=pyhd8ed1ab_0
+  - typer=0.3.2=pyhd8ed1ab_0
+  - urllib3=1.26.3=pyhd8ed1ab_0
   - vc=14.2=h21ff451_1
   - vs2015_runtime=14.27.29016=h5e58377_2
   - wheel=0.36.2=pyhd3eb1b0_0
-  - win_inet_pton=1.1.0=py38h32f6830_1
+  - win_inet_pton=1.1.0=py38haa244fe_2
   - wincertstore=0.2=py38_0
-  - xz=5.2.5=h62dcd97_0
+  - wrapt=1.11.2=py38h1e8a9f7_1
+  - xz=5.2.5=h62dcd97_1
   - zlib=1.2.11=h62dcd97_4
-  - zstd=1.4.5=h04227a9_0
-prefix: C:\Users\Shoha\.conda\envs\capi-client
+  - zstd=1.4.8=h4e2f164_1

@@ -13,7 +13,7 @@ class SessionMetaCollector(DataCollector):
         self.record_window = record_window
 
     def start_collect(self):
-        logging.info("starting to collect session metadata...")
+        logging.info("start metadata collecting...")
         super().start_collect()
         while self.collect:
             window_handle = win32gui.GetForegroundWindow()
@@ -24,6 +24,7 @@ class SessionMetaCollector(DataCollector):
 
             self.data.append((window_process_name, window_title))
             time.sleep(self.record_window)
+        logging.info("end metadata collecting...")
 
     def stop_collect(self):
         return super().stop_collect()

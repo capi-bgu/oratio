@@ -1,13 +1,13 @@
-name: capi-client
+name: oratio
 channels:
   - defaults
 dependencies:
+  - python=3.8
   - opencv
+  - pywinhook
+  - psutil
   - pywin32
   - dlib
-  - pywinhook
+  - pillow
+  - pynput
   - typer
-  - requests
-  - msgpack-python
-  - msgpack-numpy
-prefix: C:\Users\Shoha\.conda\envs\capi-client
