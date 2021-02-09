@@ -2,8 +2,8 @@ import os
 import pickle
 import pathlib
 import unittest
-from src.database.sqlite_db.SqliteManager import SqliteManager
-from src.database.sqlite_db.RawDataHandler import RawDataHandler
+from oratio.database.sqlite_db.SqliteManager import SqliteManager
+from oratio.database.sqlite_db.RawDataHandler import RawDataHandler
 
 
 class CameraDataHandlerTest(unittest.TestCase):

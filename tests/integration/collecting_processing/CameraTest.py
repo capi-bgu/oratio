@@ -3,8 +3,8 @@ import logging
 import unittest
 from threading import Thread
 from tests.SessionStub import SessionStub
-from src.collection.CameraCollector import CameraCollector
-from src.processing.CameraProcessor import CameraProcessor
+from oratio.collection.CameraCollector import CameraCollector
+from oratio.processing.CameraProcessor import CameraProcessor
 from tests.database.sqlite_db.stubs.CameraDataHandlerStub import CameraDataHandlerStub
 
 

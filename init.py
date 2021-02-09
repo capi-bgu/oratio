@@ -10,7 +10,7 @@ DLIB_FACE_MODEL_URL = "https://drive.google.com/uc?export=download&id=1Ailalzxfr
 def download_face_model(
     url: str = typer.Option(DLIB_FACE_MODEL_URL, "--url", "-u")):
     model_data = requests.get(url).content
-    with open("src/resources/face_detection.dat", 'wb') as f:
+    with open("oratio/resources/face_detection.dat", 'wb') as f:
         f.write(model_data)
 
 

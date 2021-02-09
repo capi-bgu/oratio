@@ -3,7 +3,7 @@ import logging
 import unittest
 from threading import Thread
 from tests.SessionStub import SessionStub
-from src.processing.SessionMetaProcessor import SessionMetaProcessor
+from oratio.processing.SessionMetaProcessor import SessionMetaProcessor
 from tests.collection.stubs.SessionMetaCollectorStub import SessionMetaCollectorStub
 from tests.database.sqlite_db.stubs.SessionMetaDataHandlerStub import SessionMetaDataHandlerStub
 

@@ -7,8 +7,8 @@ from threading import Thread
 from pynput.mouse import Button
 from tests.SessionStub import SessionStub
 from pynput.mouse import Controller as MouseController
-from src.collection.MouseCollector import MouseCollector
-from src.processing.MouseProcessor import MouseProcessor
+from oratio.collection.MouseCollector import MouseCollector
+from oratio.processing.MouseProcessor import MouseProcessor
 from tests.database.sqlite_db.stubs.MouseDataHandlerStub import MouseDataHandlerStub
 
 

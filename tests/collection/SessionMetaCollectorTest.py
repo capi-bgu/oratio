@@ -5,7 +5,7 @@ import pathlib
 import logging
 import unittest
 from threading import Thread
-from src.collection.SessionMetaCollector import SessionMetaCollector
+from oratio.collection.SessionMetaCollector import SessionMetaCollector
 
 
 def process_data(data):

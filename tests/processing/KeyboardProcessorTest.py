@@ -3,7 +3,7 @@ import logging
 import unittest
 from threading import Thread
 from tests.SessionStub import SessionStub
-from src.processing.KeyboardProcessor import KeyboardProcessor
+from oratio.processing.KeyboardProcessor import KeyboardProcessor
 from tests.collection.stubs.KeyboardCollectorStub import KeyboardCollectorStub
 from tests.database.sqlite_db.stubs.KeyboardDataHandlerStub import KeyboardDataHandlerStub
 

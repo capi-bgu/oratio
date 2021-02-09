@@ -5,9 +5,9 @@ import pathlib
 import unittest
 from threading import Thread
 from tests.SessionStub import SessionStub
-from src.processing.KeyboardProcessor import KeyboardProcessor
-from src.database.sqlite_db.SqliteManager import SqliteManager
-from src.database.sqlite_db.KeyboardDataHandler import KeyboardDataHandler
+from oratio.processing.KeyboardProcessor import KeyboardProcessor
+from oratio.database.sqlite_db.SqliteManager import SqliteManager
+from oratio.database.sqlite_db.KeyboardDataHandler import KeyboardDataHandler
 from tests.collection.stubs.KeyboardCollectorStub import KeyboardCollectorStub
 
 

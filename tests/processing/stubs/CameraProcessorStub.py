@@ -3,7 +3,7 @@ import cv2
 import pathlib
 from os import listdir
 from os.path import isfile, join
-from src.processing.DataProcessor import DataProcessor
+from oratio.processing.DataProcessor import DataProcessor
 
 
 class CameraProcessorStub(DataProcessor):

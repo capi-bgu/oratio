@@ -1,7 +1,7 @@
 import os
 import pathlib
 import unittest
-from src.database.sqlite_db.SqliteManager import SqliteManager
+from oratio.database.sqlite_db.SqliteManager import SqliteManager
 
 
 class SqliteManagerTest(unittest.TestCase):

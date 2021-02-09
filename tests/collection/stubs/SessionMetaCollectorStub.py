@@ -1,7 +1,7 @@
 import os
 import json
 import pathlib
-from src.collection.DataCollector import DataCollector
+from oratio.collection.DataCollector import DataCollector
 
 
 class SessionMetaCollectorStub(DataCollector):

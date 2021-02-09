@@ -5,9 +5,9 @@ import pathlib
 import unittest
 from threading import Thread
 from tests.SessionStub import SessionStub
-from src.processing.MouseProcessor import MouseProcessor
-from src.database.sqlite_db.SqliteManager import SqliteManager
-from src.database.sqlite_db.MouseDataHandler import MouseDataHandler
+from oratio.processing.MouseProcessor import MouseProcessor
+from oratio.database.sqlite_db.SqliteManager import SqliteManager
+from oratio.database.sqlite_db.MouseDataHandler import MouseDataHandler
 from tests.collection.stubs.MouseCollectorStub import MouseCollectorStub
 
 

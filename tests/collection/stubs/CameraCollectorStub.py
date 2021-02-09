@@ -3,7 +3,7 @@ import cv2
 import pathlib
 from os import listdir
 from os.path import isfile, join
-from src.collection.DataCollector import DataCollector
+from oratio.collection.DataCollector import DataCollector
 
 
 class CameraCollectorStub(DataCollector):

@@ -1,7 +1,7 @@
 import os
 import json
 import pathlib
-from src.processing.DataProcessor import DataProcessor
+from oratio.processing.DataProcessor import DataProcessor
 
 
 class MouseProcessorStub(DataProcessor):

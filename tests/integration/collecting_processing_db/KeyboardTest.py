@@ -7,10 +7,10 @@ from pynput import keyboard
 from threading import Thread
 from tests.SessionStub import SessionStub
 from pynput.keyboard import Controller as KeyboardController
-from src.processing.KeyboardProcessor import KeyboardProcessor
-from src.database.sqlite_db.SqliteManager import SqliteManager
-from src.collection.KeyboardCollector import KeyboardCollector
-from src.database.sqlite_db.KeyboardDataHandler import KeyboardDataHandler
+from oratio.processing.KeyboardProcessor import KeyboardProcessor
+from oratio.database.sqlite_db.SqliteManager import SqliteManager
+from oratio.collection.KeyboardCollector import KeyboardCollector
+from oratio.database.sqlite_db.KeyboardDataHandler import KeyboardDataHandler
 
 
 class KeyboardTest(unittest.TestCase):

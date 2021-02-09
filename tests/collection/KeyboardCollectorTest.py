@@ -6,7 +6,7 @@ import unittest
 from pynput import keyboard
 from threading import Thread
 from pynput.keyboard import Controller as KeyboardController
-from src.collection.KeyboardCollector import KeyboardCollector
+from oratio.collection.KeyboardCollector import KeyboardCollector
 
 
 class KeyboardCollectorTest(unittest.TestCase):

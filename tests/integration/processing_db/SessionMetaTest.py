@@ -5,9 +5,9 @@ import pathlib
 import unittest
 from threading import Thread
 from tests.SessionStub import SessionStub
-from src.database.sqlite_db.SqliteManager import SqliteManager
-from src.processing.SessionMetaProcessor import SessionMetaProcessor
-from src.database.sqlite_db.SessionMetaDataHandler import SessionMetaDataHandler
+from oratio.database.sqlite_db.SqliteManager import SqliteManager
+from oratio.processing.SessionMetaProcessor import SessionMetaProcessor
+from oratio.database.sqlite_db.SessionMetaDataHandler import SessionMetaDataHandler
 from tests.collection.stubs.SessionMetaCollectorStub import SessionMetaCollectorStub
 
 

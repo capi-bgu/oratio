@@ -5,7 +5,7 @@ import pathlib
 import logging
 import unittest
 from threading import Thread
-from src.collection.CameraCollector import CameraCollector
+from oratio.collection.CameraCollector import CameraCollector
 
 
 class CameraCollectorTest(unittest.TestCase):

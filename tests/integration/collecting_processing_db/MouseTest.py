@@ -7,10 +7,10 @@ from threading import Thread
 from pynput.mouse import Button
 from tests.SessionStub import SessionStub
 from pynput.mouse import Controller as MouseController
-from src.collection.MouseCollector import MouseCollector
-from src.processing.MouseProcessor import MouseProcessor
-from src.database.sqlite_db.SqliteManager import SqliteManager
-from src.database.sqlite_db.MouseDataHandler import MouseDataHandler
+from oratio.collection.MouseCollector import MouseCollector
+from oratio.processing.MouseProcessor import MouseProcessor
+from oratio.database.sqlite_db.SqliteManager import SqliteManager
+from oratio.database.sqlite_db.MouseDataHandler import MouseDataHandler
 
 
 class MouseTest(unittest.TestCase):

@@ -149,5 +149,5 @@ dmypy.json
 .idea/*
 .vscode/*
 tests/test_output/*
-src/resources/face_detection.dat
-src/processing/task_keywords.json
+oratio/resources/face_detection.dat
+oratio/resources/task_keywords.json

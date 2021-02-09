@@ -1,7 +1,7 @@
 import os
 import cv2
 import pathlib
-from src.database.sqlite_db.SqliteDataHandler import SqliteDataHandler
+from oratio.database.sqlite_db.SqliteDataHandler import SqliteDataHandler
 
 
 class CameraDataHandlerStub(SqliteDataHandler):

@@ -1,7 +1,7 @@
 import os
 import json
 import pathlib
-from src.database.sqlite_db.SqliteDataHandler import SqliteDataHandler
+from oratio.database.sqlite_db.SqliteDataHandler import SqliteDataHandler
 
 
 class SessionMetaDataHandlerStub(SqliteDataHandler):

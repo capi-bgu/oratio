@@ -7,9 +7,9 @@ import unittest
 import numpy as np
 from threading import Thread
 from tests.SessionStub import SessionStub
-from src.processing.CameraProcessor import CameraProcessor
-from src.database.sqlite_db.SqliteManager import SqliteManager
-from src.database.sqlite_db.CameraDataHandler import CameraDataHandler
+from oratio.processing.CameraProcessor import CameraProcessor
+from oratio.database.sqlite_db.SqliteManager import SqliteManager
+from oratio.database.sqlite_db.CameraDataHandler import CameraDataHandler
 from tests.collection.stubs.CameraCollectorStub import CameraCollectorStub
 
 

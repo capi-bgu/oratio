@@ -5,8 +5,8 @@ from pynput import keyboard
 from threading import Thread
 from tests.SessionStub import SessionStub
 from pynput.keyboard import Controller as KeyboardController
-from src.collection.KeyboardCollector import KeyboardCollector
-from src.processing.KeyboardProcessor import KeyboardProcessor
+from oratio.collection.KeyboardCollector import KeyboardCollector
+from oratio.processing.KeyboardProcessor import KeyboardProcessor
 from tests.database.sqlite_db.stubs.KeyboardDataHandlerStub import KeyboardDataHandlerStub
 
 

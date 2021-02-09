@@ -3,7 +3,7 @@ import logging
 import unittest
 from threading import Thread
 from tests.SessionStub import SessionStub
-from src.processing.MouseProcessor import MouseProcessor
+from oratio.processing.MouseProcessor import MouseProcessor
 from tests.collection.stubs.MouseCollectorStub import MouseCollectorStub
 from tests.database.sqlite_db.stubs.MouseDataHandlerStub import MouseDataHandlerStub
 

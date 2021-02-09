@@ -7,10 +7,10 @@ import unittest
 import numpy as np
 from threading import Thread
 from tests.SessionStub import SessionStub
-from src.collection.CameraCollector import CameraCollector
-from src.processing.CameraProcessor import CameraProcessor
-from src.database.sqlite_db.SqliteManager import SqliteManager
-from src.database.sqlite_db.CameraDataHandler import CameraDataHandler
+from oratio.collection.CameraCollector import CameraCollector
+from oratio.processing.CameraProcessor import CameraProcessor
+from oratio.database.sqlite_db.SqliteManager import SqliteManager
+from oratio.database.sqlite_db.CameraDataHandler import CameraDataHandler
 
 
 class CameraTest(unittest.TestCase):

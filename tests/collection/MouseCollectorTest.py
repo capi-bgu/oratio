@@ -6,7 +6,7 @@ import unittest
 from threading import Thread
 from pynput.mouse import Button
 from pynput.mouse import Controller as MouseController
-from src.collection.MouseCollector import MouseCollector
+from oratio.collection.MouseCollector import MouseCollector
 
 
 class MouseCollectorTest(unittest.TestCase):

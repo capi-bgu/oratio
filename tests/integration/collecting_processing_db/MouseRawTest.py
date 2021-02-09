@@ -8,10 +8,10 @@ from threading import Thread
 from pynput.mouse import Button
 from tests.SessionStub import SessionStub
 from pynput.mouse import Controller as MouseController
-from src.collection.MouseCollector import MouseCollector
-from src.processing.IdentityProcessor import IdentityProcessor
-from src.database.sqlite_db.SqliteManager import SqliteManager
-from src.database.sqlite_db.RawDataHandler import RawDataHandler
+from oratio.collection.MouseCollector import MouseCollector
+from oratio.processing.IdentityProcessor import IdentityProcessor
+from oratio.database.sqlite_db.SqliteManager import SqliteManager
+from oratio.database.sqlite_db.RawDataHandler import RawDataHandler
 
 
 class MouseRawTest(unittest.TestCase):
