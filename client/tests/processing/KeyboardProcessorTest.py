@@ -24,7 +24,7 @@ class KeyboardProcessorTest(unittest.TestCase):
         processor.start()
         processor.join()
         features = self.keyboard_processor.features
-        print(time.time() - st)
+        logging.debug(time.time() - st)
 
         self.assertAlmostEqual(features['typing_speed'], 3.8, delta=0.5)
         self.assertAlmostEqual(features['active_typing_speed'], 5.4285, delta=0.5)

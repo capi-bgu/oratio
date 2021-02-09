@@ -1,12 +1,16 @@
-import logging
+import time
 from tkinter import *
-from src.gui.LabelingUI import LabelingUI
+from src.labeling.labeling_method.tk_labeling.TkLabelMethod import TkLabelMethod
 
 
-class CategoricalLabelingUI(LabelingUI):
+class CategoricalLabelingUI(TkLabelMethod):
+
     def __init__(self):
         super().__init__()
         self.name = "Categorical"
+
+    def get_label(self):
+        super().get_label()
         self.result = IntVar()
         feelings = {"sad": 1,
                     "anger": 2,
@@ -26,6 +30,7 @@ class CategoricalLabelingUI(LabelingUI):
                         value=val).pack(anchor=W)
         Button(self.root, text="OK", command=self.exit).pack(anchor=W)
         mainloop()
+        return super(TkLabelMethod, self).get_label()
 
     def exit(self):  # check to prevent closing before mark an option
         if self.result.get() != 0:
@@ -34,5 +39,8 @@ class CategoricalLabelingUI(LabelingUI):
 
 
 if __name__ == '__main__':
-    categorical = CategoricalLabelingUI()
-    print(categorical.label)
+    labeler = CategoricalLabelingUI()
+    print(labeler.get_label())
+    time.sleep(3)
+    print(labeler.get_label())
+

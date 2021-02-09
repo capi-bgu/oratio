@@ -24,7 +24,7 @@ class CameraProcessorTest(unittest.TestCase):
         processor.start()
         processor.join()
         features = self.camera_processor.features
-        print(time.time() - st)
+        logging.debug(time.time() - st)
 
         self.assertTrue(len(features) == session.duration * camera_collector.fps)
         for img in features:

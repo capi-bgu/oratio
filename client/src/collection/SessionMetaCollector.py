@@ -8,7 +8,7 @@ from src.collection.DataCollector import DataCollector
 
 class SessionMetaCollector(DataCollector):
 
-    def __init__(self, record_window=1):
+    def __init__(self, record_window=0.333):
         super().__init__()
         self.record_window = record_window
 

@@ -11,13 +11,13 @@ from src.database.sqlite_db.SqliteManager import SqliteManager
 from src.collection.KeyboardCollector import KeyboardCollector
 from src.processing.KeyboardProcessor import KeyboardProcessor
 from src.processing.IdentityProcessor import IdentityProcessor
-from src.gui.VadSamRadioLabelingUI import VadSamRadioLabelingUI
-from src.gui.CategoricalLabelingUI import CategoricalLabelingUI
 from src.database.sqlite_db.RawDataHandler import RawDataHandler
 from src.labeling.ConstantLabelManager import ConstantLabelManager
 from src.database.sqlite_db.MouseDataHandler import MouseDataHandler
 from src.database.sqlite_db.CameraDataHandler import CameraDataHandler
 from src.database.sqlite_db.KeyboardDataHandler import KeyboardDataHandler
+from src.labeling.labeling_method.tk_labeling.CategoricalLabelingUI import CategoricalLabelingUI
+from src.labeling.labeling_method.tk_labeling.VadSamRadioLabelingUI import VadSamRadioLabelingUI
 
 # from src.collection.SessionMetaCollector import SessionMetaCollector
 # from src.processing.SessionMetaProcessor import SessionMetaProcessor
@@ -29,7 +29,7 @@ class CoreTest(unittest.TestCase):
         test_dir = pathlib.Path(__file__).parent.absolute()
         out_path = os.path.join(test_dir, 'test_output')
 
-        logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s: %(message)s',
+        logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s: %(message)s',
                             datefmt='%m/%d/%Y %I:%M:%S %p')
 
         data_gatherers = {
@@ -42,13 +42,13 @@ class CoreTest(unittest.TestCase):
             #                         IdentityProcessor(): [RawDataHandler("MetaRawData", out_path)]}
         }
         label_methods = [
-            CategoricalLabelingUI,
-            # VadSamRadioLabelingUI
+            CategoricalLabelingUI(),
+            VadSamRadioLabelingUI()
         ]
 
         constant_labeler = ConstantLabelManager(label_methods, ask_freq=5)
         database_managers = [SqliteManager(out_path)]
-        core = Core(data_gatherers, out_path, num_sessions=10, session_duration=1,
+        core = Core(data_gatherers, out_path, num_sessions=15, session_duration=1,
                     database_managers=database_managers, label_manager=constant_labeler)
         core.run()
 

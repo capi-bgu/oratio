@@ -1,10 +1,16 @@
 import tkinter as tk
-from abc import ABC, abstractmethod
+from abc import abstractmethod
+from src.labeling.labeling_method.LabelMethod import LabelMethod
 
-class LabelingUI(ABC):
+
+class TkLabelMethod(LabelMethod):
+
     def __init__(self):
-        self.label = -1
-        self.name = "ABSTRACT"
+        super().__init__()
+        self.name = "TK_ABSTRACT"
+
+    @abstractmethod
+    def get_label(self):
         self.root = tk.Tk()
         self.root.resizable(0, 0)
         self.root.protocol('WM_DELETE_WINDOW', self.exit)

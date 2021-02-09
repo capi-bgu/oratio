@@ -8,3 +8,9 @@ class LabelManager(ABC):
     @abstractmethod
     def get_label(self, session, now=False):
         pass
+
+    def ask_for_label(self):
+        label = dict()
+        for method in self.labeling_methods:
+            label.update(method.get_label())
+        return label

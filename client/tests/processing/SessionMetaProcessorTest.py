@@ -25,7 +25,7 @@ class SessionMetaProcessorTest(unittest.TestCase):
         processor.start()
         processor.join()
         features = self.session_processor.features
-        print(f"Session Meta Processor runtime: {time.time() - start_time}")
+        logging.debug(time.time() - start_time)
         self.assertEqual(features['dominate_window'], "pycharm64.exe")
         self.assertEqual(features['dominate_task'], "writing")
         self.assertEqual(features['window_switches'], 4)

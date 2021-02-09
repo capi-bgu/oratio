@@ -1,3 +1,4 @@
+import logging
 from abc import abstractmethod
 from src.database.DataHandler import DataHandler
 
@@ -9,7 +10,7 @@ class DatabaseManager(DataHandler):
 
     def save(self, data):
         if type(data) == tuple:
-            raise TypeError("DatabaseManager can only save Session data")
+            logging.error("DatabaseManager can only save Session data")
         self.save_session(data)
 
     @abstractmethod

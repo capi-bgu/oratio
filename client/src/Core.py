@@ -23,7 +23,7 @@ class Core:
         self.label_manager = label_manager
         self.num_sessions = num_sessions
         self.out_path = out_path
-        self.running = True
+        self.running = False
 
         self.database_managers = database_managers
         for database_manager in self.database_managers:
@@ -36,9 +36,9 @@ class Core:
 
         self.sessions_passed = len(self.database_managers[0])
 
-
     def run(self):
         first_session = True
+        self.running = True
         while self.sessions_passed < self.num_sessions and self.running:
             curr_session = Session(self.sessions_passed, self.session_duration, self.data_gatherers, self.out_path)
             curr_session.start_session()
@@ -50,3 +50,6 @@ class Core:
             first_session = False
             del curr_session
             gc.collect()
+
+    def stop(self):
+        self.running = False
