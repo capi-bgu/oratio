@@ -17,42 +17,38 @@ class Session:
         self.id = id
         self.duration = duration
         self.out_path = out_path
-
-        self.collector_processor = {}
-        self.processor_handler = {}
-
-        for collector, processor_handlers in data_gatherers.items():
-            self.collector_processor[collector] = list(processor_handlers.keys())
-            self.processor_handler.update(processor_handlers)
+        self.data_gatherers = data_gatherers
+        self.start_time = 0
+        self.label = -1
 
     def start_session(self):
         logging.info(f"start session {self.id}...")
         self.start_time = time.time()
+        raw_data = self.__collect()
+        Thread(target=self.__process_and_save, args=(raw_data,)).start()
+        logging.info("************************\n")
 
+    def __collect(self):
         collectors_threads = list()
-        for collector in self.collector_processor:
-            collectors_threads.append(Thread(target=self.__collecting, args=(collector,)))
+        for collector in self.data_gatherers:
+            collectors_threads.append(Thread(target=collector.start_collect))
         for collector in collectors_threads:
             collector.start()
+        time.sleep(self.duration)
+        raw_data = [collector.stop_collect() for collector in self.data_gatherers]
         for collector in collectors_threads:
             collector.join()
-        logging.info("***************************\n")
+        return raw_data
 
-    def __collecting(self, collector):
-        collector_thread = Thread(target=collector.start_collect)
-        collector_thread.start()
-        time.sleep(self.duration)
-        collected_date = collector.stop_collect()
-        collector_thread.join()
+    def __process_and_save(self, raw_data):
+        for i, processor_handlers_dict in enumerate(self.data_gatherers.values()):
+            for processor in processor_handlers_dict:
+                processor.process_data(raw_data[i], self)
 
-        for processor in self.collector_processor[collector]:
-            Thread(target=self.__processing_saving, args=(processor, collected_date)).start()
-
-    def __processing_saving(self, processor, data):
-        processor.process_data(data, self)
-
-        for handler in self.processor_handler[processor]:
-            Thread(target=handler.save, args=((self.id, processor.features),)).start()
+        for processor_handlers_dict in self.data_gatherers.values():
+            for processor, handlers_list in processor_handlers_dict.items():
+                for handler in handlers_list:
+                    handler.save((self.id, processor.features))
 
     def set_label(self, label):
         self.label = label
