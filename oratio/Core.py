@@ -50,6 +50,7 @@ class Core:
             first_session = False
             del curr_session
             gc.collect()
+        self.running = False
 
     def stop(self):
         self.running = False
