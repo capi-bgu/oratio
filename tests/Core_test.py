@@ -45,7 +45,7 @@ class CoreTest(unittest.TestCase):
             VadSamRadioLabelingUI()
         ]
 
-        constant_labeler = ConstantLabelManager(label_methods, ask_freq=3)
+        constant_labeler = ConstantLabelManager(label_methods, ask_freq=6)
         database_managers = [SqliteManager(out_path)]
         core = Core(data_gatherers, out_path, num_sessions=10, session_duration=1,
                     database_managers=database_managers, label_manager=constant_labeler)

@@ -16,11 +16,16 @@ class SessionMetaCollector(DataCollector):
         logging.info("start metadata collecting...")
         super().start_collect()
         while self.collect:
-            window_handle = win32gui.GetForegroundWindow()
-            pid = win32process.GetWindowThreadProcessId(win32gui.GetForegroundWindow())
+            try:
+                window_handle = win32gui.GetForegroundWindow()
+                pid = win32process.GetWindowThreadProcessId(win32gui.GetForegroundWindow())
 
-            window_process_name = psutil.Process(pid[-1]).name()
-            window_title = str(repr(win32gui.GetWindowText(window_handle)))
+                window_process_name = psutil.Process(pid[-1]).name()
+                window_title = str(repr(win32gui.GetWindowText(window_handle)))
+            except Exception as e:
+                logging.error(e)
+                window_process_name = "Unknown"
+                window_title = "Unknown"
 
             self.data.append((window_process_name, window_title))
             time.sleep(self.record_window)

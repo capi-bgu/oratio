@@ -7,10 +7,14 @@ from oratio.processing.DataProcessor import DataProcessor
 
 
 class SessionMetaProcessor(DataProcessor):
-    def __init__(self):
+    def __init__(self, resources_path=None):
         super().__init__()
-        src_dir = pathlib.Path(__file__).parent.parent.absolute()
-        keywords_file_path = os.path.join(src_dir, 'resources', "task_keywords.json")
+
+        if resources_path is None:
+            src_dir = pathlib.Path(__file__).parent.parent.absolute()
+            resources_path = os.path.join(src_dir, 'resources')
+
+        keywords_file_path = os.path.join(resources_path, "task_keywords.json")
         with open(keywords_file_path) as keywords_file:
             self.task_keywords = json.load(keywords_file)
 
@@ -28,7 +32,7 @@ class SessionMetaProcessor(DataProcessor):
         tasks = [task_group[0] for task_group in groupby(tasks)]
         unique_tasks, task_counts = np.unique(tasks, return_counts=True)
         self.features["dominate_task"] = unique_tasks[np.argmax(task_counts)]
-        self.features["task_switches"] = len(tasks)
+        self.features["task_switches"] = len(tasks) - 1
         self.features["task_count"] = len(unique_tasks)
 
         return self.features

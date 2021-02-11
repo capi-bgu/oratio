@@ -8,11 +8,14 @@ from oratio.processing.DataProcessor import DataProcessor
 
 
 class CameraProcessor(DataProcessor):
-    def __init__(self):
+    def __init__(self, resources_path=None):
         super().__init__()
 
-        src_dir = pathlib.Path(__file__).parent.parent.absolute()
-        self.predictor_path = os.path.join(src_dir, 'resources', 'face_detection.dat')
+        if resources_path is None:
+            src_dir = pathlib.Path(__file__).parent.parent.absolute()
+            resources_path = os.path.join(src_dir, 'resources')
+
+        self.predictor_path = os.path.join(resources_path, 'face_detection.dat')
         self.predictor = dlib.shape_predictor(self.predictor_path)
         self.detector = dlib.get_frontal_face_detector()
 
