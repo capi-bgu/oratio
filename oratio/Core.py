@@ -53,7 +53,7 @@ class Core:
             del curr_session
             gc.collect()
         self.running = False
-        self.finished = True
+        self.finished = self.sessions_passed == self.num_sessions
 
     def __keep_running(self):
         if self.num_sessions != -1:
