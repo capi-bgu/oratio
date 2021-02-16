@@ -1,0 +1,16 @@
+1613507038.4625456
+0. {'Timestamp': 1613507039.981134, 'Position': (859, 388), 'Wheel': 0, 'Message': 516}
+1. {'Timestamp': 1613507040.0470047, 'Position': (859, 388), 'Wheel': 0, 'Message': 517}
+2. {'Timestamp': 1613507040.363109, 'Message': 512, 'Position': (667, 330), 'Wheel': 0}
+3. {'Timestamp': 1613507040.3810613, 'Position': (834, 413), 'Wheel': 0, 'Message': 513}
+4. {'Timestamp': 1613507040.4369116, 'Position': (834, 413), 'Wheel': 0, 'Message': 514}
+5. {'Timestamp': 1613507041.1638122, 'Position': (834, 413), 'Wheel': 0, 'Message': 513}
+6. {'Timestamp': 1613507041.1648102, 'Position': (834, 413), 'Wheel': 0, 'Message': 514}
+7. {'Timestamp': 1613507041.1658087, 'Position': (834, 413), 'Wheel': 0, 'Message': 513}
+8. {'Timestamp': 1613507041.1668043, 'Position': (834, 413), 'Wheel': 0, 'Message': 514}
+9. {'Timestamp': 1613507041.1817648, 'Position': (834, 413), 'Wheel': 0, 'Message': 513}
+10. {'Timestamp': 1613507041.1827614, 'Position': (834, 413), 'Wheel': 0, 'Message': 514}
+11. {'Timestamp': 1613507041.4864688, 'Message': 522, 'Position': (834, 413), 'Wheel': 1}
+12. {'Timestamp': 1613507041.4864688, 'Message': 522, 'Position': (667, 330), 'Wheel': 1}
+13. {'Timestamp': 1613507041.7956405, 'Message': 522, 'Position': (834, 413), 'Wheel': -1}
+14. {'Timestamp': 1613507041.7976377, 'Message': 522, 'Position': (667, 330), 'Wheel': -1}

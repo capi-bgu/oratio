@@ -1,13 +1,13 @@
 {
   "typing_speed": 3.8,
-  "active_typing_speed": 5.4492398449056045,
-  "average_press_duration": 0.05089260339736938,
-  "average_down_to_down": 0.1369955665186832,
+  "active_typing_speed": 7.388737585964363,
+  "average_press_duration": 0.04660734732945761,
+  "average_down_to_down": 0.13293626433924624,
   "regular_press_count": 16,
   "punctuations_press_count": 0,
   "space_counter": 3,
   "error_corrections": 0,
   "mode_key": 69,
-  "idle_time": 1.513275146484375,
+  "idle_time": 2.428518772125244,
   "unique_events": 10
 }

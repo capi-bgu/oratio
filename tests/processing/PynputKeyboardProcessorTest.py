@@ -3,8 +3,8 @@ import logging
 import unittest
 from threading import Thread
 from tests.SessionStub import SessionStub
-from oratio.processing.KeyboardProcessor import KeyboardProcessor
-from tests.collection.stubs.KeyboardCollectorStub import KeyboardCollectorStub
+from oratio.processing.PynputKeyboardProcessor import PynputKeyboardProcessor
+from tests.collection.stubs.PynputKeyboardCollectorStub import PynputKeyboardCollectorStub
 from tests.database.sqlite_db.stubs.KeyboardDataHandlerStub import KeyboardDataHandlerStub
 
 
@@ -12,13 +12,13 @@ class KeyboardProcessorTest(unittest.TestCase):
     def test(self):
         logging.basicConfig(level=logging.DEBUG, format='%(message)s')
 
-        keyboard_collector = KeyboardCollectorStub()
+        keyboard_collector = PynputKeyboardCollectorStub()
         keyboard_collector.start_collect()
         start_time, data = keyboard_collector.stop_collect()
 
-        self.keyboard_processor = KeyboardProcessor()
+        self.keyboard_processor = PynputKeyboardProcessor()
         session_duration = 5
-        session = SessionStub("KeyboardProcessingTest", session_duration, start_time)
+        session = SessionStub("PynputKeyboardProcessingTest", session_duration, start_time)
         processor = Thread(target=self.keyboard_processor.process_data, args=(data, session))
         st = time.time()
         processor.start()
@@ -42,5 +42,5 @@ class KeyboardProcessorTest(unittest.TestCase):
         data_handler.save(features)
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':#
     unittest.main()

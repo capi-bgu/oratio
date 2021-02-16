@@ -14,7 +14,7 @@ class KeyboardDataHandler(SqliteDataHandler):
         """
         session, data = data
 
-        insert = "INSERT INTO Keyboard VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)"
+        insert = "INSERT INTO Keyboard VALUES(?,?,?,?,?,?,?,?,?,?,?,?)"
         with sqlite3.connect(self.db_path) as connection:
             c = connection.cursor()
             c.execute(insert, (session,
@@ -26,7 +26,6 @@ class KeyboardDataHandler(SqliteDataHandler):
                                data['punctuations_press_count'],
                                data['space_counter'],
                                data['error_corrections'],
-                               data['uppercase_counter'],
                                data['mode_key'],
                                data['idle_time'],
                                data['unique_events']))
@@ -45,7 +44,6 @@ class KeyboardDataHandler(SqliteDataHandler):
                         space_counter REAL ,\
                         special_press_count REAL ,\
                         error_corrections REAL ,\
-                        uppercase_counter REAL ,\
                         mode_key REAL ,\
                         idle_time NUMERIC ,\
                         unique_events REAL ,\

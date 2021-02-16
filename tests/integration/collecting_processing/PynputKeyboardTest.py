@@ -5,16 +5,16 @@ from pynput import keyboard
 from threading import Thread
 from tests.SessionStub import SessionStub
 from pynput.keyboard import Controller as KeyboardController
-from oratio.collection.KeyboardCollector import KeyboardCollector
-from oratio.processing.KeyboardProcessor import KeyboardProcessor
+from oratio.collection.PynputKeyboardCollector import PynputKeyboardCollector
+from oratio.processing.PynputKeyboardProcessor import PynputKeyboardProcessor
 from tests.database.sqlite_db.stubs.KeyboardDataHandlerStub import KeyboardDataHandlerStub
 
 
 class KeyboardTest(unittest.TestCase):
     def test(self):
         self.keyboard_controller = KeyboardController()
-        self.keyboard_collector = KeyboardCollector()
-        self.keyboard_processor = KeyboardProcessor()
+        self.keyboard_collector = PynputKeyboardCollector()
+        self.keyboard_processor = PynputKeyboardProcessor()
         logging.basicConfig(level=logging.DEBUG, format='%(message)s')
 
         self.st = time.time()
@@ -40,8 +40,9 @@ class KeyboardTest(unittest.TestCase):
         processor.join()
         features = self.keyboard_processor.features
         logging.debug(time.time() - st)
+        print(features)
         self.assertAlmostEqual(features['typing_speed'], 3.8, delta=0.5)
-        self.assertAlmostEqual(features['active_typing_speed'], 5.4285, delta=0.5)
+        self.assertAlmostEqual(features['active_typing_speed'], 7.3, delta=0.5)
         self.assertAlmostEqual(features['average_press_duration'], 0.04, delta=0.5)
         self.assertAlmostEqual(features['average_down_to_down'], 0.08, delta=0.5)
         self.assertEqual(features['regular_press_count'], 16)
@@ -49,7 +50,7 @@ class KeyboardTest(unittest.TestCase):
         self.assertEqual(features['space_counter'], 3)
         self.assertEqual(features['error_corrections'], 0)
         self.assertEqual(features['mode_key'], ord('e'.upper()))
-        self.assertAlmostEqual(features['idle_time'], 1.5, delta=0.5)
+        self.assertAlmostEqual(features['idle_time'], 2.5, delta=0.5)
         self.assertEqual(features['unique_events'], 10)
 
         # database
