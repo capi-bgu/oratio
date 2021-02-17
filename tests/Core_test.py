@@ -3,8 +3,6 @@ import logging
 import pathlib
 import unittest
 from oratio.Core import Core
-from oratio.collection.PynputKeyboardCollector import PynputKeyboardCollector
-from oratio.collection.PynputMouseCollector import PynputMouseCollector
 from oratio.processing.MouseProcessor import MouseProcessor
 from oratio.collection.MouseCollector import MouseCollector
 from oratio.collection.CameraCollector import CameraCollector
@@ -16,11 +14,13 @@ from oratio.processing.IdentityProcessor import IdentityProcessor
 from oratio.database.sqlite_db.RawDataHandler import RawDataHandler
 from oratio.labeling.ConstantLabelManager import ConstantLabelManager
 from oratio.collection.SessionMetaCollector import SessionMetaCollector
-from oratio.processing.PynputKeyboardProcessor import PynputKeyboardProcessor
 from oratio.processing.SessionMetaProcessor import SessionMetaProcessor
 from oratio.database.sqlite_db.MouseDataHandler import MouseDataHandler
+from oratio.collection.PynputMouseCollector import PynputMouseCollector
 from oratio.database.sqlite_db.CameraDataHandler import CameraDataHandler
+from oratio.collection.PynputKeyboardCollector import PynputKeyboardCollector
 from oratio.database.sqlite_db.KeyboardDataHandler import KeyboardDataHandler
+from oratio.processing.PynputKeyboardProcessor import PynputKeyboardProcessor
 from oratio.database.sqlite_db.SessionMetaDataHandler import SessionMetaDataHandler
 from oratio.labeling.labeling_method.tk_labeling.CategoricalLabelingUI import CategoricalLabelingUI
 from oratio.labeling.labeling_method.tk_labeling.VadSamRadioLabelingUI import VadSamRadioLabelingUI
@@ -46,9 +46,9 @@ class CoreTest(unittest.TestCase):
         data_gatherers = {
             CameraCollector(fps=2, camera=0): {CameraProcessor(): [CameraDataHandler(out_path)]},
             PynputKeyboardCollector(): {PynputKeyboardProcessor(): [KeyboardDataHandler(out_path)],
-                                  IdentityProcessor(): [RawDataHandler("KeyboardRawData", out_path)]},
+                                        IdentityProcessor(): [RawDataHandler("KeyboardRawData", out_path)]},
             PynputMouseCollector(): {MouseProcessor(): [MouseDataHandler(out_path)],
-                               IdentityProcessor(): [RawDataHandler("MouseRawData", out_path)]},
+                                     IdentityProcessor(): [RawDataHandler("MouseRawData", out_path)]},
             SessionMetaCollector(): {SessionMetaProcessor(): [SessionMetaDataHandler(out_path)],
                                      IdentityProcessor(): [RawDataHandler("MetaRawData", out_path)]}
         }
