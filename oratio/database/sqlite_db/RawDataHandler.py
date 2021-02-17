@@ -23,11 +23,13 @@ class RawDataHandler(SqliteDataHandler):
             c.execute(insert, (session, data))
             connection.commit()
 
-    def create_data_holder(self):
+    def create_data_holder(self, i=-1):
         with sqlite3.connect(self.db_path) as connection:
             c = connection.cursor()
             c.execute(f"CREATE TABLE IF NOT EXISTS {self.name} \
                         (session BLOB ,\
                         data BLOB, \
                         PRIMARY KEY(session));")
-
+            if i != -1:
+                c.execute((f"DELETE FROM {self.name} WHERE session >= ?"), i)
+            connection.commit()

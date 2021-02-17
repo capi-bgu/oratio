@@ -22,10 +22,13 @@ class CameraDataHandler(SqliteDataHandler):
             c.execute(insert, (session, data))
             connection.commit()
 
-    def create_data_holder(self):
+    def create_data_holder(self, i=-1):
         with sqlite3.connect(self.db_path) as connection:
             c = connection.cursor()
             c.execute("CREATE TABLE IF NOT EXISTS Camera \
                         (session BLOB,\
                         Images BLOB,\
                         PRIMARY KEY(session));")
+            if i != -1:
+                c.execute(("DELETE FROM Camera WHERE session >= ?"), i)
+            connection.commit()

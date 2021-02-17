@@ -25,7 +25,7 @@ class SqliteManager(DatabaseManager):
                                str(session.label)))
             connection.commit()
 
-    def create_data_holder(self):
+    def create_data_holder(self, i=-1):
         if not os.path.isdir(self.path):
             os.mkdir(self.path)
         with sqlite3.connect(self.db_path) as connection:

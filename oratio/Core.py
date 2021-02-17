@@ -30,13 +30,13 @@ class Core:
         self.database_managers = database_managers
         for database_manager in self.database_managers:
             database_manager.create_data_holder()
+        self.sessions_passed = len(self.database_managers[0])
 
         for processor_handlers_dict in data_gatherers.values():
             for handlers_list in processor_handlers_dict.values():
                 for handler in handlers_list:
-                    handler.create_data_holder()
+                    handler.create_data_holder(self.sessions_passed)
 
-        self.sessions_passed = len(self.database_managers[0])
 
     def run(self):
         first_session = True

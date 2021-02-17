@@ -22,5 +22,5 @@ class SessionMetaDataHandlerStub(SqliteDataHandler):
         with open(f"{self.out_path}\\{self.name}_meta.json", 'w') as features_file:
             json.dump(data, features_file)
 
-    def create_data_holder(self):
+    def create_data_holder(self, i=-1):
         pass

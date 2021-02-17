@@ -28,7 +28,7 @@ class SessionMetaDataHandler(SqliteDataHandler):
 
             connection.commit()
 
-    def create_data_holder(self):
+    def create_data_holder(self, i=-1):
         with sqlite3.connect(self.db_path) as connection:
             c = connection.cursor()
             c.execute("CREATE TABLE IF NOT EXISTS SessionMeta \
@@ -40,3 +40,8 @@ class SessionMetaDataHandler(SqliteDataHandler):
                         window_count REAL, \
                         task_count REAL, \
                         PRIMARY KEY(session));")
+            if i != -1:
+                c.execute(("DELETE FROM SessionMeta WHERE session >= ?"), i)
+            connection.commit()
+
+

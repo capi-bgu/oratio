@@ -31,7 +31,7 @@ class KeyboardDataHandler(SqliteDataHandler):
                                data['unique_events']))
             connection.commit()
 
-    def create_data_holder(self):
+    def create_data_holder(self, i=-1):
         with sqlite3.connect(self.db_path) as connection:
             c = connection.cursor()
             c.execute("CREATE TABLE IF NOT EXISTS Keyboard \
@@ -48,4 +48,6 @@ class KeyboardDataHandler(SqliteDataHandler):
                         idle_time NUMERIC ,\
                         unique_events REAL ,\
                         PRIMARY KEY(session));")
-
+            if i != -1:
+                c.execute(("DELETE FROM Keyboard WHERE session >= ?"), i)
+            connection.commit()
