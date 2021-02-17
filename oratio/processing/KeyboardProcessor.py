@@ -34,7 +34,8 @@ class KeyboardProcessor(DataProcessor):
                             self.features['average_down_to_down'] += down_to_down
                         previous_time = event.Timestamp
 
-                if event.Key == 'Delete' or event.Key == 'Back':
+                if event.Key == 'Delete' or event.Key == 'Back' or \
+                    event.Key == 'delete' or event.Key == 'backspace':
                     self.features['error_corrections'] += 1
 
             elif event.Message == 257:  # key release
@@ -44,12 +45,11 @@ class KeyboardProcessor(DataProcessor):
                         'last_press_time']
                     keys_info[event.KeyID]['last_press_time'] = 0
 
-                    if chr(event.Ascii).isalnum():
+                    if chr(event.KeyID).isalnum():
                         self.features['regular_press_count'] += 1
-                    elif chr(event.Ascii) in string.punctuation:
+                    elif chr(event.KeyID) in string.punctuation:
                         self.features['punctuations_press_count'] += 1
-
-                    elif chr(event.Ascii).isspace():
+                    elif chr(event.KeyID).isspace():
                         self.features['space_counter'] += 1
 
             if i == 0:  # if it's the first event

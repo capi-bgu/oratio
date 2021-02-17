@@ -2,12 +2,14 @@ import os
 import ast
 import pathlib
 from os import listdir
-import pyWinhook as pyHook
 from os.path import isfile, join
 from oratio.collection.DataCollector import DataCollector
 
 
 class KeyboardCollectorStub(DataCollector):
+    class Event:
+        pass
+
     def __init__(self):
         super().__init__()
         test_dir = pathlib.Path(__file__).parent.parent.parent.absolute()
@@ -29,9 +31,10 @@ class KeyboardCollectorStub(DataCollector):
                     event_str = '{' + line.split('{')[1]
                     event_str = event_str.replace("\'", "\"")
                     event_dict = ast.literal_eval(event_str)
-                    event = pyHook.KeyboardEvent(event_dict['Message'], event_dict['KeyID'], event_dict['ScanCode'],
-                                                 event_dict['Ascii'], event_dict['flags'], event_dict['Time'],
-                                                 event_dict['Window'], event_dict['WindowName'])
+                    event = self.Event()
+                    event.Message = event_dict['Message']
+                    event.KeyID = event_dict['KeyID']
+                    event.Key = event_dict['Key']
                     event.Timestamp = event_dict['Timestamp']
                     data.append(event)
         return start_time, data

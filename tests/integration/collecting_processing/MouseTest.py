@@ -7,8 +7,8 @@ from threading import Thread
 from pynput.mouse import Button
 from tests.SessionStub import SessionStub
 from pynput.mouse import Controller as MouseController
-from oratio.collection.MouseCollector import MouseCollector
 from oratio.processing.MouseProcessor import MouseProcessor
+from oratio.collection.MouseCollector import MouseCollector
 from tests.database.sqlite_db.stubs.MouseDataHandlerStub import MouseDataHandlerStub
 
 
@@ -20,7 +20,7 @@ class MouseTest(unittest.TestCase):
         logging.basicConfig(level=logging.DEBUG, format='%(message)s')
 
         self.st = time.time()
-        session = SessionStub("MouseCollectingProcessingTest", 5, self.st)
+        session = SessionStub("PynputMouseCollectingProcessingTest", 5, self.st)
 
         # collecting
         st = time.time()

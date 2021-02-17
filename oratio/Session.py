@@ -22,6 +22,7 @@ class Session:
         self.label = -1
 
     def start_session(self):
+        logging.info("************************\n")
         logging.info(f"start session {self.id}...")
         self.start_time = time.time()
         raw_data = self.__collect()

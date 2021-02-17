@@ -1,13 +1,16 @@
-1611836784.8301268
-0. {'Message': 516, 'Time': 1012629843, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\MouseCollectTest.py - PyCharm', 'Position': (2361, 485), 'Wheel': 0, 'Injected': 1, 'Timestamp': 1611836786.3652763}
-1. {'Message': 517, 'Time': 1012629890, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\MouseCollectTest.py - PyCharm', 'Position': (2361, 485), 'Wheel': 0, 'Injected': 1, 'Timestamp': 1611836786.4175012}
-2. {'Message': 513, 'Time': 1012630234, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\MouseCollectTest.py - PyCharm', 'Position': (2341, 505), 'Wheel': 0, 'Injected': 1, 'Timestamp': 1611836786.7659986}
-3. {'Message': 514, 'Time': 1012630296, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\MouseCollectTest.py - PyCharm', 'Position': (2341, 505), 'Wheel': 0, 'Injected': 1, 'Timestamp': 1611836786.829828}
-4. {'Message': 513, 'Time': 1012631015, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\MouseCollectTest.py - PyCharm', 'Position': (2341, 505), 'Wheel': 0, 'Injected': 1, 'Timestamp': 1611836787.5472507}
-5. {'Message': 514, 'Time': 1012631015, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\MouseCollectTest.py - PyCharm', 'Position': (2341, 505), 'Wheel': 0, 'Injected': 1, 'Timestamp': 1611836787.5482495}
-6. {'Message': 513, 'Time': 1012631015, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\MouseCollectTest.py - PyCharm', 'Position': (2341, 505), 'Wheel': 0, 'Injected': 1, 'Timestamp': 1611836787.5490165}
-7. {'Message': 514, 'Time': 1012631015, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\MouseCollectTest.py - PyCharm', 'Position': (2341, 505), 'Wheel': 0, 'Injected': 1, 'Timestamp': 1611836787.5500178}
-8. {'Message': 513, 'Time': 1012631015, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\MouseCollectTest.py - PyCharm', 'Position': (2341, 505), 'Wheel': 0, 'Injected': 1, 'Timestamp': 1611836787.5500178}
-9. {'Message': 514, 'Time': 1012631031, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\MouseCollectTest.py - PyCharm', 'Position': (2341, 505), 'Wheel': 0, 'Injected': 1, 'Timestamp': 1611836787.5510163}
-10. {'Message': 522, 'Time': 1012631328, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\MouseCollectTest.py - PyCharm', 'Position': (2341, 505), 'Wheel': 1, 'Injected': 1, 'Timestamp': 1611836787.858193}
-11. {'Message': 522, 'Time': 1012631640, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\MouseCollectTest.py - PyCharm', 'Position': (2341, 505), 'Wheel': -1, 'Injected': 1, 'Timestamp': 1611836788.1723588}
+1613580279.5950935
+0. {'Timestamp': 1613580281.1232886, 'Position': (2450, 549), 'Wheel': 0, 'Message': 516}
+1. {'Timestamp': 1613580281.1885583, 'Position': (2450, 549), 'Wheel': 0, 'Message': 517}
+2. {'Timestamp': 1613580281.499507, 'Message': 512, 'Position': (2430, 569), 'Wheel': 0}
+3. {'Timestamp': 1613580281.5144389, 'Position': (2430, 569), 'Wheel': 0, 'Message': 513}
+4. {'Timestamp': 1613580281.5764537, 'Position': (2430, 569), 'Wheel': 0, 'Message': 514}
+5. {'Timestamp': 1613580282.2938743, 'Position': (2430, 569), 'Wheel': 0, 'Message': 513}
+6. {'Timestamp': 1613580282.2960806, 'Position': (2430, 569), 'Wheel': 0, 'Message': 514}
+7. {'Timestamp': 1613580282.298074, 'Position': (2430, 569), 'Wheel': 0, 'Message': 513}
+8. {'Timestamp': 1613580282.3000696, 'Position': (2430, 569), 'Wheel': 0, 'Message': 514}
+9. {'Timestamp': 1613580282.3010657, 'Position': (2430, 569), 'Wheel': 0, 'Message': 513}
+10. {'Timestamp': 1613580282.3027773, 'Position': (2430, 569), 'Wheel': 0, 'Message': 514}
+11. {'Timestamp': 1613580282.6194556, 'Message': 522, 'Position': (2430, 569), 'Wheel': 1}
+12. {'Timestamp': 1613580282.6194556, 'Message': 522, 'Position': (2430, 569), 'Wheel': 1}
+13. {'Timestamp': 1613580282.9319413, 'Message': 522, 'Position': (2430, 569), 'Wheel': -1}
+14. {'Timestamp': 1613580282.9328723, 'Message': 522, 'Position': (2430, 569), 'Wheel': -1}
