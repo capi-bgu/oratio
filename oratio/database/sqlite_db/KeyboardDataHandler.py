@@ -1,3 +1,4 @@
+import logging
 import sqlite3
 from oratio.database.sqlite_db.SqliteDataHandler import SqliteDataHandler
 
@@ -30,6 +31,8 @@ class KeyboardDataHandler(SqliteDataHandler):
                                data['idle_time'],
                                data['unique_events']))
             connection.commit()
+        logging.info("kb data saved")
+
 
     def create_data_holder(self, i=-1):
         with sqlite3.connect(self.db_path) as connection:
@@ -48,6 +51,7 @@ class KeyboardDataHandler(SqliteDataHandler):
                         idle_time NUMERIC ,\
                         unique_events REAL ,\
                         PRIMARY KEY(session));")
+
             if i != -1:
-                c.execute(("DELETE FROM Keyboard WHERE session >= ?"), i)
+                c.execute("DELETE FROM Keyboard WHERE session >= ?", (i,))
             connection.commit()

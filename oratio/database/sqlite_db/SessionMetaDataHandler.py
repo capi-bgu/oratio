@@ -1,3 +1,4 @@
+import logging
 import sqlite3
 from oratio.database.sqlite_db.SqliteDataHandler import SqliteDataHandler
 
@@ -27,6 +28,8 @@ class SessionMetaDataHandler(SqliteDataHandler):
                                data["task_count"]))
 
             connection.commit()
+        logging.info("meta data saved")
+
 
     def create_data_holder(self, i=-1):
         with sqlite3.connect(self.db_path) as connection:
@@ -40,8 +43,9 @@ class SessionMetaDataHandler(SqliteDataHandler):
                         window_count REAL, \
                         task_count REAL, \
                         PRIMARY KEY(session));")
+
             if i != -1:
-                c.execute(("DELETE FROM SessionMeta WHERE session >= ?"), i)
+                c.execute("DELETE FROM SessionMeta WHERE session >= ?", (i,))
             connection.commit()
 
 
