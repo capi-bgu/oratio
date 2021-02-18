@@ -18,10 +18,10 @@ class MouseCollector(DataCollector):
             on_scroll=self.on_scroll,
             on_move=self.on_move)
         self.listener.start()
-        logging.info("start kb collecting...")
+        logging.info("start mouse collecting...")
 
     def stop_collect(self):
-        logging.info("end kb collecting...")
+        logging.info("end mouse collecting...")
         self.listener.stop()
         return super().stop_collect()
 
