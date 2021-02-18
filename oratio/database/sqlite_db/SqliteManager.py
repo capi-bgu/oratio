@@ -1,10 +1,10 @@
+import logging
 import os
 import sqlite3
 from oratio.database.DatabaseManager import DatabaseManager
 
 
 class SqliteManager(DatabaseManager):
-
 
     def __init__(self, path=""):
         super().__init__(path)
@@ -24,8 +24,9 @@ class SqliteManager(DatabaseManager):
                                session.start_time,
                                str(session.label)))
             connection.commit()
+        logging.info("session data saved")
 
-    def create_data_holder(self):
+    def create_data_holder(self, i=-1):
         if not os.path.isdir(self.path):
             os.mkdir(self.path)
         with sqlite3.connect(self.db_path) as connection:

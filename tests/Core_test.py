@@ -3,14 +3,14 @@ import logging
 import pathlib
 import unittest
 from oratio.Core import Core
-from oratio.processing.MouseProcessor import MouseProcessor
 from oratio.collection.MouseCollector import MouseCollector
+from oratio.processing.MouseProcessor import MouseProcessor
 from oratio.collection.CameraCollector import CameraCollector
 from oratio.processing.CameraProcessor import CameraProcessor
-from oratio.database.sqlite_db.SqliteManager import SqliteManager
-from oratio.collection.KeyboardCollector import KeyboardCollector
 from oratio.processing.KeyboardProcessor import KeyboardProcessor
+from oratio.collection.KeyboardCollector import KeyboardCollector
 from oratio.processing.IdentityProcessor import IdentityProcessor
+from oratio.database.sqlite_db.SqliteManager import SqliteManager
 from oratio.database.sqlite_db.RawDataHandler import RawDataHandler
 from oratio.labeling.ConstantLabelManager import ConstantLabelManager
 from oratio.collection.SessionMetaCollector import SessionMetaCollector
@@ -28,8 +28,8 @@ class CoreTest(unittest.TestCase):
         test_dir = pathlib.Path(__file__).parent.absolute()
         out_path = os.path.join(test_dir, 'test_output')
 
-        logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s: %(message)s',
-                            datefmt='%m/%d/%Y %I:%M:%S %p')
+        logging.basicConfig(level=logging.INFO, format='%(asctime)s.%(msecs)03d - %(levelname)s: %(message)s',
+                            datefmt='%m/%d/%Y %H:%M:%S')
 
         data_gatherers = {
             CameraCollector(fps=2, camera=0): {CameraProcessor(): [CameraDataHandler(out_path)]},
@@ -42,12 +42,12 @@ class CoreTest(unittest.TestCase):
         }
         label_methods = [
             CategoricalLabelingUI(),
-            VadSamRadioLabelingUI()
+            # VadSamRadioLabelingUI()
         ]
 
-        constant_labeler = ConstantLabelManager(label_methods, ask_freq=6)
+        constant_labeler = ConstantLabelManager(label_methods, ask_freq=30)
         database_managers = [SqliteManager(out_path)]
-        core = Core(data_gatherers, out_path, num_sessions=10, session_duration=1,
+        core = Core(data_gatherers, out_path, num_sessions=-1, session_duration=1,
                     database_managers=database_managers, label_manager=constant_labeler)
         core.run()
 

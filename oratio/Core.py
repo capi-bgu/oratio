@@ -1,4 +1,4 @@
-import gc
+from threading import Thread
 from oratio.Session import Session
 
 
@@ -30,13 +30,13 @@ class Core:
         self.database_managers = database_managers
         for database_manager in self.database_managers:
             database_manager.create_data_holder()
+        self.sessions_passed = len(self.database_managers[0])
 
         for processor_handlers_dict in data_gatherers.values():
             for handlers_list in processor_handlers_dict.values():
                 for handler in handlers_list:
-                    handler.create_data_holder()
+                    handler.create_data_holder(self.sessions_passed)
 
-        self.sessions_passed = len(self.database_managers[0])
 
     def run(self):
         first_session = True
@@ -46,12 +46,11 @@ class Core:
             curr_session.start_session()
             label = self.label_manager.get_label(curr_session, first_session)
             curr_session.set_label(label)
-            for session_data_handler in self.database_managers:
-                session_data_handler.save_session(curr_session)
+            Thread(target=lambda: (
+                [session_data_handler.save_session(curr_session) for session_data_handler in self.database_managers]
+            )).start()
             self.sessions_passed += 1
             first_session = False
-            del curr_session
-            gc.collect()
         self.running = False
         self.finished = self.sessions_passed == self.num_sessions
 

@@ -1,3 +1,4 @@
+import logging
 import sqlite3
 from oratio.database.sqlite_db.SqliteDataHandler import SqliteDataHandler
 
@@ -14,7 +15,7 @@ class KeyboardDataHandler(SqliteDataHandler):
         """
         session, data = data
 
-        insert = "INSERT INTO Keyboard VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)"
+        insert = "INSERT INTO Keyboard VALUES(?,?,?,?,?,?,?,?,?,?,?,?)"
         with sqlite3.connect(self.db_path) as connection:
             c = connection.cursor()
             c.execute(insert, (session,
@@ -26,13 +27,14 @@ class KeyboardDataHandler(SqliteDataHandler):
                                data['punctuations_press_count'],
                                data['space_counter'],
                                data['error_corrections'],
-                               data['uppercase_counter'],
                                data['mode_key'],
                                data['idle_time'],
                                data['unique_events']))
             connection.commit()
+        logging.info("kb data saved")
 
-    def create_data_holder(self):
+
+    def create_data_holder(self, i=-1):
         with sqlite3.connect(self.db_path) as connection:
             c = connection.cursor()
             c.execute("CREATE TABLE IF NOT EXISTS Keyboard \
@@ -45,9 +47,11 @@ class KeyboardDataHandler(SqliteDataHandler):
                         space_counter REAL ,\
                         special_press_count REAL ,\
                         error_corrections REAL ,\
-                        uppercase_counter REAL ,\
                         mode_key REAL ,\
                         idle_time NUMERIC ,\
                         unique_events REAL ,\
                         PRIMARY KEY(session));")
 
+            if i != -1:
+                c.execute("DELETE FROM Keyboard WHERE session >= ?", (i,))
+            connection.commit()

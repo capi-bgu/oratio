@@ -30,9 +30,8 @@ class KeyboardCollectorTest(unittest.TestCase):
 
         for i, c in enumerate(text):
             i *= 2
-            self.assertEqual(chr(data[i].Ascii), c)
-            self.assertEqual(chr(data[i + 1].Ascii), c)
-
+            self.assertEqual(chr(data[i].KeyID).lower(), c.lower())
+            self.assertEqual(chr(data[i + 1].KeyID).lower(), c.lower())
         self.process_data(data)
 
     def process_data(self, data):

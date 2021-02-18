@@ -1,39 +1,39 @@
-1611833815.8558354
-0. {'Message': 256, 'Time': 1009660843, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\KeyboardCollectorTest.py - PyCharm', 'KeyID': 72, 'ScanCode': 0, 'Ascii': 104, 'flags': 16, 'Timestamp': 1611833817.3691106}
-1. {'Message': 257, 'Time': 1009660890, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\KeyboardCollectorTest.py - PyCharm', 'KeyID': 72, 'ScanCode': 0, 'Ascii': 104, 'flags': 144, 'Timestamp': 1611833817.4339392}
-2. {'Message': 256, 'Time': 1009661000, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\KeyboardCollectorTest.py - PyCharm', 'KeyID': 69, 'ScanCode': 0, 'Ascii': 101, 'flags': 16, 'Timestamp': 1611833817.5262024}
-3. {'Message': 257, 'Time': 1009661046, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\KeyboardCollectorTest.py - PyCharm', 'KeyID': 69, 'ScanCode': 0, 'Ascii': 101, 'flags': 144, 'Timestamp': 1611833817.5765853}
-4. {'Message': 256, 'Time': 1009661140, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\KeyboardCollectorTest.py - PyCharm', 'KeyID': 76, 'ScanCode': 0, 'Ascii': 108, 'flags': 16, 'Timestamp': 1611833817.6678529}
-5. {'Message': 257, 'Time': 1009661187, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\KeyboardCollectorTest.py - PyCharm', 'KeyID': 76, 'ScanCode': 0, 'Ascii': 108, 'flags': 144, 'Timestamp': 1611833817.717721}
-6. {'Message': 256, 'Time': 1009661281, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\KeyboardCollectorTest.py - PyCharm', 'KeyID': 76, 'ScanCode': 0, 'Ascii': 108, 'flags': 16, 'Timestamp': 1611833817.8124843}
-7. {'Message': 257, 'Time': 1009661343, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\KeyboardCollectorTest.py - PyCharm', 'KeyID': 76, 'ScanCode': 0, 'Ascii': 108, 'flags': 144, 'Timestamp': 1611833817.871309}
-8. {'Message': 256, 'Time': 1009661437, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\KeyboardCollectorTest.py - PyCharm', 'KeyID': 79, 'ScanCode': 0, 'Ascii': 111, 'flags': 16, 'Timestamp': 1611833817.9670537}
-9. {'Message': 257, 'Time': 1009661484, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\KeyboardCollectorTest.py - PyCharm', 'KeyID': 79, 'ScanCode': 0, 'Ascii': 111, 'flags': 144, 'Timestamp': 1611833818.0139284}
-10. {'Message': 256, 'Time': 1009661578, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\KeyboardCollectorTest.py - PyCharm', 'KeyID': 32, 'ScanCode': 0, 'Ascii': 32, 'flags': 16, 'Timestamp': 1611833818.110671}
-11. {'Message': 257, 'Time': 1009661625, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\KeyboardCollectorTest.py - PyCharm', 'KeyID': 32, 'ScanCode': 0, 'Ascii': 32, 'flags': 144, 'Timestamp': 1611833818.163532}
-12. {'Message': 256, 'Time': 1009661718, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\KeyboardCollectorTest.py - PyCharm', 'KeyID': 70, 'ScanCode': 0, 'Ascii': 102, 'flags': 16, 'Timestamp': 1611833818.2512932}
-13. {'Message': 257, 'Time': 1009661765, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\KeyboardCollectorTest.py - PyCharm', 'KeyID': 70, 'ScanCode': 0, 'Ascii': 102, 'flags': 144, 'Timestamp': 1611833818.299166}
-14. {'Message': 256, 'Time': 1009661875, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\KeyboardCollectorTest.py - PyCharm', 'KeyID': 82, 'ScanCode': 0, 'Ascii': 114, 'flags': 16, 'Timestamp': 1611833818.3949234}
-15. {'Message': 257, 'Time': 1009661906, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\KeyboardCollectorTest.py - PyCharm', 'KeyID': 82, 'ScanCode': 0, 'Ascii': 114, 'flags': 144, 'Timestamp': 1611833818.4397905}
-16. {'Message': 256, 'Time': 1009662000, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\KeyboardCollectorTest.py - PyCharm', 'KeyID': 79, 'ScanCode': 0, 'Ascii': 111, 'flags': 16, 'Timestamp': 1611833818.5340524}
-17. {'Message': 257, 'Time': 1009662046, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\KeyboardCollectorTest.py - PyCharm', 'KeyID': 79, 'ScanCode': 0, 'Ascii': 111, 'flags': 144, 'Timestamp': 1611833818.5809286}
-18. {'Message': 256, 'Time': 1009662156, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\KeyboardCollectorTest.py - PyCharm', 'KeyID': 77, 'ScanCode': 0, 'Ascii': 109, 'flags': 16, 'Timestamp': 1611833818.6766753}
-19. {'Message': 257, 'Time': 1009662203, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\KeyboardCollectorTest.py - PyCharm', 'KeyID': 77, 'ScanCode': 0, 'Ascii': 109, 'flags': 144, 'Timestamp': 1611833818.7245588}
-20. {'Message': 256, 'Time': 1009662296, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\KeyboardCollectorTest.py - PyCharm', 'KeyID': 32, 'ScanCode': 0, 'Ascii': 32, 'flags': 16, 'Timestamp': 1611833818.818293}
-21. {'Message': 257, 'Time': 1009662343, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\KeyboardCollectorTest.py - PyCharm', 'KeyID': 32, 'ScanCode': 0, 'Ascii': 32, 'flags': 144, 'Timestamp': 1611833818.8661652}
-22. {'Message': 256, 'Time': 1009662437, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\KeyboardCollectorTest.py - PyCharm', 'KeyID': 84, 'ScanCode': 0, 'Ascii': 116, 'flags': 16, 'Timestamp': 1611833818.9614296}
-23. {'Message': 257, 'Time': 1009662484, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\KeyboardCollectorTest.py - PyCharm', 'KeyID': 84, 'ScanCode': 0, 'Ascii': 116, 'flags': 144, 'Timestamp': 1611833819.0093017}
-24. {'Message': 256, 'Time': 1009662578, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\KeyboardCollectorTest.py - PyCharm', 'KeyID': 72, 'ScanCode': 0, 'Ascii': 104, 'flags': 16, 'Timestamp': 1611833819.1051707}
-25. {'Message': 257, 'Time': 1009662625, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\KeyboardCollectorTest.py - PyCharm', 'KeyID': 72, 'ScanCode': 0, 'Ascii': 104, 'flags': 144, 'Timestamp': 1611833819.1605513}
-26. {'Message': 256, 'Time': 1009662718, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\KeyboardCollectorTest.py - PyCharm', 'KeyID': 69, 'ScanCode': 0, 'Ascii': 101, 'flags': 16, 'Timestamp': 1611833819.247319}
-27. {'Message': 257, 'Time': 1009662765, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\KeyboardCollectorTest.py - PyCharm', 'KeyID': 69, 'ScanCode': 0, 'Ascii': 101, 'flags': 144, 'Timestamp': 1611833819.2947059}
-28. {'Message': 256, 'Time': 1009662859, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\KeyboardCollectorTest.py - PyCharm', 'KeyID': 32, 'ScanCode': 0, 'Ascii': 32, 'flags': 16, 'Timestamp': 1611833819.3919823}
-29. {'Message': 257, 'Time': 1009662906, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\KeyboardCollectorTest.py - PyCharm', 'KeyID': 32, 'ScanCode': 0, 'Ascii': 32, 'flags': 144, 'Timestamp': 1611833819.4394274}
-30. {'Message': 256, 'Time': 1009663000, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\KeyboardCollectorTest.py - PyCharm', 'KeyID': 84, 'ScanCode': 0, 'Ascii': 116, 'flags': 16, 'Timestamp': 1611833819.5337043}
-31. {'Message': 257, 'Time': 1009663046, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\KeyboardCollectorTest.py - PyCharm', 'KeyID': 84, 'ScanCode': 0, 'Ascii': 116, 'flags': 144, 'Timestamp': 1611833819.5815578}
-32. {'Message': 256, 'Time': 1009663156, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\KeyboardCollectorTest.py - PyCharm', 'KeyID': 69, 'ScanCode': 0, 'Ascii': 101, 'flags': 16, 'Timestamp': 1611833819.676829}
-33. {'Message': 257, 'Time': 1009663187, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\KeyboardCollectorTest.py - PyCharm', 'KeyID': 69, 'ScanCode': 0, 'Ascii': 101, 'flags': 144, 'Timestamp': 1611833819.719701}
-34. {'Message': 256, 'Time': 1009663281, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\KeyboardCollectorTest.py - PyCharm', 'KeyID': 83, 'ScanCode': 0, 'Ascii': 115, 'flags': 16, 'Timestamp': 1611833819.8134487}
-35. {'Message': 257, 'Time': 1009663343, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\KeyboardCollectorTest.py - PyCharm', 'KeyID': 83, 'ScanCode': 0, 'Ascii': 115, 'flags': 144, 'Timestamp': 1611833819.8762856}
-36. {'Message': 256, 'Time': 1009663437, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\KeyboardCollectorTest.py - PyCharm', 'KeyID': 84, 'ScanCode': 0, 'Ascii': 116, 'flags': 16, 'Timestamp': 1611833819.9720263}
-37. {'Message': 257, 'Time': 1009663500, 'Window': 23267162, 'WindowName': 'client [C:\\Users\\Hod\\Desktop\\bgu\\Year4\\project\\CAPI_2.0\\capi\\client] - ...\\tests\\collection\\KeyboardCollectorTest.py - PyCharm', 'KeyID': 84, 'ScanCode': 0, 'Ascii': 116, 'flags': 144, 'Timestamp': 1611833820.019899}
+1613580221.158096
+0. {'Timestamp': 1613580222.67637, 'Message': 256, 'KeyID': 72, 'Key': 'h'}
+1. {'Timestamp': 1613580222.7231898, 'Message': 257, 'KeyID': 72, 'Key': 'h'}
+2. {'Timestamp': 1613580222.8165586, 'Message': 256, 'KeyID': 69, 'Key': 'e'}
+3. {'Timestamp': 1613580222.8629143, 'Message': 257, 'KeyID': 69, 'Key': 'e'}
+4. {'Timestamp': 1613580222.9547586, 'Message': 256, 'KeyID': 76, 'Key': 'l'}
+5. {'Timestamp': 1613580223.0019894, 'Message': 257, 'KeyID': 76, 'Key': 'l'}
+6. {'Timestamp': 1613580223.0958362, 'Message': 256, 'KeyID': 76, 'Key': 'l'}
+7. {'Timestamp': 1613580223.1415627, 'Message': 257, 'KeyID': 76, 'Key': 'l'}
+8. {'Timestamp': 1613580223.2341652, 'Message': 256, 'KeyID': 79, 'Key': 'o'}
+9. {'Timestamp': 1613580223.2797596, 'Message': 257, 'KeyID': 79, 'Key': 'o'}
+10. {'Timestamp': 1613580223.3736987, 'Message': 256, 'KeyID': 32, 'Key': 'space'}
+11. {'Timestamp': 1613580223.4205475, 'Message': 257, 'KeyID': 32, 'Key': 'space'}
+12. {'Timestamp': 1613580223.5157816, 'Message': 256, 'KeyID': 70, 'Key': 'f'}
+13. {'Timestamp': 1613580223.5640066, 'Message': 257, 'KeyID': 70, 'Key': 'f'}
+14. {'Timestamp': 1613580223.6557133, 'Message': 256, 'KeyID': 82, 'Key': 'r'}
+15. {'Timestamp': 1613580223.7043018, 'Message': 257, 'KeyID': 82, 'Key': 'r'}
+16. {'Timestamp': 1613580223.797465, 'Message': 256, 'KeyID': 79, 'Key': 'o'}
+17. {'Timestamp': 1613580223.8430872, 'Message': 257, 'KeyID': 79, 'Key': 'o'}
+18. {'Timestamp': 1613580223.9375927, 'Message': 256, 'KeyID': 77, 'Key': 'm'}
+19. {'Timestamp': 1613580223.9839, 'Message': 257, 'KeyID': 77, 'Key': 'm'}
+20. {'Timestamp': 1613580224.0774853, 'Message': 256, 'KeyID': 32, 'Key': 'space'}
+21. {'Timestamp': 1613580224.124486, 'Message': 257, 'KeyID': 32, 'Key': 'space'}
+22. {'Timestamp': 1613580224.2185376, 'Message': 256, 'KeyID': 84, 'Key': 't'}
+23. {'Timestamp': 1613580224.2655027, 'Message': 257, 'KeyID': 84, 'Key': 't'}
+24. {'Timestamp': 1613580224.358329, 'Message': 256, 'KeyID': 72, 'Key': 'h'}
+25. {'Timestamp': 1613580224.4041715, 'Message': 257, 'KeyID': 72, 'Key': 'h'}
+26. {'Timestamp': 1613580224.4984972, 'Message': 256, 'KeyID': 69, 'Key': 'e'}
+27. {'Timestamp': 1613580224.54537, 'Message': 257, 'KeyID': 69, 'Key': 'e'}
+28. {'Timestamp': 1613580224.6397278, 'Message': 256, 'KeyID': 32, 'Key': 'space'}
+29. {'Timestamp': 1613580224.6874578, 'Message': 257, 'KeyID': 32, 'Key': 'space'}
+30. {'Timestamp': 1613580224.7804782, 'Message': 256, 'KeyID': 84, 'Key': 't'}
+31. {'Timestamp': 1613580224.827776, 'Message': 257, 'KeyID': 84, 'Key': 't'}
+32. {'Timestamp': 1613580224.92195, 'Message': 256, 'KeyID': 69, 'Key': 'e'}
+33. {'Timestamp': 1613580224.9671435, 'Message': 257, 'KeyID': 69, 'Key': 'e'}
+34. {'Timestamp': 1613580225.0625913, 'Message': 256, 'KeyID': 83, 'Key': 's'}
+35. {'Timestamp': 1613580225.109709, 'Message': 257, 'KeyID': 83, 'Key': 's'}
+36. {'Timestamp': 1613580225.2039075, 'Message': 256, 'KeyID': 84, 'Key': 't'}
+37. {'Timestamp': 1613580225.250043, 'Message': 257, 'KeyID': 84, 'Key': 't'}

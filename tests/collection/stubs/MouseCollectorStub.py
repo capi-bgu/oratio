@@ -2,12 +2,14 @@ import os
 import ast
 import pathlib
 from os import listdir
-import pyWinhook as pyHook
 from os.path import isfile, join
 from oratio.collection.DataCollector import DataCollector
 
 
 class MouseCollectorStub(DataCollector):
+    class Event:
+        pass
+
     def __init__(self):
         super().__init__()
         test_dir = pathlib.Path(__file__).parent.parent.parent.absolute()
@@ -29,10 +31,10 @@ class MouseCollectorStub(DataCollector):
                     event_str = '{' + line.split('{')[1]
                     event_str = event_str.replace("\'", "\"")
                     event_dict = ast.literal_eval(event_str)
-                    event = pyHook.MouseEvent(event_dict['Message'], event_dict['Position'][0],
-                                              event_dict['Position'][1],
-                                              event_dict['Wheel'], event_dict['Injected'], event_dict['Time'],
-                                              event_dict['Window'], event_dict['WindowName'])
+                    event = self.Event()
+                    event.Message = event_dict['Message']
+                    event.Position = (event_dict['Position'][0], event_dict['Position'][1])
+                    event.Wheel = event_dict['Wheel']
                     event.Timestamp = event_dict['Timestamp']
                     data.append(event)
         return start_time, data
