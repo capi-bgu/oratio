@@ -30,27 +30,26 @@ class Core:
         self.database_managers = database_managers
         for database_manager in self.database_managers:
             database_manager.create_data_holder()
-        self.sessions_passed = len(self.database_managers[0])
+        self.start_session_id = len(self.database_managers[0])
 
         for processor_handlers_dict in data_gatherers.values():
             for handlers_list in processor_handlers_dict.values():
                 for handler in handlers_list:
-                    handler.create_data_holder(self.sessions_passed)
+                    handler.create_data_holder(self.start_session_id)
+        self.sessions_passed = self.start_session_id
 
 
     def run(self):
-        first_session = True
         self.running = True
         while self.__keep_running():
             curr_session = Session(self.sessions_passed, self.session_duration, self.data_gatherers, self.out_path)
             curr_session.start_session()
-            label = self.label_manager.get_label(curr_session, first_session)
+            label = self.label_manager.get_label(curr_session, self.start_session_id)
             curr_session.set_label(label)
             Thread(target=lambda: (
                 [session_data_handler.save_session(curr_session) for session_data_handler in self.database_managers]
             )).start()
             self.sessions_passed += 1
-            first_session = False
         self.running = False
         self.finished = self.sessions_passed == self.num_sessions
 

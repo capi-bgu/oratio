@@ -6,7 +6,7 @@ class LabelManager(ABC):
         self.labeling_methods = labeling_methods
 
     @abstractmethod
-    def get_label(self, session, now=False):
+    def get_label(self, session, start_session_id):
         pass
 
     def ask_for_label(self):
