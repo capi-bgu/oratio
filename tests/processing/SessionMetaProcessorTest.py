@@ -29,7 +29,7 @@ class SessionMetaProcessorTest(unittest.TestCase):
         self.assertEqual(features['dominate_window'], "pycharm64.exe")
         self.assertEqual(features['dominate_task'], "writing")
         self.assertEqual(features['window_switches'], 4)
-        self.assertEqual(features['task_switches'], 1)
+        self.assertEqual(features['task_switches'], 0)
         self.assertEqual(features['window_count'], 4)
         self.assertEqual(features['task_count'], 1)
 

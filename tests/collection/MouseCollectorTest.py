@@ -25,23 +25,28 @@ class MouseCollectorTest(unittest.TestCase):
         collector.join()
         user.join()
 
-        self.assertEqual(data[0].MessageName, "mouse right down")
-        self.assertEqual(data[1].MessageName, "mouse right up")
+        self.assertEqual(data[0].Message, 516)
+        self.assertEqual(data[1].Message, 517)
 
-        self.assertEqual(data[2].MessageName, "mouse left down")
-        self.assertEqual(data[3].MessageName, "mouse left up")
+        self.assertEqual(data[2].Message, 512)
 
-        self.assertEqual(data[4].MessageName, "mouse left down")
-        self.assertEqual(data[5].MessageName, "mouse left up")
+        self.assertEqual(data[3].Message, 513)
+        self.assertEqual(data[4].Message, 514)
 
-        self.assertEqual(data[6].MessageName, "mouse left down")
-        self.assertEqual(data[7].MessageName, "mouse left up")
+        self.assertEqual(data[5].Message, 513)
+        self.assertEqual(data[6].Message, 514)
 
-        self.assertEqual(data[8].MessageName, "mouse left down")
-        self.assertEqual(data[9].MessageName, "mouse left up")
+        self.assertEqual(data[7].Message, 513)
+        self.assertEqual(data[8].Message, 514)
 
-        self.assertEqual(data[10].MessageName, "mouse wheel")
-        self.assertEqual(data[11].MessageName, "mouse wheel")
+        self.assertEqual(data[9].Message, 513)
+        self.assertEqual(data[10].Message, 514)
+
+        self.assertEqual(data[11].Message, 522)
+        self.assertEqual(data[12].Message, 522)
+
+        self.assertEqual(data[13].Message, 522)
+        self.assertEqual(data[14].Message, 522)
 
         self.process_data(data)
 

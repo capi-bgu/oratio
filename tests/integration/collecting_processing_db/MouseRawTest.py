@@ -82,5 +82,6 @@ class MouseRawTest(unittest.TestCase):
         time.sleep(0.3)
         self.mouse_controller.scroll(0, -5)
 
+
 if __name__ == '__main__':
     unittest.main()

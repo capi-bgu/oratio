@@ -12,5 +12,5 @@ class DataHandler(ABC):
         pass
 
     @abstractmethod
-    def create_data_holder(self):
+    def create_data_holder(self, i=-1):
         pass

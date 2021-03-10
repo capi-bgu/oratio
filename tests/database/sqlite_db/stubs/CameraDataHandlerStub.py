@@ -22,5 +22,5 @@ class CameraDataHandlerStub(SqliteDataHandler):
         for i, img in enumerate(data):
             cv2.imwrite(f"{self.out_path}\\{self.name}_image_{i}.jpg", img)
 
-    def create_data_holder(self):
+    def create_data_holder(self, i=-1):
         pass
