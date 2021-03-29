@@ -1,5 +1,6 @@
 import os
 import json
+import codecs
 import pathlib
 import numpy as np
 from itertools import groupby
@@ -15,7 +16,7 @@ class SessionMetaProcessor(DataProcessor):
             resources_path = os.path.join(src_dir, 'resources')
 
         keywords_file_path = os.path.join(resources_path, "task_keywords.json")
-        with open(keywords_file_path) as keywords_file:
+        with codecs.open(keywords_file_path, 'r', encoding="UTF-8") as keywords_file:
             self.task_keywords = json.load(keywords_file)
 
     def process_data(self, data, session):
