@@ -61,6 +61,8 @@ class MouseCollector(DataCollector):
             event.Wheel = 1
         elif dy < 0:
             event.Wheel = -1
+        else:
+            event.Wheel = 0
         self.data.append(event)
 
 
