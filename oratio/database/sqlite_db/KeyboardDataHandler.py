@@ -40,12 +40,12 @@ class KeyboardDataHandler(SqliteDataHandler):
             c.execute("CREATE TABLE IF NOT EXISTS Keyboard \
                         (session BLOB ,\
                         typing_speed NUMERIC ,\
+                        active_typing_speed NUMERIC ,\
                         average_press_duration NUMERIC ,\
                         average_down_to_down NUMERIC ,\
                         regular_press_count REAL ,\
                         punctuations_press_count REAL ,\
                         space_counter REAL ,\
-                        special_press_count REAL ,\
                         error_corrections REAL ,\
                         mode_key REAL ,\
                         idle_time NUMERIC ,\
