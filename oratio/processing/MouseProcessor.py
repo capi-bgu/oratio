@@ -73,14 +73,14 @@ class MouseProcessor(DataProcessor):
                     sum_mouse_y_speed += velocity_y
                     if num_consecutive_move % WINDOW_SIZE == WINDOW_SIZE - 1:  # check if end of window
                         route = math.sqrt(abs_window_dx**2 + abs_window_dy**2)
-                        fastest_route = math.sqrt(window_dx**2 + window_dy**2)
+                        fastest_route = math.sqrt(window_dx**2 + window_dy**2) + 0.001
                         ratio = route / fastest_route
                         ratio_arr.append(ratio)
                         abs_window_dx = 0
                         abs_window_dy = 0
                         if num_consecutive_move % (2*WINDOW_SIZE) == 2*WINDOW_SIZE - 1:
                             route = math.sqrt(abs_double_window_dx ** 2 + abs_double_window_dy ** 2)
-                            fastest_route = math.sqrt(double_window_dx ** 2 + double_window_dy ** 2)
+                            fastest_route = math.sqrt(double_window_dx ** 2 + double_window_dy ** 2) + 0.001
                             double_ratio = route / fastest_route
                             double_ratio_arr.append(double_ratio)
                             double_window_dx = 0
@@ -89,7 +89,7 @@ class MouseProcessor(DataProcessor):
                             abs_double_window_dy = 0
                         if num_consecutive_move % (3*WINDOW_SIZE) == 3*WINDOW_SIZE - 1:
                             route = math.sqrt(abs_triple_window_dx ** 2 + abs_triple_window_dy ** 2)
-                            fastest_route = math.sqrt(triple_window_dx ** 2 + triple_window_dy ** 2)
+                            fastest_route = math.sqrt(triple_window_dx ** 2 + triple_window_dy ** 2) + 0.001
                             triple_ratio = route / fastest_route
                             triple_ratio_arr.append(triple_ratio)
                             triple_window_dx = 0
