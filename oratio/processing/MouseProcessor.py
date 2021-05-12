@@ -47,6 +47,7 @@ class MouseProcessor(DataProcessor):
         double_ratio_arr = []
         triple_ratio_arr = []
         WINDOW_SIZE = 20
+        all_speeds = []
 
         for i, event in enumerate(data):
             if event.Message == 512:  # Mouse move
@@ -69,6 +70,7 @@ class MouseProcessor(DataProcessor):
                     total_y_distance += abs(dy)
                     velocity_x = abs(dx) / (0.001 + event.Timestamp - last_mouse_event.Timestamp)
                     velocity_y = abs(dy) / (0.001 + event.Timestamp - last_mouse_event.Timestamp)
+                    all_speeds.append(math.sqrt(velocity_x**2 + velocity_y**2))
                     sum_mouse_x_speed += velocity_x
                     sum_mouse_y_speed += velocity_y
                     if num_consecutive_move % WINDOW_SIZE == WINDOW_SIZE - 1:  # check if end of window
@@ -174,6 +176,7 @@ class MouseProcessor(DataProcessor):
             self.features['average_active_speed_x'] = total_x_distance / active_time
             self.features['average_active_speed_y'] = total_y_distance / active_time
         if num_mouse_move > 0:
+            self.features['speed_std'] = np.std(all_speeds)
             self.features['average_momentary_speed_x'] = sum_mouse_x_speed / num_mouse_move
             self.features['average_momentary_speed_y'] = sum_mouse_y_speed / num_mouse_move
             if len(ratio_arr) > 0:
@@ -229,6 +232,7 @@ class MouseProcessor(DataProcessor):
             'average_active_speed_x': 0,
             'average_active_speed_y': 0,
             'average_cursor_angle': 0,
+            'speed_std': 0,
             'std_cursor_angle': 0,
             'Turn_0_45': 0,
             'Turn_45_90': 0,

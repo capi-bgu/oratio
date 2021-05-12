@@ -39,6 +39,7 @@ class MouseProcessorTest(unittest.TestCase):
         self.assertAlmostEqual(features['average_active_speed_x'], 0, delta=0.5)
         self.assertAlmostEqual(features['average_active_speed_y'], 0, delta=0.5)
         self.assertAlmostEqual(features['average_cursor_angle'], 0, delta=0.5)
+        self.assertAlmostEqual(features['speed_std'], 0, delta=0.5)
         self.assertAlmostEqual(features['std_cursor_angle'], 0, delta=0.5)
         self.assertAlmostEqual(features['Turn_0_45'], 0, delta=0.5)
         self.assertAlmostEqual(features['Turn_45_90'], 0, delta=0.5)

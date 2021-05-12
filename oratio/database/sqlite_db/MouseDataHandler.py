@@ -15,7 +15,7 @@ class MouseDataHandler(SqliteDataHandler):
         """
         session, data = data
 
-        insert = "INSERT INTO Mouse VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+        insert = "INSERT INTO Mouse VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
         with sqlite3.connect(self.db_path) as connection:
             c = connection.cursor()
             c.execute(insert, (session,
@@ -32,6 +32,7 @@ class MouseDataHandler(SqliteDataHandler):
                                data['average_active_speed_x'],
                                data['average_active_speed_y'],
                                data['average_cursor_angle'],
+                               data['speed_std'],
                                data['std_cursor_angle'],
                                data['Turn_0_45'],
                                data['Turn_45_90'],
@@ -72,6 +73,7 @@ class MouseDataHandler(SqliteDataHandler):
                         average_active_speed_x NUMERIC , \
                         average_active_speed_y NUMERIC , \
                         average_cursor_angle NUMERIC , \
+                        speed_std NUMERIC , \
                         std_cursor_angle NUMERIC , \
                         Turn_0_45 NUMERIC , \
                         Turn_45_90 NUMERIC , \
