@@ -175,8 +175,9 @@ class MouseProcessor(DataProcessor):
         if active_time > 0:
             self.features['average_active_speed_x'] = total_x_distance / active_time
             self.features['average_active_speed_y'] = total_y_distance / active_time
-        if num_mouse_move > 0:
+        if len(all_speeds) > 0:
             self.features['speed_std'] = np.std(all_speeds)
+        if num_mouse_move > 0:
             self.features['average_momentary_speed_x'] = sum_mouse_x_speed / num_mouse_move
             self.features['average_momentary_speed_y'] = sum_mouse_y_speed / num_mouse_move
             if len(ratio_arr) > 0:
