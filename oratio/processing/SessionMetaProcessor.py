@@ -4,6 +4,7 @@ import codecs
 import pathlib
 import numpy as np
 from itertools import groupby
+from functools import lru_cache
 from oratio.processing.DataProcessor import DataProcessor
 
 
@@ -38,6 +39,7 @@ class SessionMetaProcessor(DataProcessor):
 
         return self.features
 
+    @lru_cache(128)
     def __name_to_task(self, window_name: str):
         for task in self.task_keywords.keys():
             if any([keyword in window_name for keyword in self.task_keywords[task]]):
