@@ -124,12 +124,14 @@ class MouseProcessor(DataProcessor):
                     self.features['double_click_count'] += 1
                 last_left_click_time = event.Timestamp
             elif event.Message == 514:  # Left button release
-                self.features['left_click_duration'] += event.Timestamp - last_left_click_time
+                if last_left_click_time != 0:
+                    self.features['left_click_duration'] += event.Timestamp - last_left_click_time
             elif event.Message == 516:  # Right button press
                 self.features['right_click_count'] += 1
                 last_right_click_time = event.Timestamp
             elif event.Message == 517:  # Right button release
-                self.features['right_click_duration'] += event.Timestamp - last_right_click_time
+                if last_right_click_time != 0:
+                    self.features['right_click_duration'] += event.Timestamp - last_right_click_time
             elif event.Message == 522:  # Mouse Scroll
                 if last_mouse_scroll_direction != event.Wheel or last_message != 522:
                     if len(last_scrolling_segment) > 1:
