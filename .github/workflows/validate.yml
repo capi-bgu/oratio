@@ -1,10 +1,6 @@
 name: Validate commit
 
-on:
-  push:
-    branches: [actions]
-  pull_request:
-    branches: [actions]
+on: push
 
 jobs:
   validate:

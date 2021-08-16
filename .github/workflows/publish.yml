@@ -1,8 +1,8 @@
 name: Publish to anaconda
 
 on:
-  push:
-    branches: [actions]
+  release:
+    types: [published]
 
 jobs:
   publish:
